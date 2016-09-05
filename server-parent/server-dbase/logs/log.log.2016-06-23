@@ -1,0 +1,304 @@
+[main]2016-06-23 13:46:10,393 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created8226344610362031335diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+[qtp2037747255-26]2016-06-23 14:38:04,485 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:479)://127.0.0.1:9091/
+java.lang.IllegalStateException: cannot reset buffer on committed response
+	at org.eclipse.jetty.server.Response.resetBuffer(Response.java:1245)
+	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:371)
+	at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+[qtp2037747255-29]2016-06-23 15:24:25,407 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@1d2a2e2f {}
+[qtp2037747255-29]2016-06-23 15:24:25,416 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[qtp2037747255-29]2016-06-23 15:27:38,447 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@749039d5 {}
+[qtp2037747255-29]2016-06-23 15:27:38,449 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[qtp2037747255-25]2016-06-23 15:29:29,622 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@1e8954ea {}
+[qtp2037747255-25]2016-06-23 15:29:29,625 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[qtp2037747255-29]2016-06-23 15:29:50,013 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@3b0a5ed3 {}
+[qtp2037747255-29]2016-06-23 15:29:50,015 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[qtp2037747255-29]2016-06-23 15:34:19,782 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@52cca094 {}
+[qtp2037747255-29]2016-06-23 15:34:19,784 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[main]2016-06-23 15:45:38,652 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created8476807668965714430diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+[qtp962588540-31]2016-06-23 15:51:36,387 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@7ea432dd {}
+[qtp962588540-31]2016-06-23 15:51:36,415 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[qtp962588540-32]2016-06-23 15:52:34,788 [WARN] - org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:358):ERROR_DISPATCH loop detected on Request[POST //127.0.0.1:9091/]@32db9d51 {}
+[qtp962588540-32]2016-06-23 15:52:34,790 [WARN] - org.eclipse.jetty.server.HttpChannel.handleException(HttpChannel.java:520):Error while handling async error: 
+java.util.concurrent.TimeoutException: Async API violation
+	at org.eclipse.jetty.server.HttpChannelState.onTimeout(HttpChannelState.java:532)
+	at org.eclipse.jetty.server.AsyncContextEvent.run(AsyncContextEvent.java:161)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+	Suppressed: org.eclipse.jetty.io.EofException
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:197)
+		at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:420)
+		at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:313)
+		at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:140)
+		at org.eclipse.jetty.server.HttpConnection$SendCallback.process(HttpConnection.java:733)
+		at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:241)
+		at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:224)
+		at org.eclipse.jetty.server.HttpConnection.send(HttpConnection.java:521)
+		at org.eclipse.jetty.server.HttpChannel.sendResponse(HttpChannel.java:692)
+		at org.eclipse.jetty.server.HttpChannel.write(HttpChannel.java:746)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:179)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:163)
+		at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:441)
+		at org.eclipse.jetty.util.ByteArrayISO8859Writer.writeTo(ByteArrayISO8859Writer.java:109)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:609)
+		at org.eclipse.jetty.server.Response.sendError(Response.java:515)
+		at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:361)
+		at org.eclipse.jetty.server.HttpChannel.run(HttpChannel.java:266)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:671)
+		at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:589)
+		... 1 more
+	Caused by: java.io.IOException: 你的主机中的软件中止了一个已建立的连接。
+		at sun.nio.ch.SocketDispatcher.writev0(Native Method)
+		at sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:55)
+		at sun.nio.ch.IOUtil.write(IOUtil.java:148)
+		at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:504)
+		at org.eclipse.jetty.io.ChannelEndPoint.flush(ChannelEndPoint.java:177)
+		... 20 more
+[main]2016-06-23 16:09:09,652 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created8957576380222087442diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<category>
+
+	<!-- 学校类型 共1位长 0幼儿园，1小学，2初中，3高中，4大学，5培训班 -->
+
+	<type id="0" value="幼儿园">
+	</type>
+	<type id="1" value="小学">
+	</type>
+	<type id="2" value="初中">
+	</type>
+	<type id="3" value="高中">
+	</type>
+	<type id="4" value="大学">
+	</type>
+	<type id="5" value="培训机构">
+	</type>
+
+</category>

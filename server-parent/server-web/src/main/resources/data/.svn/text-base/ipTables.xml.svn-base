@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+    
+<iptables>
+	
+	<!-- 
+		连接hbase服务端的ip列表
+		maxthread:允许创建最大线程数
+		status：状态，0无效，1有效 
+	-->
+	<iptable addr="192.168.0.115" port="8082" maxthread="50" status="1" />
+	
+</iptables>

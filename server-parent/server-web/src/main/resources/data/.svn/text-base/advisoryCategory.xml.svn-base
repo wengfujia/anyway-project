@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+    
+<category>
+	
+	<!--
+	咨询分类
+		共1位长
+		0家长向老师咨询，1家长向学校咨询，2老师向学校咨询
+    -->
+	
+	<type id="0" value="家长向老师咨询"> </type>
+	<type id="1" value="家长向学校咨询"> </type>
+	<type id="2" value="老师向学校咨询"> </type>
+	
+</category>

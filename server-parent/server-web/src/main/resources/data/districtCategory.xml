@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<category>
+
+	<!-- 市分类 前2位为省id,中间2位为市id,长度共6位 -->
+
+	<province id="10" value="直辖市">
+		<city id="00" value="北京市">
+			<type id="00" value="xx区">
+			</type>
+		</city>
+	</province>
+
+	<province id="11" value="浙江省">
+		<city id="00" value="杭州市">
+			<type id="00" value="西湖区">
+			</type>
+			<type id="01" value="萧山区">
+			</type>
+		</city>
+	</province>
+
+</category>

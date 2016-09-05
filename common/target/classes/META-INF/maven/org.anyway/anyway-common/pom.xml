@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>anyway-common</artifactId>
+	<name>${project.artifactId}</name>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<skip_maven_deploy>false</skip_maven_deploy>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.anyway</groupId>
+			<artifactId>anyway-exceptions</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+	</dependencies>
+	<description>公用函数集</description>	
+	<parent>
+		<artifactId>anyway-project</artifactId>
+		<groupId>org.anyway</groupId>
+		<version>${project.version}</version>
+	</parent>
+</project>

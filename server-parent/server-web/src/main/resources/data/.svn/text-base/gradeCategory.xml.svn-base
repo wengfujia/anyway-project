@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+    
+<category>
+	
+	<!--
+	年级类型
+		共1位长
+		外层为学校类型，里层为年级类型
+    -->
+	
+	<school id="0" value="幼儿园">
+		<type id="0" value="托班"> </type>
+		<type id="1" value="小班"> </type>
+		<type id="2" value="中班"> </type>
+		<type id="3" value="大班"> </type>
+	</school>
+	
+	<school id="1" value="小学">
+		<type id="0" value="一年级"> </type>
+		<type id="1" value="二年级"> </type>
+		<type id="2" value="三年级"> </type>
+		<type id="3" value="四年级"> </type>
+		<type id="4" value="五年级"> </type>
+		<type id="5" value="六年级"> </type>
+	</school>
+	
+	<school id="2" value="初中">
+		<type id="0" value="初一"> </type>
+		<type id="1" value="初二"> </type>
+		<type id="2" value="初三"> </type>
+	</school>
+	
+	<school id="3" value="高中">
+		<type id="0" value="高一"> </type>
+		<type id="1" value="高二"> </type>
+		<type id="2" value="高三"> </type>
+	</school>
+	
+	<school id="4" value="大学">
+		<type id="0" value="大一"> </type>
+		<type id="1" value="大二"> </type>
+		<type id="2" value="大三"> </type>
+		<type id="3" value="大四"> </type>
+		<type id="4" value="研究生"> </type>
+		<type id="5" value="博士生"> </type>
+	</school>
+	
+	<!-- 培训班分类 -->
+	<school id="5" value="培训机构">
+		<type id="0" value="艺术"> </type>
+		<type id="1" value="体育"> </type>
+		<type id="2" value="文化"> </type>
+	</school>
+	
+</category>

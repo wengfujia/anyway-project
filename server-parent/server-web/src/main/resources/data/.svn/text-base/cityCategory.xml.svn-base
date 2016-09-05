@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+    
+<category>
+	
+	<!--
+	市分类
+		前2位为省id,长度共4位
+		直辖市省分10
+    -->
+    
+    <province id="10" value="直辖市">
+    	<type id="00" value="北京市"> </type>
+    </province>
+    
+    <province id="11" value="浙江省">
+    	<type id="00" value="杭州市"> </type>
+    </province>
+
+</category>

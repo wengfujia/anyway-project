@@ -1,0 +1,76 @@
+﻿#this is the setting for the server,you can change the values with you want.
+#the server include the http/tcp protocol
+
+[TITLE]
+TITLE=server
+
+[SET]
+CharsetName=utf-8
+#exec the business logic`s class pack
+LogicExecutorPack=io.lux.business.executor
+#exec the message`s class pack
+LogicMessagePack=io.lux.message
+#the server`s type.0=>weixin,1=>web/mobile/client
+ServerType=1
+#show the information,1=>show,0=>hiden
+DEBUG=1
+
+[LOG]
+LOG_PATH=logs/
+
+[HBASE]
+#the hbase·s config dir
+HbaseConfDir=./conf
+
+[UCI_SOCK]
+PORT=8082
+#set the socetserver run or stop.0 close,1 open
+Active=1
+WaitTime=5000
+IdleTimeOut=7000
+RWTimeOut=5000
+WorkThreadCount=20
+#use the ip filter
+IpFilter=0
+#ip filter table，use the '；' to split
+IpTables=192.168.0.1
+
+[HTTP]
+PORT=9091
+#set the httpserver run or stop.0 close,1 open
+Active=0
+WaitTime=5000
+IdleTimeOut=7000
+RWTimeOut=5000
+WorkThreadCount=20
+#use the https，0 No，1 Yes
+HTTPS=0
+#use the ip filter
+IpFilter=0
+#ip filter table，use the '；' to split
+IpTables=192.168.0.1
+
+[VERSION]
+VER.0=000
+VER.1=001
+VER.2=001
+VER.3=001
+VER.4=001
+ver.date = 2014-1-1 00:00:00
+
+#message decode method，only by SPLIT. use the '/|' to split
+[BODY]
+CMD.34=SPLIT
+
+#need to respone the message for the client. now you can tell me the message`s commandid
+[RESP]
+CMDS=10
+
+#yes,the message`s commandid：
+	# the 'HBASE' that mean is translation to the habase server
+	# the 'LOCAL' that mean is processing to the local executor business
+[OTHERS]
+CMD.10=HBASE
+
+CMD.4=LOCAL
+
