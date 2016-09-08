@@ -14,7 +14,8 @@
  * 修改：
  * 		2015.12.7
  * 		加入decode标识符，如果遇到decode的业务标识，表示需要进行单独的消息分解
- * 
+ * 		2016.9.8
+ * 		doDecode函数中的Dispatcher.submit改成：Dispatcher.execute
  */
 
 package io.box.weixin.executor;
@@ -44,6 +45,7 @@ import org.anyway.server.api.CSHTMsgStream;
 import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.data.packages.COMMANDID;
 import org.anyway.server.data.packages.HEADER;
+import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.wechat.constant.ConstantWeChat;
 import org.anyway.wechat.entity.message.resp.TextMessage;
 import org.anyway.wechat.service.MessageService;
@@ -148,7 +150,7 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 			}
 		  	else if (commandValue.equalsIgnoreCase("LOCAL")) { //直接处理本地业务逻辑
 		  		try {
-					Dispatcher.submit(this.getRequest(), commandId);
+					Dispatcher.<HTTPREQUEST<String>>execute(this.getRequest(), commandId);
 					return 0;
 				} catch (InstantiationException | IllegalAccessException e) {
 					status = -23;

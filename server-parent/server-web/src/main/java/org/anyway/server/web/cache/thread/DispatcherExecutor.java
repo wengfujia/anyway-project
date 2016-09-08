@@ -138,7 +138,7 @@ public class DispatcherExecutor {
 		    		}
 		    		
 		    		try {
-						Dispatcher.submit(request, request.getJBody().getCommandId());
+						Dispatcher.<HTTPREQUEST<String>>execute(request, request.getJBody().getCommandId());
 					} catch (InstantiationException | IllegalAccessException e) {
 						e.printStackTrace();
 					} catch (Exception e) {

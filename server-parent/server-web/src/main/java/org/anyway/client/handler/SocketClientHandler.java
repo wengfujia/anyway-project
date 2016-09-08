@@ -8,6 +8,8 @@
  * 修改日期:
  * 2014.7.12
  * 增加：retsend.addListeners用于等待返回结果，如果失败则关闭连接。
+ * 2016.9.8
+ * HandleMsgStream函数中的Dispatcher.submit改成：Dispatcher.execute
  */
 
 package org.anyway.client.handler;
@@ -93,7 +95,7 @@ public class SocketClientHandler extends SimpleDefaultHandler {
   		request.setContext(ctx);
   		request.setCStream(stream);
 		try {
-			Dispatcher.submit(request, header.getCommandID());
+			Dispatcher.execute(request, header.getCommandID());
 		} catch (InstantiationException | IllegalAccessException e) {
 			uLogger.printInfo("[socket]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s",clientIP);
 		}

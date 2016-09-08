@@ -11,6 +11,9 @@
  * 作者： 翁富家
  * 修改:
  * 日期：2015年05月28日
+ * 
+ * 2016.9.8
+ * doDecode函数中的Dispatcher.submit改成：Dispatcher.execute
  */
 
 package io.box.web.executor;
@@ -36,6 +39,7 @@ import org.anyway.server.api.HSHTMsgStream;
 import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.data.packages.COMMANDID;
 import org.anyway.server.data.packages.HEADER;
+import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.server.data.packages.json.JBuffer;
 import org.anyway.server.utils.uJsonUtils;
 import org.anyway.client.TcpClient;
@@ -119,7 +123,7 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 		}
 		else if (commandValue.equalsIgnoreCase("LOCAL")) { //直接处理本地业务逻辑
 	  		try {
-				Dispatcher.submit(this.getRequest(), commandId);
+				Dispatcher.<HTTPREQUEST<String>>execute(this.getRequest(), commandId);
 				return 0;
 			} catch (InstantiationException | IllegalAccessException e) {
 				status = -23;

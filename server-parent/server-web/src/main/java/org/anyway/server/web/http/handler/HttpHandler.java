@@ -6,6 +6,9 @@
  * 修改:
  * 日期：2015年05月18日
  * 修改日期:
+ * 
+ * 2016.9.8
+ * messageReceived函数中的Dispatcher.submit改成：Dispatcher.execute
  */
 
 package org.anyway.server.web.http.handler;
@@ -98,7 +101,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
 		request.setWait();
 		CacheManager.getInstance().getHttpCache().addDone(request);
 		//业务处理
-		Dispatcher.submit(request, request.getJBody().getCommandId());
+		Dispatcher.<HTTPREQUEST<String>>execute(request, request.getJBody().getCommandId());
     }
    
 }
