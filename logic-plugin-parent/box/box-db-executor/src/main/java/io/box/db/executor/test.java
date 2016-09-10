@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.anyway.common.MessageAnnotation;
 import org.anyway.common.uConfigVar;
 import org.anyway.common.utils.uLogger;
 import org.anyway.server.dbase.cache.DBCache;
@@ -21,7 +22,6 @@ import org.anyway.server.data.models.ErrorDescBean;
 import org.anyway.server.data.packages.COMMANDID;
 
 import io.box.db.executor.impl.DbExecutorImpl;
-import io.box.db.executor.impl.MessageAnnotation;
 
 @MessageAnnotation(msgType = COMMANDID.TEST)
 public final class test extends DbExecutorImpl {

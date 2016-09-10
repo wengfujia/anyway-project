@@ -55,7 +55,7 @@ public class Dispatcher {
 				HttpBusinessExecutorBase executor = (HttpBusinessExecutorBase) executorClass.newInstance();
 				executor.setRequest((HTTPREQUEST<String>)request);
 				//执行
-				httpdispatcherService.submit(executor);
+				httpdispatcherService.submit(executor);	
 			}
 			else if (request instanceof TCPREQUEST) {				
 				TcpBusinessExecutorBase executor = (TcpBusinessExecutorBase) executorClass.newInstance();
