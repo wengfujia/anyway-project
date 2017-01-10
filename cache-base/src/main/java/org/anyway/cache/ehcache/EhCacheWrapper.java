@@ -10,8 +10,6 @@
 
 package org.anyway.cache.ehcache;
 
-import org.anyway.cache.ehcache.impl.EhCacheBaseWrapper;
-
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;

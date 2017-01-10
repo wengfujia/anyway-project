@@ -8,7 +8,7 @@
  * 修改日期:
  */
 
-package org.anyway.cache.ehcache.impl;
+package org.anyway.cache.ehcache;
 
 public interface EhCacheBaseWrapper<K, V> {
 
