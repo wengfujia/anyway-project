@@ -14,7 +14,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.anyway.common.uConfigVar;
 import org.anyway.common.utils.uClassUtil;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.cache.thread.DispatcherExecutor;
 import org.anyway.server.web.cache.thread.SeqidCacheRunnable;
@@ -38,12 +38,12 @@ public class AppServer {
 		uLogger.println("loading cache。。。。。。");
 		CacheManager.getInstance().DO();
 		
-		if (uStringUtils.empty(uConfigVar.Logic_MessagePack) == false) {
+		if (uStringUtil.empty(uConfigVar.Logic_MessagePack) == false) {
 			//加载消息分解类
 			uLogger.println("loading business message classes。。。。。。");
 			uClassUtil.initTypeToMsgClassMap(uConfigVar.Logic_MessagePack);
 		}
-		if (uStringUtils.empty(uConfigVar.Logic_ExecutorPack) == false) {
+		if (uStringUtil.empty(uConfigVar.Logic_ExecutorPack) == false) {
 			//加载消息分发类
 			uLogger.println("loading business logic classes。。。。。。");
 			uClassUtil.initTypeToExecutorClassMap(uConfigVar.Logic_ExecutorPack);

@@ -24,10 +24,10 @@ import org.anyway.common.uConfigVar;
 import org.anyway.common.uGlobalVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pint;
-import org.anyway.common.utils.uNetUtils;
+import org.anyway.common.utils.uNetUtil;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uSecretUtils;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uSecretUtil;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.data.packages.DBHEADER;
 import org.anyway.server.data.packages.HEADER;
 
@@ -151,8 +151,8 @@ public class CSHTMsgStream {
      * @throws UnsupportedEncodingException 
      */
     public String GetString() {
-    	if (uStringUtils.empty(this.content)) {
-    		this.content = uNetUtils.getString(m_msg.getNr(), uConfigVar.CharsetName);
+    	if (uStringUtil.empty(this.content)) {
+    		this.content = uNetUtil.getString(m_msg.getNr(), uConfigVar.CharsetName);
     	}
     	return this.content;
     }
@@ -202,7 +202,7 @@ public class CSHTMsgStream {
     	String[] results = null;
     	//获取一行，并进行\t分隔
     	String row = this.rows[index];
-    	if (uStringUtils.empty(row) == false) {
+    	if (uStringUtil.empty(row) == false) {
     		results = StringUtils.splitPreserveAllTokens(row, uGlobalVar.MSG_SEPATATE);
     	}
     	
@@ -250,7 +250,7 @@ public class CSHTMsgStream {
     {
       byte[] p = new byte[10];
       System.arraycopy(buffer, 0, p, 0, 7); //包长为7位长的char
-      return uNetUtils.chars2int(p, charsetname);
+      return uNetUtil.chars2int(p, charsetname);
     }
 
     /**
@@ -275,51 +275,51 @@ public class CSHTMsgStream {
     		ibuffer = Unpooled.buffer(uGlobalVar.HEADER_LENGTH, uConfigVar.US_MaxSendBufferSize);
 
     	int ilen = 0;
-    	byte[] tempbuff = uNetUtils.int2chars(aheader.getLen());  	    	
-    	tempbuff = uNetUtils.expandBytes(tempbuff, HEADER_STRLENS[0]);
+    	byte[] tempbuff = uNetUtil.int2chars(aheader.getLen());  	    	
+    	tempbuff = uNetUtil.expandBytes(tempbuff, HEADER_STRLENS[0]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, 0, HEADER_STRLENS[0]);
     	ilen += HEADER_STRLENS[0];   	
-    	tempbuff = uNetUtils.int2chars(aheader.getCommandID());
-    	tempbuff = uNetUtils.expandBytes(tempbuff, HEADER_STRLENS[1]);
+    	tempbuff = uNetUtil.int2chars(aheader.getCommandID());
+    	tempbuff = uNetUtil.expandBytes(tempbuff, HEADER_STRLENS[1]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[1]);
     	ilen += HEADER_STRLENS[1];
-    	tempbuff = uNetUtils.int2chars(aheader.getStatus());  	    	
-    	tempbuff = uNetUtils.expandBytes(tempbuff, HEADER_STRLENS[2]);
+    	tempbuff = uNetUtil.int2chars(aheader.getStatus());  	    	
+    	tempbuff = uNetUtil.expandBytes(tempbuff, HEADER_STRLENS[2]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[2]);
     	ilen += HEADER_STRLENS[2];
-    	tempbuff = uNetUtils.expandBytes(aheader.getSequence().getBytes(), HEADER_STRLENS[3]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getSequence().getBytes(), HEADER_STRLENS[3]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[3]);
     	ilen += HEADER_STRLENS[3];
-    	tempbuff = uNetUtils.expandBytes(aheader.getAcknowledge().getBytes(), HEADER_STRLENS[4]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getAcknowledge().getBytes(), HEADER_STRLENS[4]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[4]);
     	ilen += HEADER_STRLENS[4];
-    	tempbuff = uNetUtils.expandBytes(aheader.getSessionid().getBytes(), HEADER_STRLENS[5]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getSessionid().getBytes(), HEADER_STRLENS[5]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[5]);
     	ilen += HEADER_STRLENS[5];
-    	tempbuff = uNetUtils.int2chars(aheader.getResptype());  	    	
-    	tempbuff = uNetUtils.expandBytes(tempbuff, HEADER_STRLENS[6]);
+    	tempbuff = uNetUtil.int2chars(aheader.getResptype());  	    	
+    	tempbuff = uNetUtil.expandBytes(tempbuff, HEADER_STRLENS[6]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[6]);
     	ilen += HEADER_STRLENS[6];    	
-    	tempbuff = uNetUtils.expandBytes(aheader.getUser().getBytes(), HEADER_STRLENS[7]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getUser().getBytes(), HEADER_STRLENS[7]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[7]);
     	ilen += HEADER_STRLENS[7];
-    	tempbuff = uNetUtils.expandBytes(aheader.getPwd().getBytes(), HEADER_STRLENS[8]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getPwd().getBytes(), HEADER_STRLENS[8]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[8]);
     	ilen += HEADER_STRLENS[8];
-    	tempbuff = uNetUtils.expandBytes(aheader.getVersion().getBytes(), HEADER_STRLENS[9]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getVersion().getBytes(), HEADER_STRLENS[9]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[9]);
     	ilen += HEADER_STRLENS[9];
-    	tempbuff = uNetUtils.expandBytes(aheader.getReserve().getBytes(), HEADER_STRLENS[10]);
+    	tempbuff = uNetUtil.expandBytes(aheader.getReserve().getBytes(), HEADER_STRLENS[10]);
     	ibuffer.writeBytes(tempbuff);
     	//System.arraycopy(tempbuff, 0, buffer, ilen, HEADER_STRLENS[10]);
     	ilen += HEADER_STRLENS[10];
@@ -327,38 +327,38 @@ public class CSHTMsgStream {
     }
 	
     public static int GetHeaderFromBuffer(byte[] buffer, HEADER aheader) throws Exception {
-    	int i = uNetUtils.readInt(buffer, 0, HEADER_STRLENS[0]);	
+    	int i = uNetUtil.readInt(buffer, 0, HEADER_STRLENS[0]);	
     	aheader.setLen(i);
 		int ileft = HEADER_STRLENS[0];
-		i = uNetUtils.readInt(buffer, ileft, HEADER_STRLENS[1]);
+		i = uNetUtil.readInt(buffer, ileft, HEADER_STRLENS[1]);
 		aheader.setCommandID(i);
 		ileft += HEADER_STRLENS[1];
-		i = uNetUtils.readInt(buffer, ileft, HEADER_STRLENS[2]);
+		i = uNetUtil.readInt(buffer, ileft, HEADER_STRLENS[2]);
 		aheader.setStatus(i);
 		ileft += HEADER_STRLENS[2];
 		
-		String s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[3], charsetname);
+		String s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[3], charsetname);
 		aheader.setSequence(s);
 		ileft += HEADER_STRLENS[3];
-		s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[4], charsetname);
+		s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[4], charsetname);
 		aheader.setAcknowledge(s);
 		ileft += HEADER_STRLENS[4];
-		s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[5], charsetname);
+		s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[5], charsetname);
 		aheader.setSessionid(s);
 		ileft += HEADER_STRLENS[5];
-		i = uNetUtils.readInt(buffer, ileft, HEADER_STRLENS[6]);		
+		i = uNetUtil.readInt(buffer, ileft, HEADER_STRLENS[6]);		
 		aheader.setResptype(i);
 		ileft += HEADER_STRLENS[6];
-		s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[7], charsetname);
+		s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[7], charsetname);
 		aheader.setUser(s);
 		ileft += HEADER_STRLENS[7];
-		s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[8], charsetname);
+		s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[8], charsetname);
 		aheader.setPwd(s);
 		ileft += HEADER_STRLENS[8];
-		s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[9], charsetname);
+		s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[9], charsetname);
 		aheader.setVersion(s);
 		ileft += HEADER_STRLENS[9];
-		s = uNetUtils.getString(buffer, ileft, HEADER_STRLENS[10], charsetname);
+		s = uNetUtil.getString(buffer, ileft, HEADER_STRLENS[10], charsetname);
 		aheader.setReserve(s);
 		ileft += HEADER_STRLENS[10];
 		return ileft;
@@ -379,7 +379,7 @@ public class CSHTMsgStream {
 			//解析包体
 			byte[] p =  null;
 			if (body != null) {
-				p = uSecretUtils.Decrypt(body, decrypt);  			
+				p = uSecretUtil.Decrypt(body, decrypt);  			
 			}
 			if (p != null) {//再次检测解密后的包是否存在
 				m_msg.setNr(p);
@@ -418,11 +418,11 @@ public class CSHTMsgStream {
 			ileft = GetHeaderFromBuffer(buffer, header);
 
 			//解析包体
-			byte[] body = uNetUtils.readBytes(buffer, ileft, len - uGlobalVar.HEADER_LENGTH -1);
+			byte[] body = uNetUtil.readBytes(buffer, ileft, len - uGlobalVar.HEADER_LENGTH -1);
 			int nrlen = 0;
 			if (body != null && body.length>0) //3DES
 			{
-				body = uSecretUtils.Decrypt(body, decrypt);
+				body = uSecretUtil.Decrypt(body, decrypt);
 			}
 			if (body != null) {//再次检测解密后的包是否存在
 				m_msg.setNr(body);
@@ -459,7 +459,7 @@ public class CSHTMsgStream {
 		try {
 			if (body != null) 
 			{
-				body = uSecretUtils.Encrypt(m_msg.getNr(), encrypt); 
+				body = uSecretUtil.Encrypt(m_msg.getNr(), encrypt); 
 				len = body.length;
 			}	
 			//包头
@@ -493,7 +493,7 @@ public class CSHTMsgStream {
 		try {
 			if (body != null) 
 			{
-				body = uSecretUtils.Encrypt(m_msg.getNr(), encrypt); 
+				body = uSecretUtil.Encrypt(m_msg.getNr(), encrypt); 
 				len = body.length;
 				//System.arraycopy(body, 0, buffer, uGlobalVar.HEADER_LENGTH, m_msg.getNrLen());
 			}
@@ -532,8 +532,8 @@ public class CSHTMsgStream {
 		int result = 0;
 		byte[] temp = new byte[40]; 
 		try {		
-			uNetUtils.memset(temp, (byte) 0x0000, temp.length);	  
-			temp = uNetUtils.int2chars(i);			
+			uNetUtil.memset(temp, (byte) 0x0000, temp.length);	  
+			temp = uNetUtil.int2chars(i);			
 		  	//k = Math.min(k, ilen);
 		  	ibuffer.writeBytes(temp);
 		  	ibuffer.writeByte((byte) 0x0000);//最后一位为网络字节0

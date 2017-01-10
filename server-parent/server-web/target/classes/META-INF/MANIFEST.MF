@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Built-By: wengfj
 Class-Path: lib/anyway-wechat-0.0.1-SNAPSHOT.jar lib/javax.servlet-api
  -3.1.0.jar lib/xstream-1.4.8.jar lib/xmlpull-1.1.3.1.jar lib/xpp3_min
  -1.1.4c.jar lib/morph-1.1.1.jar lib/commons-logging-1.2.jar lib/compo
@@ -13,7 +12,8 @@ Class-Path: lib/anyway-wechat-0.0.1-SNAPSHOT.jar lib/javax.servlet-api
  SNAPSHOT.jar lib/anyway-server-api-0.0.1-SNAPSHOT.jar lib/commons-lan
  g-2.6.jar lib/gson-2.6.2.jar lib/slf4j-api-1.7.21.jar lib/slf4j-log4j
  12-1.7.21.jar lib/log4j-1.2.17.jar lib/netty-all-4.1.0.Final.jar
-Build-Jdk: 1.8.0_92
+Build-Jdk: 1.7.0_45
+Built-By: wengfj
 Created-By: Maven Integration for Eclipse
 Main-Class: dbRobot.BeanRobot
 

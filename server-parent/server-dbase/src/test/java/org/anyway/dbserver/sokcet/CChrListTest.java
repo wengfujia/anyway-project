@@ -1,7 +1,7 @@
 package org.anyway.dbserver.sokcet;
 
 import org.anyway.common.types.pint;
-import org.anyway.common.utils.uNetUtils;
+import org.anyway.common.utils.uNetUtil;
 import org.anyway.server.data.CChrList;
 import org.junit.Test;
 
@@ -50,9 +50,9 @@ public class CChrListTest extends TestCase {
 		
 		pint pstrlen = new pint(0);
 	    byte[] pstr=list.First(pstrlen);
-	    System.out.println( uNetUtils.getString(pstr, "UTF-8"));
+	    System.out.println( uNetUtil.getString(pstr, "UTF-8"));
 		for (; !list.Eof(); pstr = list.Next(pstrlen)) {
-			System.out.println( uNetUtils.getString(pstr, "UTF-8"));
+			System.out.println( uNetUtil.getString(pstr, "UTF-8"));
 			if (list.IsLast()) {
 				System.out.println("IsLast");
 			}

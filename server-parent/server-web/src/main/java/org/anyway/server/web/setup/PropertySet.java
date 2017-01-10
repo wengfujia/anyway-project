@@ -39,8 +39,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.anyway.common.enums.CryptEnum;
-import org.anyway.common.utils.uHexUtils;
-import org.anyway.common.utils.uSecretUtils;
+import org.anyway.common.utils.uHexUtil;
+import org.anyway.common.utils.uSecretUtil;
 import org.anyway.server.web.common.uLoadVar;
 import org.anyway.server.web.validity.Version;
 
@@ -148,12 +148,12 @@ public class PropertySet {
 		}
 		
 		String date = "[usedate="+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"]";
-		byte[] bdate=uSecretUtils.Encrypt(date.getBytes(), CryptEnum.DES);
-		date = uHexUtils.bytesToHexString(bdate);
+		byte[] bdate=uSecretUtil.Encrypt(date.getBytes(), CryptEnum.DES);
+		date = uHexUtil.bytesToHexString(bdate);
 		//读取密钥
 		String s=Version.readFile(f);
-		byte[] decryptData = uHexUtils.hexStringToByte(s);
-		decryptData = uSecretUtils.Decrypt(decryptData,CryptEnum.DES);
+		byte[] decryptData = uHexUtil.hexStringToByte(s);
+		decryptData = uSecretUtil.Decrypt(decryptData,CryptEnum.DES);
 		s=new String(decryptData);
 		
 		int exp = 0;
@@ -245,8 +245,8 @@ public class PropertySet {
 		inner.put("sid", info[7]);
 		inner.put("userid", info[2]);
 		//加密密码
-		byte[] b=uSecretUtils.Encrypt(info[3].getBytes(), CryptEnum.DES);
-		String pwd = uHexUtils.bytesToHexString(b);
+		byte[] b=uSecretUtil.Encrypt(info[3].getBytes(), CryptEnum.DES);
+		String pwd = uHexUtil.bytesToHexString(b);
 		inner.put("pwd ", pwd);
 		map.put("database", inner);
 		String isweb=inputString("open web?(yes/no)", br);

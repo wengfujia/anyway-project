@@ -1,6 +1,6 @@
 package org.anyway.common.crypto;
 
-import org.anyway.common.utils.uHexUtils;
+import org.anyway.common.utils.uHexUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class DESedeCoderTest extends DESedeCoder {
 		byte[] encryptData = DESedeCoder.encrypt(data.getBytes());
 		System.out.println("加密后数据: :"+encryptData);
 		//System.out.println("加密后数据: byte[]:"+showByteArray(encryptData));
-		System.out.println("加密后数据: hexStr:"+uHexUtils.bytesToHexString(encryptData));
+		System.out.println("加密后数据: hexStr:"+uHexUtil.bytesToHexString(encryptData));
 		System.out.println();
 		//byte[] decryptData = decrypt(encryptData,k);
 		//System.out.println("解密后数据: byte[]:"+showByteArray(decryptData));

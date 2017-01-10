@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.anyway.common.uConfigVar;
-import org.anyway.common.utils.uDateUtils;
+import org.anyway.common.utils.uDateUtil;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.data.models.ErrorDescBean;
 import org.anyway.server.data.models.UserBean;
 import org.anyway.server.dbase.cache.DBCache;
@@ -20,7 +20,7 @@ public class DbProvider implements Provider{
 	 */
 	@Override
 	public void FillErrors() throws SQLException, Exception {
-		if (uStringUtils.empty(uConfigVar.TbERROR)) {
+		if (uStringUtil.empty(uConfigVar.TbERROR)) {
 			return;
 		}
 		
@@ -72,7 +72,7 @@ public class DbProvider implements Provider{
 				        user.setRowID(rs.getInt(1));
 				        user.setLoginName(rs.getString(2));
 				        user.setPassword(rs.getString(3));
-				        user.setLastLoginTime(rs.getDate(4)==null?uDateUtils.getDateTime():rs.getDate(4));
+				        user.setLastLoginTime(rs.getDate(4)==null?uDateUtil.getDateTime():rs.getDate(4));
 				        user.setLastLoginIP(rs.getString(5));
 				        user.setState(rs.getInt(6));
 					}
@@ -147,7 +147,7 @@ public class DbProvider implements Provider{
 	 */
 	@Override
 	public void FillUsers() throws SQLException, Exception {
-		if (uStringUtils.empty(uConfigVar.TbUSER)) {
+		if (uStringUtil.empty(uConfigVar.TbUSER)) {
 			return;
 		}
 		
@@ -165,7 +165,7 @@ public class DbProvider implements Provider{
 			        	user.setRowID(rs.getInt(1));
 				        user.setLoginName(rs.getString(2));
 				        user.setPassword(rs.getString(3));
-				        user.setLastLoginTime(rs.getDate(4)==null?uDateUtils.getDateTime():rs.getDate(4));
+				        user.setLastLoginTime(rs.getDate(4)==null?uDateUtil.getDateTime():rs.getDate(4));
 				        user.setLastLoginIP(rs.getString(5));
 				        user.setState(rs.getInt(6));
 				        DBCache.UsersCache.put(user.getLoginName(), user);

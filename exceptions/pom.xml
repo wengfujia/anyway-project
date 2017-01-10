@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>anyway-project</artifactId>
-		<version>${project.version}</version>
+		<version>0.0.1-SNAPSHOT</version>
 		<groupId>org.anyway</groupId>
 	</parent>
 	<artifactId>anyway-exceptions</artifactId>

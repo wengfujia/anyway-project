@@ -13,7 +13,7 @@ package org.anyway.server.data.packages;
 import java.util.Date;
 import io.netty.channel.ChannelHandlerContext;
 
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.api.CSHTMsgStream;
 
 @SuppressWarnings("serial")
@@ -29,7 +29,7 @@ public class TCPREQUEST implements java.io.Serializable {
 	public TCPREQUEST() {
 		this.status = 0; //等待状态
 		this.time = System.currentTimeMillis();
-		this.id = String.valueOf(this.time + Long.valueOf(uStringUtils.getRandom()));
+		this.id = String.valueOf(this.time + Long.valueOf(uStringUtil.getRandom()));
 	}
 	
 	/**

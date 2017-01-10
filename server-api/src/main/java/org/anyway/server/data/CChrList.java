@@ -11,7 +11,7 @@
 package org.anyway.server.data;
 
 import org.anyway.common.types.pint;
-import org.anyway.common.utils.uNetUtils;
+import org.anyway.common.utils.uNetUtil;
 import org.anyway.exceptions.NotEnoughDataInByteBufferException;
 import org.anyway.server.data.contracts.IChrList;
 import org.anyway.common.uConfigVar;
@@ -155,7 +155,7 @@ public class CChrList implements IChrList{
 	 */
 	public void Append(String str) {
 		try {
-			byte[] b = uNetUtils.getBytes(str, uConfigVar.CharsetName);
+			byte[] b = uNetUtil.getBytes(str, uConfigVar.CharsetName);
 			int  len = b.length;
 			Append(b, len);	
 		} catch (Exception e) {

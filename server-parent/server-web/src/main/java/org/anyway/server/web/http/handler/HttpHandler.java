@@ -22,7 +22,7 @@ import io.netty.util.CharsetUtil;
 
 import org.anyway.common.uConfigVar;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uSecretUtils;
+import org.anyway.common.utils.uSecretUtil;
 import org.anyway.server.data.packages.COMMANDID;
 import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.server.data.packages.json.JBuffer;
@@ -85,7 +85,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
 		else { //web接入
 			LoginBuf.setCommandId(COMMANDID.WEB_REQUEST);
 			if (uConfigVar.HT_Crypt == 1) { //启用加密，需要解密
-				content = uSecretUtils.Decrypt3Des(content);
+				content = uSecretUtil.Decrypt3Des(content);
 	    	}
 		}
 		LoginBuf.setBody(content);

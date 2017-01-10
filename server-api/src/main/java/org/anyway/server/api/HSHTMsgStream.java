@@ -17,8 +17,8 @@ import com.google.gson.Gson;
 
 import org.anyway.common.uConfigVar;
 import org.anyway.common.enums.CryptEnum;
-import org.anyway.common.utils.uNetUtils;
-import org.anyway.common.utils.uSecretUtils;
+import org.anyway.common.utils.uNetUtil;
+import org.anyway.common.utils.uSecretUtil;
 import org.anyway.server.data.http.HChrList;
 import org.anyway.server.data.http.HMessageBuffer;
 import org.anyway.server.data.packages.HEADER;
@@ -122,10 +122,10 @@ public class HSHTMsgStream {
 			//转换成json
 			String sjson = toJson(hbuffer);
 
-			result = uNetUtils.getBytes(sjson, uConfigVar.CharsetName);
+			result = uNetUtil.getBytes(sjson, uConfigVar.CharsetName);
 			if (result != null) 
 			{
-				result = uSecretUtils.Encrypt(result, encrypt);			
+				result = uSecretUtil.Encrypt(result, encrypt);			
 			}
 		}
 		catch (Exception e)
@@ -157,11 +157,11 @@ public class HSHTMsgStream {
 				result = sjson;
 			}
 			else {
-				byte[] tmp = uNetUtils.getBytes(sjson, uConfigVar.CharsetName);
+				byte[] tmp = uNetUtil.getBytes(sjson, uConfigVar.CharsetName);
 				if (tmp != null) 
 				{
-					tmp = uSecretUtils.Encrypt(tmp, encrypt);
-					result = uNetUtils.getString(tmp, uConfigVar.CharsetName);			
+					tmp = uSecretUtil.Encrypt(tmp, encrypt);
+					result = uNetUtil.getString(tmp, uConfigVar.CharsetName);			
 				}
 				else {
 					result = sjson;
@@ -244,7 +244,7 @@ public class HSHTMsgStream {
 	{
 		HMessageBuffer hbuffer = new HMessageBuffer();
 		ArrayList<HMessageBuffer.CBody> list = new ArrayList<HMessageBuffer.CBody>();
-		String content = uNetUtils.getString(body, uConfigVar.CharsetName);
+		String content = uNetUtil.getString(body, uConfigVar.CharsetName);
     	list.add(new HMessageBuffer.CBody(content));
     	hbuffer.setResult(result);
     	hbuffer.setData(list);
@@ -267,7 +267,7 @@ public class HSHTMsgStream {
 		try
 		{
 			hbuffer = SetVarToHMessageBuffer(header, body);
-			jsons = uNetUtils.getBytes(toJson(hbuffer), uConfigVar.CharsetName);	
+			jsons = uNetUtil.getBytes(toJson(hbuffer), uConfigVar.CharsetName);	
 		}
 		catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -294,7 +294,7 @@ public class HSHTMsgStream {
 		try
 		{
 			hbuffer = SetVarToHMessageBuffer(result, body);
-			jsons = uNetUtils.getBytes(toJson(hbuffer), uConfigVar.CharsetName);	
+			jsons = uNetUtil.getBytes(toJson(hbuffer), uConfigVar.CharsetName);	
 		}
 		catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

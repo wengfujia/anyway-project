@@ -15,7 +15,7 @@ import org.anyway.server.data.packages.json.JBuffer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class uJsonUtils {
+public class uJsonUtil {
 	
 	/**
 	 * parseData解析json数据

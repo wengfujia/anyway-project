@@ -35,8 +35,8 @@ import org.anyway.common.uConfigVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uSecretUtils;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uSecretUtil;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.api.HSHTMsgStream;
 import org.anyway.server.data.http.HChrList;
 import org.anyway.server.data.packages.COMMANDID;
@@ -64,7 +64,7 @@ public class AsyncHttpServlet extends HttpServlet {
 	          throws ServletException, IOException 
 	{
 		String sId = request.getParameter("sId");
-		if (uStringUtils.empty(sId)) { //获取流
+		if (uStringUtil.empty(sId)) { //获取流
 			InputStream inputStream = request.getInputStream();
 	        ByteArrayOutputStream out = new ByteArrayOutputStream();
 	        byte[] b = new byte[1024];
@@ -78,7 +78,7 @@ public class AsyncHttpServlet extends HttpServlet {
 		
 		int ret = 0;
 		String err = "";
-		if (uStringUtils.empty(sId)) {
+		if (uStringUtil.empty(sId)) {
 			ret = -10;
 			err = "非法参数！";
 		}
@@ -86,10 +86,10 @@ public class AsyncHttpServlet extends HttpServlet {
 		if (ret != 0) {//错误返回，不进入业务处理流程
 			String callback = request.getParameter("callback");
 			//返回组合包
-			if (uStringUtils.empty(callback)) {
-				callback = uSecretUtils.Encrypt3Des(HSHTMsgStream.toJsonString(ret, err));
+			if (uStringUtil.empty(callback)) {
+				callback = uSecretUtil.Encrypt3Des(HSHTMsgStream.toJsonString(ret, err));
 			} else {
-				callback = callback + "(" + uSecretUtils.Encrypt3DesToJson(HSHTMsgStream.toJsonString(ret, err)) + ")";
+				callback = callback + "(" + uSecretUtil.Encrypt3DesToJson(HSHTMsgStream.toJsonString(ret, err)) + ")";
 			}
 			
 			response.setContentType("text/html;charset=UTF-8");
@@ -130,7 +130,7 @@ public class AsyncHttpServlet extends HttpServlet {
 			//String sId = request.getParameter("sId");
 			//if (uFunctions.isEmpty(sId)) return null;
 			
-			String sId = uSecretUtils.Decrypt3Des(aId);	
+			String sId = uSecretUtil.Decrypt3Des(aId);	
 			JBuffer<String> LoginBuf = uJsonParse.parseBuffer(sId);
 
 			String result = null;
@@ -160,7 +160,7 @@ public class AsyncHttpServlet extends HttpServlet {
 				LoginBuf.Clear(); LoginBuf = null;
 			}
 			//判断用户名与密码
-			if (uStringUtils.empty(suser) || uStringUtils.empty(spwd)) {
+			if (uStringUtil.empty(suser) || uStringUtil.empty(spwd)) {
 				result = HSHTMsgStream.toJsonString(-301, "非法的用户名或密码");
 				uLogger.println("[http]Fail! ErrorCode:-301,The User or Password Is Error,IP:" + ip);
 				return result;
@@ -168,7 +168,7 @@ public class AsyncHttpServlet extends HttpServlet {
 			//判断版本号
 			String key = uLogger.sprintf("VER.%s", sessionid);
 		  	String ver = uLoadVar.GetVerValue("", key);
-			if (uStringUtils.empty(sversion)==false && ver.compareTo(sversion)>0) {
+			if (uStringUtil.empty(sversion)==false && ver.compareTo(sversion)>0) {
 				/*String err = "您的版本过旧，现在为您升级";
 				pstring result1 = new pstring();
 	    		pstring result2 = new pstring();
@@ -187,13 +187,13 @@ public class AsyncHttpServlet extends HttpServlet {
 			HChrList list = hstream.GetNr();
 			
 			HEADER header = hstream.getHeader();
-			if (!uStringUtils.empty(sessionid))
+			if (!uStringUtil.empty(sessionid))
 				header.setSessionid(sessionid);
 			header.setIP(ip);
 			header.setCommandID(commandid);
 			header.setUser(suser);
 			header.setPwd(spwd);
-			if (!uStringUtils.empty(sversion))
+			if (!uStringUtil.empty(sversion))
 				header.setVersion(sversion);
 
 			StringBuffer log = new StringBuffer();
@@ -215,7 +215,7 @@ public class AsyncHttpServlet extends HttpServlet {
 			    		pstring result1 = new pstring();
 			    		pstring result2 = new pstring();
 			    		DBCache.GetErrorInfo(status, result1, result2);
-		    			if (!uStringUtils.empty(result2.getString())) //获取到错误代码解释
+		    			if (!uStringUtil.empty(result2.getString())) //获取到错误代码解释
 		    			{
 		    				list.Clear();
 		    				list.Append(result2.getString());
@@ -258,10 +258,10 @@ public class AsyncHttpServlet extends HttpServlet {
 					response.setContentType("application/json");
 					PrintWriter out = response.getWriter();
 					//返回包组合
-					if (uStringUtils.empty(callback)) {
-						callback = uSecretUtils.Encrypt3Des(result);
+					if (uStringUtil.empty(callback)) {
+						callback = uSecretUtil.Encrypt3Des(result);
 					} else { //这个是jquery，需要进行json再返回，否则收不到
-						callback = callback + "(" + uSecretUtils.Encrypt3DesToJson(result) + ")";
+						callback = callback + "(" + uSecretUtil.Encrypt3DesToJson(result) + ")";
 					}
 					
 					out.write(callback);

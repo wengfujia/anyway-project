@@ -18,7 +18,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.data.models.ErrorDescBean;
 import org.anyway.server.data.models.IpTableBean;
@@ -49,7 +49,7 @@ public class XmlProvider implements Provider {
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
 				CategoryBean cate = new CategoryBean();
-				cate.setKey(uStringUtils.getInteger(node.attributeValue("id")));
+				cate.setKey(uStringUtil.getInteger(node.attributeValue("id")));
 				cate.setValue(node.attributeValue("value"));
 				this.manager.getDbCache().ProvinceCache().put(cate.getKey(), cate);
 			}
@@ -73,14 +73,14 @@ public class XmlProvider implements Provider {
 			Iterator<Element> nodes = root.elementIterator("province"); //读取省
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				int pid = uStringUtils.getInteger(node.attributeValue("id"));
+				int pid = uStringUtil.getInteger(node.attributeValue("id"));
 				//读取市
 				Iterator<Element> citynodes = root.elementIterator("type"); //读取市
 				while(citynodes.hasNext()) {
 					Element city = citynodes.next();
-					int cid = pid+uStringUtils.getInteger(city.attributeValue("id")); //根据省id+市id，组成新的市id
+					int cid = pid+uStringUtil.getInteger(city.attributeValue("id")); //根据省id+市id，组成新的市id
 					CategoryBean cate = new CategoryBean();
-					cate.setKey(uStringUtils.getInteger(cid));
+					cate.setKey(uStringUtil.getInteger(cid));
 					cate.setValue(city.attributeValue("value"));
 					this.manager.getDbCache().CityCache().put(cate.getKey(), cate);
 				}
@@ -106,20 +106,20 @@ public class XmlProvider implements Provider {
 			Iterator<Element> nodes = root.elementIterator("province"); //读取省
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				int pid = uStringUtils.getInteger(node.attributeValue("id"));
+				int pid = uStringUtil.getInteger(node.attributeValue("id"));
 				//读取市
 				Iterator<Element> citynodes = root.elementIterator("city"); //读取市
 				while(citynodes.hasNext()) {
 					Element city = citynodes.next();
-					int cid = pid + uStringUtils.getInteger(city.attributeValue("id")); //根据省id+市id，组成新的市id
+					int cid = pid + uStringUtil.getInteger(city.attributeValue("id")); //根据省id+市id，组成新的市id
 					//读取区
 					Iterator<Element> districtnodes = root.elementIterator("type");
 					while(districtnodes.hasNext()) {
 						Element district = districtnodes.next();
-						int did = cid + uStringUtils.getInteger(district.attributeValue("id")); //根据市id+区id，组成新的区id
+						int did = cid + uStringUtil.getInteger(district.attributeValue("id")); //根据市id+区id，组成新的区id
 						//放入缓存
 						CategoryBean cate = new CategoryBean();
-						cate.setKey(uStringUtils.getInteger(did));
+						cate.setKey(uStringUtil.getInteger(did));
 						cate.setValue(district.attributeValue("value"));
 						this.manager.getDbCache().DistrictCache().put(cate.getKey(), cate);
 					}
@@ -147,7 +147,7 @@ public class XmlProvider implements Provider {
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
 				CategoryBean cate = new CategoryBean();
-				cate.setKey(uStringUtils.getInteger(node.attributeValue("id")));
+				cate.setKey(uStringUtil.getInteger(node.attributeValue("id")));
 				cate.setValue(node.attributeValue("value"));
 				this.manager.getDbCache().SchoolCache().put(cate.getKey(), cate);
 			}
@@ -171,14 +171,14 @@ public class XmlProvider implements Provider {
 			Iterator<Element> nodes = root.elementIterator("school"); //读取学校
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				int pid = uStringUtils.getInteger(node.attributeValue("id"));
+				int pid = uStringUtil.getInteger(node.attributeValue("id"));
 				//读取市
 				Iterator<Element> citynodes = root.elementIterator("type"); //读取年级
 				while(citynodes.hasNext()) {
 					Element city = citynodes.next();
-					int cid = pid+uStringUtils.getInteger(city.attributeValue("id")); //根据学校id+年级id，组成新的年级id
+					int cid = pid+uStringUtil.getInteger(city.attributeValue("id")); //根据学校id+年级id，组成新的年级id
 					CategoryBean cate = new CategoryBean();
-					cate.setKey(uStringUtils.getInteger(cid));
+					cate.setKey(uStringUtil.getInteger(cid));
 					cate.setValue(city.attributeValue("value"));
 					this.manager.getDbCache().GradeCache().put(cate.getKey(), cate);
 				}
@@ -203,14 +203,14 @@ public class XmlProvider implements Provider {
 			Iterator<Element> nodes = root.elementIterator("school"); //读取学校
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				int pid = uStringUtils.getInteger(node.attributeValue("id"));
+				int pid = uStringUtil.getInteger(node.attributeValue("id"));
 				//读取市
 				Iterator<Element> citynodes = root.elementIterator("type"); //读取专业
 				while(citynodes.hasNext()) {
 					Element city = citynodes.next();
-					int cid = pid+uStringUtils.getInteger(city.attributeValue("id")); //根据学校id+专业id，组成新的专业id
+					int cid = pid+uStringUtil.getInteger(city.attributeValue("id")); //根据学校id+专业id，组成新的专业id
 					CategoryBean cate = new CategoryBean();
-					cate.setKey(uStringUtils.getInteger(cid));
+					cate.setKey(uStringUtil.getInteger(cid));
 					cate.setValue(city.attributeValue("value"));
 					this.manager.getDbCache().SpecialtyCache().put(cate.getKey(), cate);
 				}
@@ -235,14 +235,14 @@ public class XmlProvider implements Provider {
 			Iterator<Element> nodes = root.elementIterator("school"); //读取学校
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				int pid = uStringUtils.getInteger(node.attributeValue("id"));
+				int pid = uStringUtil.getInteger(node.attributeValue("id"));
 				//读取市
 				Iterator<Element> citynodes = root.elementIterator("type"); //读取专业
 				while(citynodes.hasNext()) {
 					Element city = citynodes.next();
-					int cid = pid+uStringUtils.getInteger(city.attributeValue("id")); //根据学校id+专业id，组成新的专业id
+					int cid = pid+uStringUtil.getInteger(city.attributeValue("id")); //根据学校id+专业id，组成新的专业id
 					CategoryBean cate = new CategoryBean();
-					cate.setKey(uStringUtils.getInteger(cid));
+					cate.setKey(uStringUtil.getInteger(cid));
 					cate.setValue(city.attributeValue("value"));
 					this.manager.getDbCache().SpecialtyCache().put(cate.getKey(), cate);
 				}
@@ -268,7 +268,7 @@ public class XmlProvider implements Provider {
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
 				CategoryBean cate = new CategoryBean();
-				cate.setKey(uStringUtils.getInteger(node.attributeValue("id")));
+				cate.setKey(uStringUtil.getInteger(node.attributeValue("id")));
 				cate.setValue(node.attributeValue("value"));
 				this.manager.getDbCache().SchoolCache().put(cate.getKey(), cate);
 			}
@@ -294,7 +294,7 @@ public class XmlProvider implements Provider {
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
 				CategoryBean cate = new CategoryBean();
-				cate.setKey(uStringUtils.getInteger(node.attributeValue("id")));
+				cate.setKey(uStringUtil.getInteger(node.attributeValue("id")));
 				cate.setValue(node.attributeValue("value"));
 				this.manager.getDbCache().MessageCache().put(cate.getKey(), cate);
 			}
@@ -320,7 +320,7 @@ public class XmlProvider implements Provider {
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
 				CategoryBean cate = new CategoryBean();
-				cate.setKey(uStringUtils.getInteger(node.attributeValue("id")));
+				cate.setKey(uStringUtil.getInteger(node.attributeValue("id")));
 				cate.setValue(node.attributeValue("value"));
 				this.manager.getDbCache().UserTypeCache().put(cate.getKey(), cate);
 			}
@@ -346,7 +346,7 @@ public class XmlProvider implements Provider {
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
 				ErrorDescBean tberror = new ErrorDescBean();
-	        	tberror.setErrorCode(uStringUtils.getInteger(node.attributeValue("ErrorCode")));
+	        	tberror.setErrorCode(uStringUtil.getInteger(node.attributeValue("ErrorCode")));
 	        	tberror.setDescription(node.attributeValue("Description"));
 	        	tberror.setResponse(node.attributeValue("Response"));
 	        	this.manager.getDbCache().ErrorDescsCache().put(tberror.getErrorCode(), tberror);
@@ -373,9 +373,9 @@ public class XmlProvider implements Provider {
 				Element node = nodes.next();
 				IpTableBean iptable = new IpTableBean();
 				iptable.setAddress(node.attributeValue("addr"));
-	        	iptable.setPort(uStringUtils.getInteger(node.attributeValue("port")));
-	        	iptable.setMaxthread(uStringUtils.getInteger(node.attributeValue("maxthread")));
-	        	iptable.setStatus(uStringUtils.getInteger(node.attributeValue("status")));
+	        	iptable.setPort(uStringUtil.getInteger(node.attributeValue("port")));
+	        	iptable.setMaxthread(uStringUtil.getInteger(node.attributeValue("maxthread")));
+	        	iptable.setStatus(uStringUtil.getInteger(node.attributeValue("status")));
 	        	String key = iptable.getAddress()+String.valueOf(iptable.getPort()); //ip+port做为key
 	        	this.manager.getDbCache().IpTablesCache().put(key, iptable);
 			}

@@ -23,9 +23,9 @@ import org.anyway.common.uConfigVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pint;
 import org.anyway.common.types.pstring;
-import org.anyway.common.utils.uNetUtils;
+import org.anyway.common.utils.uNetUtil;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.netty.socket.handler.SimpleDefaultHandler;
 import org.anyway.server.api.CSHTMsgStream;
@@ -125,14 +125,14 @@ public class SocketHandler extends SimpleDefaultHandler {
 			pstring result1 = new pstring();
 			pstring result2 = new pstring();
 			CacheManager.getInstance().GetErrorInfo(status, result1, result2);
-			if (uStringUtils.empty(result2.getString()) == false) {// 获取到错误代码解释
+			if (uStringUtil.empty(result2.getString()) == false) {// 获取到错误代码解释
 				result2.setString("非知错误");
 			}
 
 			pint pstrlen = new pint(0);
 			byte[] pstr;
 			try {
-				pstr = uNetUtils.getBytes(result2.getString(), uConfigVar.CharsetName);
+				pstr = uNetUtil.getBytes(result2.getString(), uConfigVar.CharsetName);
 				CSHTMsgStream streamResp = new CSHTMsgStream();
 				header.setCommandID(commandid);
 				header.setStatus(status);

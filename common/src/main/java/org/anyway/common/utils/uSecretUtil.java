@@ -17,7 +17,7 @@ import org.anyway.common.crypto.DESedeCoder;
 import org.anyway.common.uConfigVar;
 import org.anyway.common.enums.CryptEnum;
 
-public class uSecretUtils {
+public class uSecretUtil {
 	/**
      * 加密方法，加码出错返回原数组
      * @param src 源数据的字节数组,mode加密模式
@@ -73,7 +73,7 @@ public class uSecretUtils {
 	 */
 	public static String Encrypt3Des(String source) throws UnsupportedEncodingException{		
 		byte[] encrypt3Des = Encrypt(source.getBytes(uConfigVar.CharsetName), CryptEnum.DES);
-    	String result = uStringUtils.base64Encode(encrypt3Des);
+    	String result = uStringUtil.base64Encode(encrypt3Des);
     	return result;
 	}
 	 
@@ -99,7 +99,7 @@ public class uSecretUtils {
 	public static String Decrypt3Des(String des) throws UnsupportedEncodingException{
     	//Gson gson = new Gson();
     	//byte[] bt = gson.fromJson(des, byte[].class);
-		byte[] bt = uStringUtils.base64Decode02(des);
+		byte[] bt = uStringUtil.base64Decode02(des);
     	String result = new String(Decrypt(bt, CryptEnum.DES), uConfigVar.CharsetName);
     	return result;
     }

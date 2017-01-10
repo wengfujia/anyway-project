@@ -18,7 +18,7 @@ import java.nio.charset.Charset;
 import org.anyway.common.uConfigVar;
 import org.anyway.exceptions.NotEnoughDataInByteBufferException;
 
-public class uNetUtils {
+public class uNetUtil {
 	private static final byte SZ_BYTE = 1;
 	private static final byte SZ_SHORT = 2;
 	private static final byte SZ_INT = 4;
@@ -71,7 +71,7 @@ public class uNetUtils {
      * @see 如果系统不支持所传入的<code>charset</code>字符集,则按照系统默认字符集进行转换 
      */  
     public static String getString(byte[] buffer, int frmIndx, int ilen, String charset) {  
-        if(uStringUtils.empty(buffer)){  
+        if(uStringUtil.empty(buffer)){  
             return "";  
         }  
         
@@ -83,7 +83,7 @@ public class uNetUtils {
         byte[] data = new byte[icount];
         System.arraycopy(buffer, frmIndx, data, 0, icount);
         
-        if(uStringUtils.empty(charset)){  
+        if(uStringUtil.empty(charset)){  
             return new String(data);  
         } 
         
@@ -99,10 +99,10 @@ public class uNetUtils {
      * @see 如果系统不支持所传入的<code>charset</code>字符集,则按照系统默认字符集进行转换 
      */  
     public static String getString(byte[] data, String charset) {  
-        if(uStringUtils.empty(data)){  
+        if(uStringUtil.empty(data)){  
             return "";  
         }  
-        if(uStringUtils.empty(charset)){  
+        if(uStringUtil.empty(charset)){  
             return new String(data);  
         } 
         
@@ -119,7 +119,7 @@ public class uNetUtils {
      */  
     public static byte[] getBytes(String data, String charset) throws UnsupportedEncodingException {  
         data = (data==null ? "" : data);  
-        if (uStringUtils.empty(charset)) {  
+        if (uStringUtil.empty(charset)) {  
             return data.getBytes();  
         }  
         
@@ -172,7 +172,7 @@ public class uNetUtils {
     public static int chars2int(byte[] buffer, String charset) {
 		int targets = 0;
 		String s = getString(buffer, charset).trim();
-		if (s.isEmpty()==false && uStringUtils.isInt(s)) {
+		if (s.isEmpty()==false && uStringUtil.isInt(s)) {
 			targets = Integer.parseInt(s);
 		}
 		

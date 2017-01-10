@@ -35,7 +35,7 @@ import org.anyway.common.uGlobalVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.common.uLoadVar;
 import org.anyway.server.web.dispatcher.Dispatcher;
@@ -70,7 +70,7 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 		QueryStringDecoder queryDecoder = new QueryStringDecoder(getRequest().getUri(), true);
 		Map<String, List<String>> parameters = queryDecoder.parameters();
 		this.key = parameters.containsKey("key") ? parameters.get("key").get(0) : "";
-		if (uStringUtils.empty(this.key)) {
+		if (uStringUtil.empty(this.key)) {
 			getRequest().getContext().close();
 			return false;
 		}
@@ -83,14 +83,14 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 
 		String token = this.cachemanager.getConfigCache().getToken(this.key);
 		// 查看是否合法
-		if (uStringUtils.empty(token)) { // 非法接入
+		if (uStringUtil.empty(token)) { // 非法接入
 			getRequest().getContext().close();
 			isSucess = false;
 		} else if (false == SignService.checkSignature(token, signature, timeStamp, nonce)) {
 			getRequest().getContext().close();
 			isSucess = false;
 		} else if (getRequest().getHttpMethod().equals(HttpMethod.GET)) { // get方式
-			echoStr = uStringUtils.empty(echoStr) ? this.cachemanager.getDbCache().ErrorDescsCache().get(-11).getResponse()
+			echoStr = uStringUtil.empty(echoStr) ? this.cachemanager.getDbCache().ErrorDescsCache().get(-11).getResponse()
 					: echoStr;
 			super.sendResponse(echoStr);
 			isSucess = false;
@@ -123,7 +123,7 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 		buffer = null;
 		//根据weixin.xml中的commandids的配置，获取业务头
 		String commandValue = this.cachemanager.getConfigCache().getWeixinCommandid(this.key, requestMap);
-		if (uStringUtils.empty(commandValue)) {
+		if (uStringUtil.empty(commandValue)) {
 			status = -20;
 		}
 		else {
@@ -131,12 +131,12 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 			//判断业务是否需要传入hbase服务端
 			String key = uLogger.sprintf("CMD.%d", commandId);
 			commandValue = uLoadVar.GetValue("", key);
-		  	if (uStringUtils.empty(commandValue)) { //业务头为空
+		  	if (uStringUtil.empty(commandValue)) { //业务头为空
 		  		status = -20;
 		  	}
 		  	else if (commandValue.equalsIgnoreCase("HBASE") ) { //需要转到数据库服务层处理
 		  		String content = requestMap.get("Content");
-		  		if (uStringUtils.empty(content)==false) {
+		  		if (uStringUtil.empty(content)==false) {
 		  			try {		  			
 						buffer = content.getBytes(uConfigVar.CharsetName);
 					} catch (UnsupportedEncodingException e) {

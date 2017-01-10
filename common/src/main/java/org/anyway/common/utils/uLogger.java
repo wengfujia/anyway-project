@@ -67,7 +67,7 @@ public class uLogger {
 	 */
 	public static void printInfo(byte[] info) throws UnsupportedEncodingException {
 		if (debug) {
-			String sinfo = uNetUtils.getString(info, uConfigVar.CharsetName);
+			String sinfo = uNetUtil.getString(info, uConfigVar.CharsetName);
 			logger.info(sinfo);
 		}
 	}
@@ -87,7 +87,7 @@ public class uLogger {
 	 */
 	public static void println(String log)
 	{
-		if (debug && uStringUtils.empty(log)==false) {
+		if (debug && uStringUtil.empty(log)==false) {
 			Date now = new Date();  
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   HH:mm:ss");//可以方便地修改日期格式  
 			String strDate = dateFormat.format(now);

@@ -19,8 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.anyway.common.enums.CryptEnum;
-import org.anyway.common.utils.uHexUtils;
-import org.anyway.common.utils.uSecretUtils;
+import org.anyway.common.utils.uHexUtil;
+import org.anyway.common.utils.uSecretUtil;
 
 public class ExpireCreate {
     //创建密钥文件
@@ -29,8 +29,8 @@ public class ExpireCreate {
 		String usedays = "[exp="+Integer.toString(expDate)+"]";
 		String sourceStr = usedays+date;
 		
-		byte[] sourceBtye=uSecretUtils.Encrypt(sourceStr.getBytes(), CryptEnum.DES);
-		String encStr= uHexUtils.bytesToHexString(sourceBtye);
+		byte[] sourceBtye=uSecretUtil.Encrypt(sourceStr.getBytes(), CryptEnum.DES);
+		String encStr= uHexUtil.bytesToHexString(sourceBtye);
 			
 		File f = new File(System.getProperty("user.dir")+"/"+"key");
 		if(f.exists()){

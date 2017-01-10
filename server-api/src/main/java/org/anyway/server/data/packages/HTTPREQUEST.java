@@ -10,7 +10,7 @@
 
 package org.anyway.server.data.packages;
 
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.data.packages.json.JBuffer;
 
@@ -39,7 +39,7 @@ public class HTTPREQUEST<T> implements java.io.Serializable {
 	 */
 	public HTTPREQUEST() {
 		this.iptable = null;
-		this.id = String.valueOf(this.time + Long.valueOf(uStringUtils.getRandom()));
+		this.id = String.valueOf(this.time + Long.valueOf(uStringUtil.getRandom()));
 		this.status = 0; //等待状态
 		this.time = System.currentTimeMillis();
 		this.retry = 1;

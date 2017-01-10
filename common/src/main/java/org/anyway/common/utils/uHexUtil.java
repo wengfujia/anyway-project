@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 /**
  * @Description: 进制转换工具类，常用为十六进制 二进制 八进制 字符串 byte及数组转换
  */
-public class uHexUtils {
+public class uHexUtil {
 
 	@SuppressWarnings("unused")
 	private static final String PATTERN_LEN_TEN = "0000000000";// Len(2^32)=10
@@ -133,7 +133,7 @@ public class uHexUtils {
 		numberformater.applyPattern("00000000");
 		int res_16 = Integer.valueOf(Integer.toHexString(bi2));
 		String result = numberformater.format(res_16);
-		byte[] b = uHexUtils.hexStringToByte(result);
+		byte[] b = uHexUtil.hexStringToByte(result);
 		return b;
 	}
 
@@ -201,7 +201,7 @@ public class uHexUtils {
 	 * @return
 	 */
 	public String stringToHexString(String string) {
-		return uHexUtils.bytesToHexString(string.getBytes());
+		return uHexUtil.bytesToHexString(string.getBytes());
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class uHexUtils {
 	 * @return
 	 */
 	public static final byte[] intToSignByteArray(int signIntVal) {
-		byte[] b = uHexUtils.intToByteArray(Math.abs(signIntVal));
+		byte[] b = uHexUtil.intToByteArray(Math.abs(signIntVal));
 
 		if (signIntVal < 0) {
 			b[0] = (byte) 0x80;

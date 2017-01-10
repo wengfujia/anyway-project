@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.anyway.common.uConfigVar;
-import org.anyway.common.utils.uNetUtils;
+import org.anyway.common.utils.uNetUtil;
 import org.anyway.server.data.contracts.IChrList;
 
 public class HChrList implements IChrList{
@@ -42,7 +42,7 @@ public class HChrList implements IChrList{
 	public void Append(byte[] nr)
 	{
 		String str = "";
-		str = uNetUtils.getString(nr, uConfigVar.CharsetName);
+		str = uNetUtil.getString(nr, uConfigVar.CharsetName);
 		HMessageBuffer.CBody body = new HMessageBuffer.CBody(str);
 		list.add(body);
 	}

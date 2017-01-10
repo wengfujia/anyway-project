@@ -16,7 +16,7 @@ import java.util.Scanner;
  * 修改日期:
  */
 
-public class uFileUtils {
+public class uFileUtil {
 	
 	/**
 	 * 创建文件

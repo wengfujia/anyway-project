@@ -27,9 +27,9 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.anyway.common.uConfigVar;
 import org.anyway.common.enums.CryptEnum;
-import org.anyway.common.utils.uHexUtils;
-import org.anyway.common.utils.uSecretUtils;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uHexUtil;
+import org.anyway.common.utils.uSecretUtil;
+import org.anyway.common.utils.uStringUtil;
 import com.nikhaldimann.inieditor.IniEditor;
 
 public class uLoadVar extends uConfigVar {
@@ -113,9 +113,9 @@ public class uLoadVar extends uConfigVar {
 		SID = inifile.get("DATABASE", "SID");
 		UserID = inifile.get("DATABASE", "USERID");
 		Pwd = inifile.get("DATABASE", "PWD");
-		if (uStringUtils.empty(Pwd)==false) { //3DES解密
-			byte[] decryptData = uHexUtils.hexStringToByte(Pwd);
-			decryptData = uSecretUtils.Decrypt(decryptData,CryptEnum.DES);
+		if (uStringUtil.empty(Pwd)==false) { //3DES解密
+			byte[] decryptData = uHexUtil.hexStringToByte(Pwd);
+			decryptData = uSecretUtil.Decrypt(decryptData,CryptEnum.DES);
 			Pwd = new String(decryptData);
 		}
 		TbERROR = inifile.get("DATABASE", "TbERROR");

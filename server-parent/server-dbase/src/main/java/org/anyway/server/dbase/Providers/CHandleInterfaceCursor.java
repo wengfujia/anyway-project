@@ -37,8 +37,8 @@ import java.util.StringTokenizer;
 import org.anyway.common.uConfigVar;
 import org.anyway.common.uGlobalVar;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uNetUtils;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uNetUtil;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.data.CChrList;
 import org.anyway.server.data.contracts.IChrList;
 import org.anyway.server.dbase.Providers.db.CJdbcPool;
@@ -71,7 +71,7 @@ public class CHandleInterfaceCursor<T> extends CInterface<T> {
 				String body = "";
 				if (nr != null) {
 					if (nr instanceof byte[]) // nr.getClass().getSimpleName().equals("byte[]")
-						body = uNetUtils.getString((byte[]) nr, uConfigVar.CharsetName);
+						body = uNetUtil.getString((byte[]) nr, uConfigVar.CharsetName);
 					else
 						body = (String) nr;
 				}
@@ -160,12 +160,12 @@ public class CHandleInterfaceCursor<T> extends CInterface<T> {
 			Result = cs.getInt(1);
 			String s1 = cs.getString(8) == null ? "" : cs.getString(8);
 			String s2 = cs.getString(9) == null ? "" : cs.getString(9);
-			o_reserve = uNetUtils.getBytes(s2, uConfigVar.CharsetName);
+			o_reserve = uNetUtil.getBytes(s2, uConfigVar.CharsetName);
 			if (list == null)
 				return Result;
 
 			// String classname = list.getClass().getSimpleName();
-			if (uStringUtils.empty(s1) == false) {
+			if (uStringUtil.empty(s1) == false) {
 				// 用接口类代替了泛型与类型强转换
 				if (list instanceof CChrList) {// classname.equalsIgnoreCase("CChrList")
 					s1 += uGlobalVar.MSG_SEPATATE;// socket需要用\t分行

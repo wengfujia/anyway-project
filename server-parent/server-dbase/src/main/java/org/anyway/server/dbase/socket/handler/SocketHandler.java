@@ -33,8 +33,8 @@ import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pint;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uNetUtils;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uNetUtil;
+import org.anyway.common.utils.uStringUtil;
 
 public class SocketHandler extends SimpleDefaultHandler {
 
@@ -105,19 +105,19 @@ public class SocketHandler extends SimpleDefaultHandler {
 			  	}
 		    	
 		    	if (status ==0) {
-		    		uLogger.sprintf(log, "[socket]Sucess! CommandID:%s,User:%s,Content:%.10s,IP:%s", String.valueOf(header.getCommandID()), header.getUser(), uNetUtils.getString(nr, uConfigVar.CharsetName), clientIP);
+		    		uLogger.sprintf(log, "[socket]Sucess! CommandID:%s,User:%s,Content:%.10s,IP:%s", String.valueOf(header.getCommandID()), header.getUser(), uNetUtil.getString(nr, uConfigVar.CharsetName), clientIP);
 		    	} else if (status != -12) {
 		    		//查出错误含义
 		    		if (list.Count()==0) {
 		    			pstring result1 = new pstring();
 		    			pstring result2 = new pstring();
 		    			DBCache.GetErrorInfo(status, result1, result2);
-		    			if (uStringUtils.empty(result2.getString())==false) //获取到错误代码解释
+		    			if (uStringUtil.empty(result2.getString())==false) //获取到错误代码解释
 		    			{
 		    				list.Append(result2.getString());
 		    			}
 		    		}
-		    		uLogger.sprintf(log, "[socket]Fail! ErrorCode:%s， CommandID:%s,User:%s,Content:%.10s,IP:%s", status, header.getCommandID(), header.getUser(), uNetUtils.getString(nr, uConfigVar.CharsetName), clientIP);		    		
+		    		uLogger.sprintf(log, "[socket]Fail! ErrorCode:%s， CommandID:%s,User:%s,Content:%.10s,IP:%s", status, header.getCommandID(), header.getUser(), uNetUtil.getString(nr, uConfigVar.CharsetName), clientIP);		    		
 		    	}
 		    }
 	

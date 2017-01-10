@@ -1,8 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/java/org/anyway/common/crypto/AESCoder.java=UTF-8
-encoding//src/main/java/org/anyway/common/utils/uNetUtils.java=UTF-8
-encoding//src/main/java/org/anyway/common/utils/uSecretUtils.java=UTF-8
-encoding//src/main/java/org/anyway/common/utils/uStringUtils.java=UTF-8
+encoding//src/main/java/org/anyway/common/utils/uNetUtil.java=UTF-8
+encoding//src/main/java/org/anyway/common/utils/uSecretUtil.java=UTF-8
+encoding//src/main/java/org/anyway/common/utils/uStringUtil.java=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

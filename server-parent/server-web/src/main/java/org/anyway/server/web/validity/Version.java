@@ -20,8 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.anyway.common.enums.CryptEnum;
-import org.anyway.common.utils.uHexUtils;
-import org.anyway.common.utils.uSecretUtils;
+import org.anyway.common.utils.uHexUtil;
+import org.anyway.common.utils.uSecretUtil;
 
 public class Version {
 	public static boolean check(){
@@ -33,8 +33,8 @@ public class Version {
 				return false;
 			}
 			
-			byte[] decryptData = uHexUtils.hexStringToByte(s);
-			decryptData = uSecretUtils.Decrypt(decryptData,CryptEnum.DES);
+			byte[] decryptData = uHexUtil.hexStringToByte(s);
+			decryptData = uSecretUtil.Decrypt(decryptData,CryptEnum.DES);
 			s = new String(decryptData);
 			if(s.indexOf("exp")<0 || s.indexOf("usedate")<0){
 				System.out.println("Error:Authorization File Infomation Error!");
@@ -128,16 +128,16 @@ public class Version {
 			System.out.println("Error:Authorization File Not Found!");
 			System.exit(0);
 		}
-		byte[] decryptData = uHexUtils.hexStringToByte(s);
-		decryptData = uSecretUtils.Decrypt(decryptData,CryptEnum.DES);
+		byte[] decryptData = uHexUtil.hexStringToByte(s);
+		decryptData = uSecretUtil.Decrypt(decryptData,CryptEnum.DES);
 		s=new String(decryptData);
 		if(s.indexOf("lastuse")<0){
 			s = s+"[lastuse="+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"]";
 		}else{
 			s = s.substring(0, s.indexOf("lastuse"))+"lastuse="+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+"]";
 		}
-		byte[] bt=uSecretUtils.Encrypt(s.getBytes(), CryptEnum.DES);
-		s = uHexUtils.bytesToHexString(bt);
+		byte[] bt=uSecretUtil.Encrypt(s.getBytes(), CryptEnum.DES);
+		s = uHexUtil.bytesToHexString(bt);
 		if(f.exists())
 			f.delete();
 		f.createNewFile();

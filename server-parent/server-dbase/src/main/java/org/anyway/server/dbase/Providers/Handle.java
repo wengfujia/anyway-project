@@ -11,7 +11,7 @@
 package org.anyway.server.dbase.Providers;
 
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.data.CChrList;
 import org.anyway.server.data.http.HChrList;
 import org.anyway.server.data.packages.DBHEADER;
@@ -29,7 +29,7 @@ public class Handle {
 		int ret = 0;
 		String value = getCommandType(header);
 		
-		if (uStringUtils.empty(value)) {
+		if (uStringUtil.empty(value)) {
 			ret = 20;
 			list.Append("[http]不支持该业务");
 		} else {
@@ -72,7 +72,7 @@ public class Handle {
 		int ret = 0;
 		String value = getCommandType(header);
 		
-		if (uStringUtils.empty(value)) {
+		if (uStringUtil.empty(value)) {
 			ret = 20;
 			list.Append("[socket]不支持该业务");
 		} else {

@@ -16,7 +16,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
-import org.anyway.common.utils.uNetUtils;
+import org.anyway.common.utils.uNetUtil;
 
 public class MessageDecoder extends ByteToMessageDecoder {
 	private final String charsetname;
@@ -41,7 +41,7 @@ public class MessageDecoder extends ByteToMessageDecoder {
         in.markReaderIndex();
         byte[] sizeBytes = new byte[7];
         in.getBytes(0, sizeBytes);//, 0, 7
-        int dataLength = uNetUtils.chars2int(sizeBytes, charsetname);
+        int dataLength = uNetUtil.chars2int(sizeBytes, charsetname);
         //Wrong the packet length
         if (dataLength==0) {
         	in.clear();

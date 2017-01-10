@@ -25,7 +25,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.anyway.common.uGlobalVar;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.web.common.uLoadVar;
 import org.anyway.server.web.models.SeqSectionBean;
@@ -264,12 +264,12 @@ public class ConfigCache {
 			//记录匹配
 			if (map.get("msgtype").equalsIgnoreCase(weixinMap.get("MsgType"))) { //消息类型匹配
 				String msgkey = map.get("msgkey");
-				if (uStringUtils.empty(msgkey)) { //如果没有msgkey进行匹配，说明是根据消息类型匹配
+				if (uStringUtil.empty(msgkey)) { //如果没有msgkey进行匹配，说明是根据消息类型匹配
 					result = map.get("commandid");
 				}
 				String lvalue = map.get(msgkey).toLowerCase(); 		//需要匹配的值
 				String wvalue = weixinMap.get(msgkey).toLowerCase();//微信转入的值
-				if (!uStringUtils.empty(lvalue) && !uStringUtils.empty(wvalue)) {//判断是否为精确匹配
+				if (!uStringUtil.empty(lvalue) && !uStringUtil.empty(wvalue)) {//判断是否为精确匹配
 					String _value = lvalue.replace("?", ""); //替换掉模湖匹配关键字
 					if (wvalue.length() == lvalue.length() && wvalue.indexOf(_value) >= 0) { //微信转入的值是否包含设定的匹配值
 						result = map.get("commandid");

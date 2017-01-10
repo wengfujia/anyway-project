@@ -28,7 +28,7 @@ import org.anyway.common.uGlobalVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.uLogger;
-import org.anyway.common.utils.uStringUtils;
+import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.common.uLoadVar;
 import org.anyway.server.web.dispatcher.Dispatcher;
@@ -41,7 +41,7 @@ import org.anyway.server.data.packages.COMMANDID;
 import org.anyway.server.data.packages.HEADER;
 import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.server.data.packages.json.JBuffer;
-import org.anyway.server.utils.uJsonUtils;
+import org.anyway.server.utils.uJsonUtil;
 import org.anyway.client.TcpClient;
 
 @MessageAnnotation(msgType = COMMANDID.WEB_REQUEST)
@@ -60,7 +60,7 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 
 		//解析包
 		try {
-    		LoginBuf = uJsonUtils.parseBuffer(getRequest().getJBody().getBody());
+    		LoginBuf = uJsonUtil.parseBuffer(getRequest().getJBody().getBody());
     	}
     	catch (Exception e) {
     		status = -23;
@@ -69,7 +69,7 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 		
 		if (status == 0) {
 			//判断用户名与密码
-			if (uStringUtils.empty(LoginBuf.getUserName())) {// || uStringUtils.empty(LoginBuf.getPassWord())) {
+			if (uStringUtil.empty(LoginBuf.getUserName())) {// || uStringUtils.empty(LoginBuf.getPassWord())) {
 				status = -18;
 			}
 			else {
@@ -104,12 +104,12 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 		//判断业务是否需要传入hbase服务端
 		String key = uLogger.sprintf("CMD.%d", commandId);
 		String commandValue = uLoadVar.GetValue("", key);
-		if (uStringUtils.empty(commandValue)) { //业务头为空
+		if (uStringUtil.empty(commandValue)) { //业务头为空
 			status = -20;
 	  	}
 		else if (commandValue.equalsIgnoreCase("HBASE")) { //需要转到数据库服务层处理
 			String body = LoginBuf.getBody();
-			if (uStringUtils.empty(body)==false) {
+			if (uStringUtil.empty(body)==false) {
 				try {
 					buffer = body.getBytes(uConfigVar.CharsetName); //转换成byte[]
 				} catch (UnsupportedEncodingException e) {
