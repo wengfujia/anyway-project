@@ -56,52 +56,56 @@ public class uClassUtil {
 	 * 初始化typeToMsgClassMap
 	 * 遍历包com.company.game.dispatcher.msg
 	 * 取得消息类的class文件
-	 * @param packName
+	 * @param packNames (多个包间用,分隔)
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public static void initTypeToMsgClassMap(String packName) 
+	public static void initTypeToMsgClassMap(String packNames) 
 			throws ClassNotFoundException, IOException {
 		
-		Map<Integer, Class<?>> tmpMap = new HashMap<Integer, Class<?>>();
-		
-		Set<Class<?>> classSet = getClasses(packName);
-		if (classSet != null) {
-			for (Class<?> clazz : classSet) {
-				if (clazz.isAnnotationPresent(MessageAnnotation.class)) {
-					MessageAnnotation annotation = clazz.getAnnotation(MessageAnnotation.class);
-					tmpMap.put(annotation.msgType(), clazz);
-				}
-			}
-		}
-		
-		typeToMsgClassMap = Collections.unmodifiableMap(tmpMap);
+		Map<Integer, Class<?>> result = getTypeClassMap(packNames);
+		typeToMsgClassMap = Collections.unmodifiableMap(result);
 	}
 	
 	/**
 	 * 初始化typeToExecutorClassMap
 	 * 遍历包com.company.game.dispatcher.exec
 	 * 取得业务逻辑执行器的class文件
-	 * @param packName
+	 * @param packNames (多个包间用,分隔)
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public static void initTypeToExecutorClassMap(String packName) 
+	public static void initTypeToExecutorClassMap(String packNames) 
 			throws ClassNotFoundException, IOException {
 		
-		Map<Integer, Class<?>> tmpMap = new HashMap<Integer, Class<?>>();
-		
-		Set<Class<?>> classSet = getClasses(packName);
-		if (classSet != null) {
-			for (Class<?> clazz : classSet) {
-				if (clazz.isAnnotationPresent(MessageAnnotation.class)) {
-					MessageAnnotation annotation = clazz.getAnnotation(MessageAnnotation.class);
-					tmpMap.put(annotation.msgType(), clazz);
+		Map<Integer, Class<?>> result = getTypeClassMap(packNames);
+		typeToExecutorClassMap = Collections.unmodifiableMap(result);
+	}
+	
+	/**
+	 * 根据包列表，扫描并获取对应的注解类
+	 * @param packNames (多个包间用,分隔)
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	public static Map<Integer, Class<?>> getTypeClassMap(String packNames) 
+			throws ClassNotFoundException, IOException {
+		Map<Integer, Class<?>> result = new HashMap<Integer, Class<?>>();
+		//根据,进行分隔获取多个包
+		String[] packList = packNames.split(",");
+		for (String packName : packList) {
+			Set<Class<?>> classSet = getClasses(packName);
+			if (classSet != null) {
+				for (Class<?> clazz : classSet) {
+					if (clazz.isAnnotationPresent(MessageAnnotation.class)) {
+						MessageAnnotation annotation = clazz.getAnnotation(MessageAnnotation.class);
+						result.put(annotation.msgType(), clazz);
+					}
 				}
 			}
 		}
-		
-		typeToExecutorClassMap = Collections.unmodifiableMap(tmpMap);
+		return result;
 	}
 	
 	/**
