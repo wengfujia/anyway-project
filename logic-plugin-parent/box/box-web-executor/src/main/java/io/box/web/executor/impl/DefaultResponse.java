@@ -8,12 +8,12 @@
  * 日期：2015年07月08日
  */
 
-package io.box.web.executor;
+package io.box.web.executor.impl;
+
+import io.box.web.executor.WebMessageResponse;
 
 import org.anyway.common.MessageAnnotation;
 import org.anyway.server.data.packages.COMMANDID;
-
-import io.box.web.executor.impl.WebMessageResponse;
 
 @MessageAnnotation(msgType = COMMANDID.DEFAULTRESPONSE)
 public class DefaultResponse extends WebMessageResponse {

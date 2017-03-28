@@ -125,13 +125,13 @@ public class DispatcherExecutor {
 		
 		@Override
 	    public void run() {
-	    	Results results = manager.getHttpCache().queryTimeOut(3);
+	    	Results results = manager.getHttpCache().queryTimeOut(10);
 	    	List<Result> resultList = results.all();
 	    	if (resultList != null && !resultList.isEmpty()) {
 	    		for (Result result : resultList) {
 		    		@SuppressWarnings("unchecked")
 					HTTPREQUEST<String> request = (HTTPREQUEST<String>)result.getValue();
-		    		if (request.getRetry() >= uGlobalVar.RETRY) {
+		    		if (request.getRetry() >= uGlobalVar.RETRY || !request.getContext().channel().isActive()) {
 		    			//从处理线程池中移除
 	            		manager.getHttpCache().removeDone(request.getID());
 	            		continue;

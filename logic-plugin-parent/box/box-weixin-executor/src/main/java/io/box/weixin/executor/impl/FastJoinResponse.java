@@ -8,7 +8,9 @@
  * 日期：2015年09月15日
  */
 
-package io.box.weixin.executor;
+package io.box.weixin.executor.impl;
+
+import io.box.weixin.executor.AbstractWeixinMessageResponse;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -25,10 +27,8 @@ import org.anyway.common.MessageAnnotation;
 import org.anyway.server.api.CSHTMsgStream;
 import org.anyway.server.data.packages.COMMANDID;
 
-import io.box.weixin.executor.impl.WeixinMessageResponse;
-
 @MessageAnnotation(msgType = COMMANDID.CLASS_JOIN_VALIDATECODE)
-public class FastJoinResponse extends WeixinMessageResponse {
+public class FastJoinResponse extends AbstractWeixinMessageResponse {
 	
 	@Override
 	public void run() {

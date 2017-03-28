@@ -8,7 +8,9 @@
  * 日期：2015年05月28日
  */
 
-package io.box.weixin.executor;
+package io.box.weixin.executor.impl;
+
+import io.box.weixin.executor.AbstractWeixinMessageLocalResponse;
 
 import java.io.ByteArrayInputStream;
 import java.util.Map;
@@ -20,10 +22,8 @@ import org.anyway.wechat.entity.message.resp.TextMessage;
 import org.anyway.wechat.service.MessageService;
 import org.anyway.wechat.util.MessageUtil;
 
-import io.box.weixin.executor.impl.WeixinMessageLocalResponse;
-
 @MessageAnnotation(msgType = COMMANDID.WEIXIN_UNSUBSCRIBE)
-public class UnsubscribeResponse extends WeixinMessageLocalResponse {
+public class UnsubscribeResponse extends AbstractWeixinMessageLocalResponse {
 	
 	@Override
 	public void run() {

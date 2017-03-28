@@ -93,7 +93,7 @@ public class uClassUtil {
 			throws ClassNotFoundException, IOException {
 		Map<Integer, Class<?>> result = new HashMap<Integer, Class<?>>();
 		//根据,进行分隔获取多个包
-		String[] packList = packNames.split(",");
+		String[] packList = packNames.split("[,，]");
 		for (String packName : packList) {
 			Set<Class<?>> classSet = getClasses(packName);
 			if (classSet != null) {

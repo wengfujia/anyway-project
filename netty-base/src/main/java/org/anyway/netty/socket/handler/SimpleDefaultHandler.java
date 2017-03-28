@@ -65,7 +65,7 @@ public abstract class SimpleDefaultHandler extends SimpleChannelInboundHandler<b
 			if (ctx.channel().isWritable())
 				ret = ctx.writeAndFlush(ibuffer);
 			else
-				ctx.close();
+				ctx.channel().disconnect();
 		}
 		catch (Exception E)
 		{

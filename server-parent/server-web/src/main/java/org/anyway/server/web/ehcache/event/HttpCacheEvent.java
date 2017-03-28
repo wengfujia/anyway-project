@@ -27,7 +27,7 @@ public class HttpCacheEvent implements CacheEventListener {
     public void notifyElementEvicted(Ehcache cache, Element element) {
     	@SuppressWarnings("unchecked")
 		HTTPREQUEST<String> request = (HTTPREQUEST<String>)element.getObjectValue();
-    	request.Close();
+    	close(request);
 	}
     
     /**
@@ -39,7 +39,7 @@ public class HttpCacheEvent implements CacheEventListener {
     	//获取连接，关闭
     	@SuppressWarnings("unchecked")
 		HTTPREQUEST<String> request = (HTTPREQUEST<String>)element.getObjectValue();
-    	request.Close();
+    	close(request);
     }
     
     /**
@@ -52,8 +52,7 @@ public class HttpCacheEvent implements CacheEventListener {
     	for (Object key : cache.getKeys()) {
     		@SuppressWarnings("unchecked")
 			HTTPREQUEST<String> request = (HTTPREQUEST<String>)cache.get(key).getObjectValue();
-    		request.Close();
-    		request.getIpTable().decCurthreads();
+    		close(request);
     	}
     }
 
@@ -66,8 +65,7 @@ public class HttpCacheEvent implements CacheEventListener {
              throws CacheException {
     	@SuppressWarnings("unchecked")
 		HTTPREQUEST<String> request = (HTTPREQUEST<String>) element.getObjectValue();
-    	request.Close();
-    	request.getIpTable().decCurthreads();
+    	close(request);
     }
     
     /**
@@ -88,5 +86,18 @@ public class HttpCacheEvent implements CacheEventListener {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+    
+    /**
+     * 关闭连接
+     * @param request
+     */
+    private void close(HTTPREQUEST<String> request) {
+    	if (null != request) {
+    		if (null != request.getIpTable()) {
+    			request.getIpTable().decCurthreads();
+    		}
+        	request.Close();
+    	}
     }
 }

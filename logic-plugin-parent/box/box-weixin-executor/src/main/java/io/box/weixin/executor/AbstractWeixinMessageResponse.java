@@ -7,7 +7,7 @@
  * 日期：2015年05月28日
  */
 
-package io.box.weixin.executor.impl;
+package io.box.weixin.executor;
 
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.data.packages.HTTPREQUEST;
@@ -15,7 +15,7 @@ import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.factory.TcpBusinessExecutorBase;
 import org.anyway.server.web.http.handler.ResponseHandler;
 
-public class WeixinMessageResponse extends TcpBusinessExecutorBase {
+public abstract class AbstractWeixinMessageResponse extends TcpBusinessExecutorBase {
 	
 	protected CacheManager manager = null;
 	protected HTTPREQUEST<String> httprequest = null;
@@ -51,21 +51,6 @@ public class WeixinMessageResponse extends TcpBusinessExecutorBase {
 	protected void sendResponse(String content) {
 		//发送网络包
 		ResponseHandler.writeResponse(content, httprequest.getContext(), httprequest.getRequest());
-		
-//		byte[] result = null;
-//		try {
-//			result = uNetUtils.getBytes(content, uGlobalVar.CharsetName);
-//		} catch (UnsupportedEncodingException e) {
-//			return;
-//		}
-//		//发送网络包
-//		boolean isKeepAlive = new ResponseHandler().writeResponse(result, httprequest.getContext(),
-//				httprequest.getIsKeepAlive(), httprequest.getDecoderResult());
-//		// If keep-alive is off, close the connection once the content is fully
-//		// written.
-//		if (!isKeepAlive) {
-//			httprequest.getContext().writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
-//		}
 	}
 
 	/**
@@ -73,9 +58,6 @@ public class WeixinMessageResponse extends TcpBusinessExecutorBase {
 	 * 需要被继承
 	 * @return
 	 */
-	protected String msgEncode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	protected abstract String msgEncode();
 	
 }

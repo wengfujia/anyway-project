@@ -112,7 +112,7 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 		Map<String, String> requestMap = MessageUtil.parseXml(new ByteArrayInputStream(buffer));
 		// 把微信消息转换成内部业务消息
 		String msgType = requestMap.get("MsgType").toLowerCase();
-		//对文件消息进行关键字过滤
+		//对文本消息进行关键字过滤
 		if (msgType.equalsIgnoreCase(ConstantWeChat.REQ_MESSAGE_TYPE_TEXT)) {
 			// 判断是否有非法关键字
 			if (this.cachemanager.getDbCache().hasStopWord(requestMap.get("Content"))) {
@@ -151,7 +151,7 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 		  	else if (commandValue.equalsIgnoreCase("LOCAL")) { //直接处理本地业务逻辑
 		  		try {
 					Dispatcher.<HTTPREQUEST<String>>execute(this.getRequest(), commandId);
-					return 0;
+					return -1;
 				} catch (InstantiationException | IllegalAccessException e) {
 					status = -23;
 					uLogger.printInfo(e.getMessage());
@@ -228,14 +228,13 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 					client.send(ibuffer, uGlobalVar.RETRY);
 					// 设置状态为等待应答
 					this.getRequest().setDoning();
-//					this.cachemanager.getHttpCache().addDone(this.getRequest());
 				} else {
 					// 设置状态为等待处理
 					this.getRequest().setWait();
-					// 没有找到可用服务端，存入等待缓和存
-//					this.cachemanager.getHttpCache().addWait(this.getRequest());
 				}
 				this.cachemanager.getHttpCache().replaceDone(this.getRequest());
+				return;
+			} else if (status == -1) { //处理本地业务逻辑
 				return;
 			}
 		}

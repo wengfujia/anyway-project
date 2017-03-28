@@ -28,8 +28,8 @@ import org.anyway.cache.ehcache.EhCacheWrapper;
 public class HttpCache {
 	
 	private EhCacheFactory ehcachemanager = null;
-//	private volatile EhCacheWrapper<String, HTTPREQUEST<String>> waitcache; //待处理缓存
-	private volatile EhCacheWrapper<String, HTTPREQUEST<String>> donecache; //已处理缓存
+//	private EhCacheWrapper<String, HTTPREQUEST<String>> waitcache; //待处理缓存
+	private EhCacheWrapper<String, HTTPREQUEST<String>> donecache; //已处理缓存
 	
 	/**
 	 * 构造函数
@@ -39,9 +39,8 @@ public class HttpCache {
 		ehcachemanager = null;
 		if (null != manager) {
 			this.ehcachemanager = manager;
-//			waitcache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpWaitCache", ehcachemanager.getManager());
-			donecache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpDoneCache", ehcachemanager.getManager());
-			
+//				waitcache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpWaitCache", ehcachemanager.getManager());
+				donecache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpDoneCache", ehcachemanager.getManager());
 		}
 		else throw new NoCacheException("manager不能为空，ThreadCache线程缓存池创建失败！");
 	}
@@ -61,10 +60,11 @@ public class HttpCache {
 	 * 获取已处理缓存
 	 * @return
 	 */
-	public EhCacheWrapper<String, HTTPREQUEST<String>> DoneCache() {
+	public synchronized EhCacheWrapper<String, HTTPREQUEST<String>> DoneCache() {
 		if (null == donecache) {
 			donecache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpDoneCache", ehcachemanager.getManager());
 		}
+
 		return donecache;
 	}
 	

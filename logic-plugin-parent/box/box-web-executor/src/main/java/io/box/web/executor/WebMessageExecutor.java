@@ -19,6 +19,7 @@
 package io.box.web.executor;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.util.internal.StringUtil;
 
 import java.io.UnsupportedEncodingException;
 
@@ -76,7 +77,8 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 				//判断版本号
 				String key = uLogger.sprintf("VER.%s", LoginBuf.getSessionId());
 			  	String ver = uLoadVar.GetVerValue("", key);
-				if (ver.compareTo(LoginBuf.getVersion())>0) {
+				if (StringUtil.isNullOrEmpty(ver) || ver.compareTo(LoginBuf.getVersion())>0) {
+					uLogger.sprintf("错误的版本号,sessionid:%s", LoginBuf.getSessionId());
 					status = -12;
 				}
 			}	
@@ -124,7 +126,7 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 		else if (commandValue.equalsIgnoreCase("LOCAL")) { //直接处理本地业务逻辑
 	  		try {
 				Dispatcher.<HTTPREQUEST<String>>execute(this.getRequest(), commandId);
-				return 0;
+				return -1;
 			} catch (InstantiationException | IllegalAccessException e) {
 				status = -23;
 				uLogger.printInfo(e.getMessage());
@@ -174,7 +176,7 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 	@Override
 	public void run() {
 		//判断缓存是否有效并连接是否合法
-		if (null == this.getCacheManager()) {
+		if (null == this.getCacheManager() || null == this.getRequest()) {
 			uLogger.printInfo("找不到相应的缓存");
 			return;
 		}
@@ -192,14 +194,13 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 					client.send(ibuffer, uGlobalVar.RETRY);
 					// 设置状态为等待应答
 					this.getRequest().setDoning();
-//					this.cachemanager.getHttpCache().addDone(this.getRequest());
 				} else {
 					// 设置状态为等待处理
 					this.getRequest().setWait();
-					// 没有找到可用服务端，存入等待缓和存
-//					this.cachemanager.getHttpCache().addWait(this.getRequest());
 				}
 				this.cachemanager.getHttpCache().replaceDone(this.getRequest());
+				return;
+			} else if (status == -1) { //处理本地逻辑
 				return;
 			}
 		}

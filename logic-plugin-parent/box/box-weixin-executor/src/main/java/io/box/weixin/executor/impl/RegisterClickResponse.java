@@ -8,7 +8,9 @@
  * 日期：2015年05月28日
  */
 
-package io.box.weixin.executor;
+package io.box.weixin.executor.impl;
+
+import io.box.weixin.executor.AbstractWeixinMessageLocalResponse;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -23,10 +25,8 @@ import org.anyway.wechat.entity.message.resp.NewsMessage;
 import org.anyway.wechat.service.MessageService;
 import org.anyway.wechat.util.MessageUtil;
 
-import io.box.weixin.executor.impl.WeixinMessageLocalResponse;
-
 @MessageAnnotation(msgType = COMMANDID.WEIXIN_REG_CLICK)
-public class RegisterClickResponse extends WeixinMessageLocalResponse {
+public class RegisterClickResponse extends AbstractWeixinMessageLocalResponse {
 	
 	@Override
 	public void run() {

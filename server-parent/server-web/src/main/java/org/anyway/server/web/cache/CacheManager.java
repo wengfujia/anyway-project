@@ -32,11 +32,13 @@ public class CacheManager {
 	 * @throws NoCacheException 
 	 * @throws Exception 
 	 */
-	public synchronized static CacheManager getInstance() throws NoCacheException {
-		if (INSTANCE == null) {
-			INSTANCE = new CacheManager();
+	public  static CacheManager getInstance() throws NoCacheException {
+		synchronized(CacheManager.class) {
+			if (INSTANCE == null) {
+				INSTANCE = new CacheManager();
+			}
+			return INSTANCE;
 		}
-		return INSTANCE;
 	}
 
 	/**
@@ -46,10 +48,12 @@ public class CacheManager {
 	 * @throws Exception 
 	 */
 	public static CacheManager getInstance(EhCacheFactory ehcachemanager) throws Exception {
-		if (INSTANCE == null) {
-			INSTANCE = new CacheManager(ehcachemanager);
+		synchronized(CacheManager.class) {
+			if (INSTANCE == null) {
+				INSTANCE = new CacheManager(ehcachemanager);
+			}
+			return INSTANCE;
 		}
-		return INSTANCE;
 	}
 
 	/**
@@ -137,7 +141,7 @@ public class CacheManager {
 		IpTableBean iptable = null;
 		for (IpTableBean ip:this.dbcache.IpTablesCache().values()) {
 			if (ip.isSucess()) {
-				if (null == iptable || ip.getValidthreads()<iptable.getValidthreads()) {
+				if (null == iptable || ip.getValidthreads()>iptable.getValidthreads()) {
 					iptable = ip;
 				}
 			}

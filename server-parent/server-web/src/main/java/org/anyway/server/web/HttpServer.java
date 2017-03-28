@@ -15,8 +15,6 @@ import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 
 import org.anyway.common.uConfigVar;
 import org.anyway.common.utils.uLogger;
@@ -41,7 +39,7 @@ public class HttpServer {
 	                ServerBootstrap b = new ServerBootstrap();
 	                b.group(bossGroup, workerGroup) //设置时间循环对象，前者用来处理accept事件，后者用于处理已经建立的连接的io  
 	                 .channel(NioServerSocketChannel.class) //用它来建立新accept的连接，用于构造serversocketchannel的工厂类  
-	                 .option(ChannelOption.SO_BACKLOG, 128)
+	                 .option(ChannelOption.SO_BACKLOG, 1024)
 	                 .option(ChannelOption.SO_RCVBUF, uConfigVar.HT_MaxReadBufferSize)
 	                 .option(ChannelOption.SO_SNDBUF, uConfigVar.HT_MaxSendBufferSize)
 	                 .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT) //new PooledByteBufAllocator(false)
@@ -50,10 +48,10 @@ public class HttpServer {
 	                 .option(ChannelOption.TCP_NODELAY,true)
 	                 .option(ChannelOption.SO_KEEPALIVE,true)
 	                 .option(ChannelOption.SO_REUSEADDR,true); //重用地址
-	                
-	                if (uConfigVar.DEBUG) {
-	                	b.handler(new LoggingHandler(LogLevel.INFO));
-	                }                 
+//	                
+//	                if (uConfigVar.DEBUG) {
+//	                	b.handler(new LoggingHandler(LogLevel.INFO));
+//	                }                 
 	                b.childHandler(new HttpCodecFactory()); //为当前的channel的pipeline添加自定义的处理函数 
 	                //打开
 	                b.bind(port).sync().channel().closeFuture().sync();

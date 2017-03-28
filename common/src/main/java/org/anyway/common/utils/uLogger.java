@@ -55,7 +55,7 @@ public class uLogger {
 	 */
 	public static void printInfo(String info) {
 		if (debug) {
-			logger.info(info);
+			logger.debug(info);
 		}
 	}
 	

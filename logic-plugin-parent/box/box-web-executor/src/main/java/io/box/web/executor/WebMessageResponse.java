@@ -7,7 +7,7 @@
  * 日期：2015年05月28日
  */
 
-package io.box.web.executor.impl;
+package io.box.web.executor;
 
 import java.util.StringTokenizer;
 

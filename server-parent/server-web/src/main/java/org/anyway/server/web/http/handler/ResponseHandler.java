@@ -22,9 +22,9 @@ public class ResponseHandler {
      */
 	@SuppressWarnings("deprecation")
 	public static <T> boolean writeResponse(T content, ChannelHandlerContext ctx, FullHttpRequest fullHttpRequest) {
-    	if (ctx.channel().isWritable() == false) {
-        	return false;
-        }
+//    	if (ctx.channel().isWritable() == false) {
+//        	return false;
+//        }
         // Convert the response content to a ChannelBuffer.
         ByteBuf sbuffer = null;
         if (content instanceof String) {
@@ -56,11 +56,11 @@ public class ResponseHandler {
         //response.headers().set(HttpHeaders.Names.CONTENT_TYPE, "text/plain; charset=UTF-8");
         response.headers().set(HttpHeaders.Names.CONTENT_TYPE, "application/json; charset=UTF-8");
 
-        if (!close) {
+        /*if (!close) {
             // There's no need to add 'Content-Length' header
             // if this is the last response.
             response.headers().set(HttpHeaders.Names.CONTENT_LENGTH, sbuffer.readableBytes());
-        }
+        }*/
         
         // Write the response.
         ChannelFuture future = ctx.writeAndFlush(response);

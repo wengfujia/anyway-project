@@ -127,6 +127,6 @@ public class IpTableBean implements java.io.Serializable {
      * @return
      */
     public Boolean isSucess() {
-    	return this.curthreads<this.maxthreads && this.status==1 ? true : false;
+    	return this.status==1 ? true : false; //this.curthreads<this.maxthreads && 加个这个条件出现找不到可能IP资源，可能因为线程报错造成IP资源没有释放
     }
 }

@@ -50,7 +50,8 @@ public class NettyClient {
 		bootstrap = new Bootstrap();
 		bootstrap.group(group).channel(NioSocketChannel.class)
 				.handler(new MessageCodecFactory());
-		bootstrap//.option(ChannelOption.SO_TIMEOUT, uConfigVar.US_WaitTimeOut)
+		bootstrap
+		 //.option(ChannelOption.SO_TIMEOUT, uConfigVar.US_WaitTimeOut)
          .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, uConfigVar.US_IdleTimeOut)	                 
          .option(ChannelOption.TCP_NODELAY,true)
          .option(ChannelOption.SO_KEEPALIVE,true)

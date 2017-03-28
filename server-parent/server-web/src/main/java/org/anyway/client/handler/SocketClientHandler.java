@@ -59,13 +59,11 @@ public class SocketClientHandler extends SimpleDefaultHandler {
 	    		return;
 	    	} 
 	    	else {
-	    		uLogger.sprintf("[socket]Receive The Wrong Message,IP:%s",clientIP);
-	    		ctx.close();
+	    		uLogger.sprintf("[client]Receive The Wrong Message,IP:%s",clientIP);
 	    	}
 		} 
 		else {
-			uLogger.sprintf("[socket]Receive The Wrong Message,IP:%s",clientIP);
-			ctx.close();
+			uLogger.sprintf("[client]Receive The Wrong Message,IP:%s",clientIP);
     	}
 		
 		if (shtStream!=null) {shtStream.ClearStream();shtStream = null;} 
@@ -84,10 +82,10 @@ public class SocketClientHandler extends SimpleDefaultHandler {
 		//1.处理
 		HEADER header = stream.getHeader();	
 		if (stream.GetStatus() == -12) { //版本号不对
-			uLogger.printInfo("[socket]Error Version,User:%s,IP:%s,Mac:%s", header.getUser(), clientIP, header.getReserve());
+			uLogger.printInfo("[client]Error Version,User:%s,IP:%s,Mac:%s", header.getUser(), clientIP, header.getReserve());
 		}
 		else if (stream.GetStatus() !=0) {//其它错误 打印日志
-			uLogger.printInfo("[socket]Fail! ErrorCode:%s，User:%s,IP:%s,Mac:%s", header.getStatus(), header.getUser(), clientIP, header.getReserve());
+			uLogger.printInfo("[client]Fail! ErrorCode:%s，User:%s,IP:%s,Mac:%s", header.getStatus(), header.getUser(), clientIP, header.getReserve());
 		}
 
 		//2.接收消息返回，消息返回到信息发送源
@@ -97,7 +95,7 @@ public class SocketClientHandler extends SimpleDefaultHandler {
 		try {
 			Dispatcher.execute(request, header.getCommandID());
 		} catch (InstantiationException | IllegalAccessException e) {
-			uLogger.printInfo("[socket]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s",clientIP);
+			uLogger.printInfo("[client]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s",clientIP);
 		}
 		catch (Exception e) {
 			uLogger.printInfo(e.getMessage());
@@ -107,7 +105,7 @@ public class SocketClientHandler extends SimpleDefaultHandler {
 	//////////////////////////////////////////////////////////////////
 	//消息发送函数
 	///////////////////////////////////////////////////////////////////
-    /**
+	/**
      * 发送反馈包
      * @param ctx
      * @param header
@@ -124,9 +122,9 @@ public class SocketClientHandler extends SimpleDefaultHandler {
 	    	
 	    	ChannelFuture retsend = SendPacket(ctx, ibuffer, len);
 	    	if (retsend==null) {
-				uLogger.sprintf("[socket]Fail To SendPacket,IP:%s",clientIP);
+				uLogger.sprintf("[client]Fail To SendPacket,IP:%s",clientIP);
 				ctx.close();
-	    	}	
+	    	}
     	}
     	finally { 
     		//清空

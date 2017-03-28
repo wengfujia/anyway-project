@@ -51,9 +51,9 @@ public class SocketServer {
 	                 .option(ChannelOption.SO_KEEPALIVE,true)
 	                 .option(ChannelOption.SO_REUSEADDR,true); //重用地址
 	                
-	                if (uConfigVar.DEBUG) {
-	                	b.handler(new LoggingHandler(LogLevel.INFO));
-	                }            
+//	                if (uConfigVar.DEBUG) {
+//	                	b.handler(new LoggingHandler(LogLevel.INFO));
+//	                }            
 	                b.childHandler(new MessageCodecFactory()); //为当前的channel的pipeline添加自定义的处理函数 
 	                //打开
 	                b.bind(port).sync().channel().closeFuture().sync();
