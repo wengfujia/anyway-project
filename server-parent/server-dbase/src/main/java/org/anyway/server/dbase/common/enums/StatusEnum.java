@@ -8,7 +8,7 @@
  * 修改日期:
  */
 
-package org.anyway.server.dbase.enums;
+package org.anyway.server.dbase.common.enums;
 
 import java.util.Iterator;
 import java.util.List;

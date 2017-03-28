@@ -23,7 +23,7 @@ import org.anyway.common.utils.uLogger;
 import org.anyway.server.data.models.ErrorDescBean;
 import org.anyway.server.data.models.UserBean;
 import org.anyway.server.dbase.Providers.db.DbService;
-import org.anyway.server.dbase.enums.StatusEnum;
+import org.anyway.server.dbase.common.enums.StatusEnum;
 
 public class DBCache {
 

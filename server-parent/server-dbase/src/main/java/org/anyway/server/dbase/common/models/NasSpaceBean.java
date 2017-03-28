@@ -1,5 +1,5 @@
-package org.anyway.server.dbase.model;
-import org.anyway.server.dbase.enums.StatusEnum;
+package org.anyway.server.dbase.common.models;
+import org.anyway.server.dbase.common.enums.StatusEnum;
 
 @SuppressWarnings("serial")
 public class NasSpaceBean extends DataBase {

@@ -21,7 +21,7 @@ import org.anyway.server.data.packages.DBHEADER;
 import org.anyway.server.data.packages.HEADER;
 import org.anyway.server.dbase.cache.DBCache;
 import org.anyway.server.dbase.common.uLoadVar;
-import org.anyway.server.dbase.enums.StatusEnum;
+import org.anyway.server.dbase.common.enums.StatusEnum;
 
 public abstract class CInterface<T> {
 	HEADER m_header;

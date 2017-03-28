@@ -1,4 +1,4 @@
-package org.anyway.server.dbase.model;
+package org.anyway.server.dbase.common.models;
 /*
  * 名称: DataBase
  * 描述: 缓存数据类基类

@@ -1,4 +1,4 @@
-package org.anyway.server.dbase.model;
+package org.anyway.server.dbase.common.models;
 /*
  * 名称: PostBean
  * 描述: 职位类

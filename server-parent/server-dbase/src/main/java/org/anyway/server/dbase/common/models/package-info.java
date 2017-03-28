@@ -5,4 +5,4 @@
  * @author wengfj
  *
  */
-package org.anyway.server.dbase.model;
+package org.anyway.server.dbase.common.models;
