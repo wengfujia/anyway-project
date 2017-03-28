@@ -8,7 +8,7 @@
  * 修改日期:
  */
 
-package org.anyway.server.web.enums;
+package org.anyway.server.web.common.enums;
 
 public enum StatusEnum {
 	INVALID("无效", 0),

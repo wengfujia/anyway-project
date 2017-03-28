@@ -1,4 +1,4 @@
-package org.anyway.server.web.enums;
+package org.anyway.server.web.common.enums;
 
 public class ConfigEnum {
 	

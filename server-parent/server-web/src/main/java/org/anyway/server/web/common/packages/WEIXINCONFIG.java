@@ -7,7 +7,7 @@
  * 日期：2015年05月28日
  */
 
-package org.anyway.server.web.packages;
+package org.anyway.server.web.common.packages;
 
 import org.anyway.wechat.entity.AccessToken;
 

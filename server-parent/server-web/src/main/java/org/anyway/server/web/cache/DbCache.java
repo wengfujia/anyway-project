@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.anyway.server.data.models.ErrorDescBean;
 import org.anyway.server.data.models.IpTableBean;
-import org.anyway.server.web.models.CategoryBean;
+import org.anyway.server.web.common.models.CategoryBean;
 
 public class DbCache {
 	//private EhCacheFactory ehcachemanager = null;

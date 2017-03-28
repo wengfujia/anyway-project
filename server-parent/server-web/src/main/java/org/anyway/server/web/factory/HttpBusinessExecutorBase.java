@@ -19,7 +19,7 @@ import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.server.web.cache.CacheManager;
-import org.anyway.server.web.enums.StatusEnum;
+import org.anyway.server.web.common.enums.StatusEnum;
 import org.anyway.server.web.http.handler.ResponseHandler;
 
 public abstract class HttpBusinessExecutorBase implements Runnable {

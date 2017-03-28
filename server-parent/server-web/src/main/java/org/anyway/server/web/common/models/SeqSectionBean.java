@@ -1,4 +1,4 @@
-package org.anyway.server.web.models;
+package org.anyway.server.web.common.models;
 
 /*
  * 名称: SeqSectionBean

@@ -17,13 +17,12 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
 import org.anyway.common.utils.uStringUtil;
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.data.models.ErrorDescBean;
 import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.web.cache.CacheManager;
-import org.anyway.server.web.models.CategoryBean;
+import org.anyway.server.web.common.models.CategoryBean;
 
 public class XmlProvider implements Provider {
 
