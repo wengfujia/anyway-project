@@ -10,16 +10,16 @@
 
 package io.box.web.executor.impl;
 
-import io.box.web.executor.WebMessageResponse;
+import io.box.web.executor.AbstractWebMessageResponse;
 
 import org.anyway.common.MessageAnnotation;
 import org.anyway.server.data.packages.COMMANDID;
 
 @MessageAnnotation(msgType = COMMANDID.DEFAULTRESPONSE)
-public class DefaultResponse extends WebMessageResponse {
+public class DefaultResponse extends AbstractWebMessageResponse {
 
 	@Override
-	public void run() {
-		super.run();
+	public Integer call() {
+		return super.call();
 	}
 }

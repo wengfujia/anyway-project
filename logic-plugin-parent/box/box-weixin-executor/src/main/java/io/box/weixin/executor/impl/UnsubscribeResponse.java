@@ -26,8 +26,8 @@ import org.anyway.wechat.util.MessageUtil;
 public class UnsubscribeResponse extends AbstractWeixinMessageLocalResponse {
 	
 	@Override
-	public void run() {
-		super.run();
+	public Integer call() {
+		return super.call();
 	}
 	
 	/**

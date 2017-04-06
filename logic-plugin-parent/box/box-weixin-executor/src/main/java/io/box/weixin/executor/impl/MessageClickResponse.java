@@ -31,8 +31,8 @@ import org.anyway.wechat.util.MessageUtil;
 public class MessageClickResponse extends AbstractWeixinMessageResponse {
 	
 	@Override
-	public void run() {
-		super.run();
+	public Integer call() {
+		return super.call();
 	}
 	
 	/**

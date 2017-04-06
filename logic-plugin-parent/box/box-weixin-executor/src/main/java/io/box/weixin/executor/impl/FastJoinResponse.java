@@ -31,8 +31,8 @@ import org.anyway.server.data.packages.COMMANDID;
 public class FastJoinResponse extends AbstractWeixinMessageResponse {
 	
 	@Override
-	public void run() {
-		super.run();
+	public Integer call() {
+		return super.call();
 	}
 	
 	/**

@@ -25,11 +25,11 @@ public abstract class AbstractWeixinMessageResponse extends TcpBusinessExecutorB
 	 * 从http线程池中获取连接,并把消息分解成json后返回http消息
 	 */
 	@Override
-	public void run() {
+	public Integer call() {
 		try {
 			this.manager = CacheManager.getInstance();
 		} catch (NoCacheException e) {
-			return;
+			return -23;
 		}
 		//获取连接，返回消息
 		String seq = this.getRequest().getCStream().GetSequence();
@@ -40,7 +40,9 @@ public abstract class AbstractWeixinMessageResponse extends TcpBusinessExecutorB
 			//从连接池中删除连接
 			httprequest.Close();
 			this.manager.getHttpCache().removeDone(seq);
+			return 0;
 		}
+		return -23;
 	}
 
 	/**

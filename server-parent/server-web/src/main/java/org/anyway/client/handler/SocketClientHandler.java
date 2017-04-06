@@ -93,7 +93,7 @@ public class SocketClientHandler extends SimpleDefaultHandler {
   		request.setContext(ctx);
   		request.setCStream(stream);
 		try {
-			Dispatcher.execute(request, header.getCommandID());
+			Dispatcher.submit(request, header.getCommandID());
 		} catch (InstantiationException | IllegalAccessException e) {
 			uLogger.printInfo("[client]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s",clientIP);
 		}

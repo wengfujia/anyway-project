@@ -72,7 +72,8 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
 	        	ctx.close();
 	        	fullRequest = null;
 	        	return;
-	        }	
+	        }
+	    	uLogger.println("[http]connect is closed!");
     	}
     	
     	//分解消息
@@ -81,12 +82,14 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
 		JBuffer<String> LoginBuf = new JBuffer<String>();
 		if (uLoadVar.IsWeixinServer()) { //微信接入			
 			LoginBuf.setCommandId(COMMANDID.WEIXIN_REQUEST);
+			uLogger.println("[http]weixin is comein!");
 		}
 		else { //web接入
 			LoginBuf.setCommandId(COMMANDID.WEB_REQUEST);
 			if (uConfigVar.HT_Crypt == 1) { //启用加密，需要解密
 				content = uSecretUtil.Decrypt3Des(content);
 	    	}
+			uLogger.println("[http]web is comein!");
 		}
 		LoginBuf.setBody(content);
 		
@@ -98,10 +101,11 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
 		request.setContext(ctx);
 		request.setUri(fullRequest.uri());
 		request.setHttpMethod(fullRequest.method());
-		request.setWait();
+		request.setWait(); 
 		CacheManager.getInstance().getHttpCache().addDone(request);
 		//业务处理
-		Dispatcher.<HTTPREQUEST<String>>execute(request, request.getJBody().getCommandId());
+		int status = Dispatcher.<HTTPREQUEST<String>>submit(request, request.getJBody().getCommandId());
+		uLogger.println("[http]final status=%s", status);
     }
    
 }

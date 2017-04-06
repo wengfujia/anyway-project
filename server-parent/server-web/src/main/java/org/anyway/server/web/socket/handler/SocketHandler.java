@@ -112,7 +112,7 @@ public class SocketHandler extends SimpleDefaultHandler {
 				request.setContext(ctx);
 				request.setCStream(stream);
 				try {
-					status = Dispatcher.execute(request, stream.GetCommand());
+					status = Dispatcher.submit(request, stream.GetCommand());
 				} catch (InstantiationException | IllegalAccessException e) {
 					uLogger.printInfo("[socket]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s", clientIP);
 					status = -10;

@@ -10,6 +10,7 @@
 
 package io.box.web.message;
 
+
 import org.anyway.common.MessageAnnotation;
 import org.anyway.common.uGlobalVar;
 import org.anyway.server.data.packages.COMMANDID;

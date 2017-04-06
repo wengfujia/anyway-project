@@ -8,6 +8,8 @@
 
 package org.anyway.server.web.factory;
 
+import java.util.concurrent.Callable;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
@@ -22,7 +24,7 @@ import org.anyway.server.data.packages.HEADER;
 import org.anyway.server.data.packages.TCPREQUEST;
 import org.anyway.server.web.cache.CacheManager;
 
-public abstract class TcpBusinessExecutorBase implements Runnable {
+public abstract class TcpBusinessExecutorBase implements Callable<Integer> {
 
 	private TCPREQUEST request;
 
@@ -47,8 +49,8 @@ public abstract class TcpBusinessExecutorBase implements Runnable {
 	}
 	
 	@Override
-	public void run() {
-		
+	public Integer call() {
+		return 0;
 	}
 	
 	/**

@@ -31,7 +31,6 @@ import java.util.Map;
 
 import org.anyway.common.MessageAnnotation;
 import org.anyway.common.uConfigVar;
-import org.anyway.common.uGlobalVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.uLogger;
@@ -42,7 +41,6 @@ import org.anyway.server.web.common.enums.SessionEnum;
 import org.anyway.server.web.dispatcher.Dispatcher;
 import org.anyway.server.web.factory.HttpBusinessExecutorBase;
 import org.anyway.server.api.CSHTMsgStream;
-import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.data.packages.COMMANDID;
 import org.anyway.server.data.packages.HEADER;
 import org.anyway.server.data.packages.HTTPREQUEST;
@@ -51,7 +49,6 @@ import org.anyway.wechat.entity.message.resp.TextMessage;
 import org.anyway.wechat.service.MessageService;
 import org.anyway.wechat.service.SignService;
 import org.anyway.wechat.util.MessageUtil;
-import org.anyway.client.TcpClient;
 
 @MessageAnnotation(msgType = COMMANDID.WEIXIN_REQUEST)
 public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
@@ -64,15 +61,14 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 	 * 
 	 * @return
 	 */
-	private Boolean doFilter() {
-		Boolean isSucess = true;
+	private int doFilter() {
 		// 获取参数
 		QueryStringDecoder queryDecoder = new QueryStringDecoder(getRequest().getUri(), true);
 		Map<String, List<String>> parameters = queryDecoder.parameters();
 		this.key = parameters.containsKey("key") ? parameters.get("key").get(0) : "";
 		if (uStringUtil.empty(this.key)) {
 			getRequest().getContext().close();
-			return false;
+			return -23;
 		}
 		String echoStr = parameters.containsKey("echostr") ? parameters.get("echostr").get(0) : "";
 		String timeStamp = parameters.containsKey("timestamp") ? parameters.get("timestamp").get(0) : "";
@@ -82,88 +78,60 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 		String msgSignature = parameters.containsKey("msg_signature") ? parameters.get("msg_signature").get(0) : "";
 
 		String token = this.cachemanager.getConfigCache().getToken(this.key);
+		int status = 0;
 		// 查看是否合法
 		if (uStringUtil.empty(token)) { // 非法接入
 			getRequest().getContext().close();
-			isSucess = false;
+			status = -23;
 		} else if (false == SignService.checkSignature(token, signature, timeStamp, nonce)) {
 			getRequest().getContext().close();
-			isSucess = false;
+			status = -23;
 		} else if (getRequest().getHttpMethod().equals(HttpMethod.GET)) { // get方式
 			echoStr = uStringUtil.empty(echoStr) ? this.cachemanager.getDbCache().ErrorDescsCache().get(-11).getResponse()
 					: echoStr;
 			super.sendResponse(echoStr);
-			isSucess = false;
+			status = -23;
 		}
-		return isSucess;
+		return status;
 	}
 	
 	/**
 	 * 分解消息
 	 * @param bytebuf
+	 * @param requestMap 微信请求包
 	 * @return 状态 0成功，其余不成功
 	 */
-	private int doDecode(ByteBuf bytebuf) {
+	private int doDecode(ByteBuf bytebuf, Map<String, String> requestMap) {
+
 		int status = 0;
 		int commandId = -1;
 		
-		// 分解微信内容成map
-		byte[] buffer = this.getRequest().getJBody().getBody().getBytes();	
-		Map<String, String> requestMap = MessageUtil.parseXml(new ByteArrayInputStream(buffer));
-		// 把微信消息转换成内部业务消息
-		String msgType = requestMap.get("MsgType").toLowerCase();
-		//对文本消息进行关键字过滤
-		if (msgType.equalsIgnoreCase(ConstantWeChat.REQ_MESSAGE_TYPE_TEXT)) {
-			// 判断是否有非法关键字
-			if (this.cachemanager.getDbCache().hasStopWord(requestMap.get("Content"))) {
-				status = -17;
-			}
-		}
-		
-		buffer = null;
-		//根据weixin.xml中的commandids的配置，获取业务头
-		String commandValue = this.cachemanager.getConfigCache().getWeixinCommandid(this.key, requestMap);
-		if (uStringUtil.empty(commandValue)) {
-			status = -20;
-		}
-		else {
-			commandId = Integer.parseInt(commandValue);
-			//判断业务是否需要传入hbase服务端
-			String key = uLogger.sprintf("CMD.%d", commandId);
-			commandValue = uLoadVar.GetValue("", key);
-		  	if (uStringUtil.empty(commandValue)) { //业务头为空
-		  		status = -20;
-		  	}
-		  	else if (commandValue.equalsIgnoreCase("HBASE") ) { //需要转到数据库服务层处理
-		  		String content = requestMap.get("Content");
-		  		if (uStringUtil.empty(content)==false) {
-		  			try {		  			
-						buffer = content.getBytes(uConfigVar.CharsetName);
-					} catch (UnsupportedEncodingException e) {
-						status = -23;
-						uLogger.printInfo(e.getMessage());
-					} catch (Exception e) {
-						status = -23;
-						uLogger.printInfo(e.getMessage());
-					}
-		  		}
-			}
-		  	else if (commandValue.equalsIgnoreCase("LOCAL")) { //直接处理本地业务逻辑
-		  		try {
-					Dispatcher.<HTTPREQUEST<String>>execute(this.getRequest(), commandId);
-					return -1;
-				} catch (InstantiationException | IllegalAccessException e) {
+		byte[] buffer = null;
+
+		commandId = Integer.parseInt(requestMap.get("commandId"));
+		//判断业务是否需要传入hbase服务端
+		String key = uLogger.sprintf("CMD.%d", commandId);
+		key = uLoadVar.GetValue("", key);
+	  	if (uStringUtil.empty(key)) { //业务头为空
+	  		status = -20;
+	  	}
+	  	else if ("HBASE".equalsIgnoreCase(key) ) { //需要转到数据库服务层处理
+	  		String content = requestMap.get("Content");
+	  		if (uStringUtil.empty(content)==false) {
+	  			try {		  			
+					buffer = content.getBytes(uConfigVar.CharsetName);
+				} catch (UnsupportedEncodingException e) {
 					status = -23;
 					uLogger.printInfo(e.getMessage());
 				} catch (Exception e) {
 					status = -23;
 					uLogger.printInfo(e.getMessage());
 				}
-		  	}
-		  	else if (commandValue.equalsIgnoreCase("DECODE")) { //需要进行解码处理
-	  			buffer = super.decodeMessage(commandId, requestMap);
 	  		}
 		}
+	  	else if ("DECODE".equalsIgnoreCase(key)) { //需要进行解码处理
+  			buffer = super.decodeMessage(commandId, requestMap);
+  		}
 		
 	  	//返回结果
 	  	if (status == 0) {
@@ -173,8 +141,8 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 			}
 			//设置包头
 	  		//获取版本号
-	  		String key = uLogger.sprintf("VER.%s", String.valueOf(SessionEnum.WX.getSessionId()));
-	  		String ver = uLoadVar.GetVerValue("", key);
+	  		String ver = uLogger.sprintf("VER.%s", String.valueOf(SessionEnum.WX.getSessionId()));
+	  		ver = uLoadVar.GetVerValue("", ver);
 			HEADER header = new HEADER();
 			header.setCommandID(commandId);
 			header.setStatus(0);
@@ -205,40 +173,73 @@ public class WeixinMessageExecutor extends HttpBusinessExecutorBase {
 		return status;
 	}
 
+	private int route(Map<String, String> requestMap) {
+		ByteBuf ibuffer = this.getRequest().getContext().alloc().buffer();
+		int status = doDecode(ibuffer, requestMap); // 进行解码，转换成内部业务消息包
+		if (status == 0) {
+			// 发送到数据层
+			sendTo(ibuffer);
+			this.cachemanager.getHttpCache().replaceDone(this.getRequest());
+		}
+		return status;
+	}
+	
 	/**
 	 * 执行业务
 	 */
 	@Override
-	public void run() {
+	public Integer call() {
 		//判断缓存是否有效并连接是否合法
 		if (null == this.getCacheManager()) {
-			return;
+			return -23;
 		}
 
 		cachemanager = this.getCacheManager();
-		if (doFilter() == true) {
-			ByteBuf ibuffer = this.getRequest().getContext().alloc().buffer();
-			int status = doDecode(ibuffer); // 进行解码，转换成内部业务消息包
-			if (status == 0) {
-				// 获取可用的hbase服务端连接
-				IpTableBean iptable = this.getIpTable();
-				if (null != iptable) {
-					// 提交到hbase服务端
-					TcpClient client = new TcpClient(iptable.getAddress(), iptable.getPort());
-					client.send(ibuffer, uGlobalVar.RETRY);
-					// 设置状态为等待应答
-					this.getRequest().setDoning();
-				} else {
-					// 设置状态为等待处理
-					this.getRequest().setWait();
+		int status = doFilter();
+		if (status == 0) {
+			// 分解微信内容成map
+			byte[] buffer = this.getRequest().getJBody().getBody().getBytes();	
+			Map<String, String> requestMap = MessageUtil.parseXml(new ByteArrayInputStream(buffer));
+			// 把微信消息转换成内部业务消息
+			String msgType = requestMap.get("MsgType").toLowerCase();
+			//对文本消息进行关键字过滤
+			if (msgType.equalsIgnoreCase(ConstantWeChat.REQ_MESSAGE_TYPE_TEXT)) {
+				// 判断是否有非法关键字
+				if (this.cachemanager.getDbCache().hasStopWord(requestMap.get("Content"))) {
+					status = -17;
 				}
-				this.cachemanager.getHttpCache().replaceDone(this.getRequest());
-				return;
-			} else if (status == -1) { //处理本地业务逻辑
-				return;
 			}
+			
+			//根据weixin.xml中的commandids的配置，获取业务头
+			String commandId = this.cachemanager.getConfigCache().getWeixinCommandid(this.key, requestMap);
+			if (uStringUtil.empty(commandId)) {
+				return -20;
+			}
+			//判断业务是否需要传入hbase服务端
+			String commandValue = uLogger.sprintf("CMD.%s", commandId);
+			commandValue = uLoadVar.GetValue("", commandValue);
+		  	if (uStringUtil.empty(commandValue)) { //业务头为空
+		  		status = -20;
+		  	}
+		  	else if ("LOCAL".equalsIgnoreCase(commandValue)) { //直接处理本地业务逻辑
+		  		try {
+		  			status = Dispatcher.<HTTPREQUEST<String>>submit(this.getRequest(), Integer.parseInt(commandId));
+				} catch (InstantiationException | IllegalAccessException e) {
+					status = -23;
+					uLogger.printInfo(e.getMessage());
+				} catch (Exception e) {
+					status = -23;
+					uLogger.printInfo(e.getMessage());
+				}
+		  	}
+		  	else {
+		  		requestMap.put("commandId", commandId);
+		  		requestMap.put("commandValue", commandValue);
+		  		return route(requestMap);
+		  	}
 		}
 		this.cachemanager.getHttpCache().removeDone(this.getRequest().getID());
+		return status;
 	}
 	
 }

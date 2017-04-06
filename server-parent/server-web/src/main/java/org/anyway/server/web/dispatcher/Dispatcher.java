@@ -19,6 +19,8 @@ package org.anyway.server.web.dispatcher;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.anyway.common.uConfigVar;
 import org.anyway.common.utils.uClassUtil;
@@ -51,55 +53,27 @@ public class Dispatcher {
 			executorClass = uClassUtil.getExecutorClassByType(uConfigVar.DEF_RESPONSE);
 		}
 		if (executorClass!=null) {
-			if (request instanceof HTTPREQUEST<?>) {				
+			int timeOut = 8000;
+			Future<Integer> future = null;
+			if (request instanceof HTTPREQUEST<?>) {
+				timeOut = uConfigVar.HT_IdleTimeOut;
 				HttpBusinessExecutorBase executor = (HttpBusinessExecutorBase) executorClass.newInstance();
 				executor.setRequest((HTTPREQUEST<String>)request);
 				//执行
-				httpdispatcherService.submit(executor);	
+				future = httpdispatcherService.submit(executor);
 			}
-			else if (request instanceof TCPREQUEST) {				
+			else if (request instanceof TCPREQUEST) {
+				timeOut = uConfigVar.US_IdleTimeOut;
 				TcpBusinessExecutorBase executor = (TcpBusinessExecutorBase) executorClass.newInstance();
 				executor.setRequest((TCPREQUEST)request);
 				//执行
-				tcpdispatcherService.submit(executor);
+				future = tcpdispatcherService.submit(executor);
 			}
-		}
-		else {
-			uLogger.printInfo("没有找到"+msgType+"相应的执行类");
-			result = -10;
-		}
-		return result;
-	}
-	
-	/**
-	 * 使用execute业务分发
-	 * @param <T>
-	 * @param <T>
-	 * @param context
-	 * @param request
-	 * @param msgType
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> int execute(T request, int msgType) throws InstantiationException, IllegalAccessException {
-		int result = 0;
-		Class<?> executorClass = uClassUtil.getExecutorClassByType(msgType);
-		if (executorClass==null && uConfigVar.DEF_RESPONSE>=0) { //判断是否有默认返回类  2015.9.22
-			executorClass = uClassUtil.getExecutorClassByType(uConfigVar.DEF_RESPONSE);
-		}
-		if (executorClass!=null) {
-			if (request instanceof HTTPREQUEST<?>) {				
-				HttpBusinessExecutorBase executor = (HttpBusinessExecutorBase) executorClass.newInstance();
-				executor.setRequest((HTTPREQUEST<String>)request);
-				//执行
-				httpdispatcherService.execute(executor);
-			}
-			else if (request instanceof TCPREQUEST) {				
-				TcpBusinessExecutorBase executor = (TcpBusinessExecutorBase) executorClass.newInstance();
-				executor.setRequest((TCPREQUEST)request);
-				//执行
-				tcpdispatcherService.execute(executor);
+			try {
+				result = future.get(timeOut, TimeUnit.MILLISECONDS);
+			} catch (Exception ex) {
+				result = -23;
+				ex.printStackTrace();
 			}
 		}
 		else {

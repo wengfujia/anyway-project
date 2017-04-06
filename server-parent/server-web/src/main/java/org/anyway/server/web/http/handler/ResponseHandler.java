@@ -46,6 +46,7 @@ public class ResponseHandler {
 //        sbuffer.capacity(buffer.length);
 //        sbuffer.writeBytes(buffer);
  
+        
         // Decide whether to close the connection or not.
         boolean close = fullHttpRequest.headers().contains(HttpHeaders.Names.CONNECTION, HttpHeaders.Values.CLOSE, true)
                 || fullHttpRequest.getProtocolVersion().equals(HttpVersion.HTTP_1_0)

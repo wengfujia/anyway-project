@@ -8,11 +8,16 @@
 
 package org.anyway.server.web.factory;
 
+import io.netty.buffer.ByteBuf;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
+import org.anyway.client.TcpClient;
+import org.anyway.common.uGlobalVar;
 import org.anyway.common.utils.uClassUtil;
 import org.anyway.common.utils.uLogger;
 import org.anyway.exceptions.NoCacheException;
@@ -22,7 +27,7 @@ import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.common.enums.StatusEnum;
 import org.anyway.server.web.http.handler.ResponseHandler;
 
-public abstract class HttpBusinessExecutorBase implements Runnable {
+public abstract class HttpBusinessExecutorBase implements Callable<Integer> {
 
 	private HTTPREQUEST<String> request;
 	
@@ -63,8 +68,8 @@ public abstract class HttpBusinessExecutorBase implements Runnable {
 	}
 	
 	@Override
-	public void run() {
-		
+	public Integer call() {
+		return 0;
 	}
 	
 	/*
@@ -108,9 +113,14 @@ public abstract class HttpBusinessExecutorBase implements Runnable {
 	 * 
 	 * @param content
 	 */
-	protected void sendResponse(String content) {
-		ResponseHandler.writeResponse(content, this.request.getContext(), this.request.getRequest());
-		
+	protected int sendResponse(String content) {
+		boolean result = ResponseHandler.writeResponse(content, this.request.getContext(), this.request.getRequest());
+		if (result) {
+			return 0;
+		}
+		else {
+			return -23;
+		}
 //		boolean isKeepAlive = new ResponseHandler().writeResponse(content, getRequest().getContext(),
 //				getRequest().getIsKeepAlive(), getRequest().getDecoderResult());
 //		// If keep-alive is off, close the connection once the content is fully
@@ -118,5 +128,26 @@ public abstract class HttpBusinessExecutorBase implements Runnable {
 //		if (!isKeepAlive) {
 //			getRequest().getContext().writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
 //		}
+	}
+	
+	/**
+	 * 发送数据到数据层
+	 * @param ibuffer
+	 * @return
+	 */
+	protected int sendTo(ByteBuf ibuffer) {
+		// 获取可用的hbase服务端连接
+		IpTableBean iptable = this.getIpTable();
+		if (null != iptable) {
+			// 提交到hbase服务端
+			TcpClient client = new TcpClient(iptable.getAddress(), iptable.getPort());
+			client.send(ibuffer, uGlobalVar.RETRY);
+			// 设置状态为等待应答
+			this.getRequest().setDoning();
+		} else {
+			// 设置状态为等待处理
+			this.getRequest().setWait();
+		}
+		return 0;
 	}
 }

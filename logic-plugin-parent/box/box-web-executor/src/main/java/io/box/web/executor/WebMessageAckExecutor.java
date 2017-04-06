@@ -32,16 +32,17 @@ public class WebMessageAckExecutor extends TcpBusinessExecutorBase {
 	 * 
 	 */
 	@Override
-	public void run() {
+	public Integer call() {
 		try {
 			this.manager = CacheManager.getInstance();
 		} catch (NoCacheException e) {
-			return;
+			return -23;
 		}
 		//设置状态为等待应答，放入已传输缓存 
 		String seq = this.getRequest().getCStream().GetSequence();
 		HTTPREQUEST<String> request = this.manager.getHttpCache().DoneCache().get(seq);
 		request.setDone();
 		this.manager.getHttpCache().DoneCache().replace(seq, request);
+		return 0;
 	}
 }

@@ -626,7 +626,7 @@
 		timeToIdleSeconds="12" timeToLiveSeconds="12"
 		diskExpiryThreadIntervalSeconds="12" memoryStoreEvictionPolicy="FIFO">
 		<cacheEventListenerFactory
-			class="org.anyway.server.web.ehcache.event.HttpCacheEventFactory" />
+			class="org.anyway.server.web.cache.event.HttpCacheEventFactory" />
 		<searchable>
 			<searchAttribute name="times" expression="value.getTimes()" />
 			<searchAttribute name="status" expression="value.getStatus()" />
@@ -639,7 +639,7 @@
 		timeToIdleSeconds="7000" timeToLiveSeconds="7000"
 		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU">
 		<cacheEventListenerFactory
-			class="org.anyway.server.web.ehcache.event.ConfigCacheEventFactory" />
+			class="org.anyway.server.web.cache.event.ConfigCacheEventFactory" />
 	</cache>
 
 	<cache name="WeixinCommandIDCache" maxEntriesLocalHeap="200"
@@ -653,6 +653,6 @@
 		overflowToDisk="true" diskPersistent="false" timeToIdleSeconds="0"
 		timeToLiveSeconds="0" diskExpiryThreadIntervalSeconds="120"
 		memoryStoreEvictionPolicy="LFU">
-		<!-- <cacheEventListenerFactory class="com.server.ehcache.event.ConfigCacheEventFactory"/> -->
+		<!-- <cacheEventListenerFactory class="com.server.cache.event.ConfigCacheEventFactory"/> -->
 	</cache>
 </ehcache>

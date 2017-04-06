@@ -27,8 +27,8 @@ import org.anyway.server.data.packages.COMMANDID;
 public class LocationResponse extends AbstractWeixinMessageResponse {
 	
 	@Override
-	public void run() {
-		super.run();
+	public Integer call() {
+		return super.call();
 	}
 	
 	/**

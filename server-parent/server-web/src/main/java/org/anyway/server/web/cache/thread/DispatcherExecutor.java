@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.anyway.common.uConfigVar;
 import org.anyway.common.uGlobalVar;
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.data.packages.HTTPREQUEST;
@@ -125,7 +126,7 @@ public class DispatcherExecutor {
 		
 		@Override
 	    public void run() {
-	    	Results results = manager.getHttpCache().queryTimeOut(10);
+	    	Results results = manager.getHttpCache().queryTimeOut(uConfigVar.HT_IdleTimeOut);
 	    	List<Result> resultList = results.all();
 	    	if (resultList != null && !resultList.isEmpty()) {
 	    		for (Result result : resultList) {
@@ -138,14 +139,16 @@ public class DispatcherExecutor {
 		    		}
 		    		
 		    		try {
-						Dispatcher.<HTTPREQUEST<String>>execute(request, request.getJBody().getCommandId());
-					} catch (InstantiationException | IllegalAccessException e) {
+						int status = Dispatcher.<HTTPREQUEST<String>>submit(request, request.getJBody().getCommandId());
+						if (status == 0) {
+							//设置为等待状态
+				    		request.setWait();
+						}
+		    		} catch (InstantiationException | IllegalAccessException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-		    		//设置为等待状态
-		    		request.setWait();
 		    		
 //		    		//放回等待缓存池
 //            		request.setWait();

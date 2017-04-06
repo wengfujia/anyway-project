@@ -25,25 +25,21 @@ import java.io.UnsupportedEncodingException;
 
 import org.anyway.common.MessageAnnotation;
 import org.anyway.common.uConfigVar;
-import org.anyway.common.uGlobalVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.uLogger;
 import org.anyway.common.utils.uStringUtil;
 import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.common.uLoadVar;
-import org.anyway.server.web.common.enums.StatusEnum;
 import org.anyway.server.web.dispatcher.Dispatcher;
 import org.anyway.server.web.factory.HttpBusinessExecutorBase;
 import org.anyway.server.api.CSHTMsgStream;
 import org.anyway.server.api.HSHTMsgStream;
-import org.anyway.server.data.models.IpTableBean;
 import org.anyway.server.data.packages.COMMANDID;
 import org.anyway.server.data.packages.HEADER;
 import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.server.data.packages.json.JBuffer;
 import org.anyway.server.utils.uJsonUtil;
-import org.anyway.client.TcpClient;
 
 @MessageAnnotation(msgType = COMMANDID.WEB_REQUEST)
 public class WebMessageExecutor extends HttpBusinessExecutorBase {
@@ -56,7 +52,7 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 	 * 
 	 * @return
 	 */
-	private Boolean doFilter() {
+	private int doFilter() {
 		int status = 0;
 
 		//解析包
@@ -84,32 +80,21 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 			}	
 		}
 		
-		if (status == 0) {
-			return true;
+		if (status != 0) {
+			this.sendError(status);//发送错误消息
 		}
-		else {
-			//发送错误消息
-			this.sendError(status);
-			return false;
-		}
-		
+		return status;
 	}
 
 	/**
 	 * 消息分解
 	 */
-	private int doDecode(ByteBuf bytebuf) {
+	private int doDecode(String commandValue, ByteBuf bytebuf) {
 		int status = 0;
-		int commandId = LoginBuf.getCommandId();
 		byte[] buffer = null;
 		
 		//判断业务是否需要传入hbase服务端
-		String key = uLogger.sprintf("CMD.%d", commandId);
-		String commandValue = uLoadVar.GetValue("", key);
-		if (uStringUtil.empty(commandValue)) { //业务头为空
-			status = -20;
-	  	}
-		else if (commandValue.equalsIgnoreCase("HBASE")) { //需要转到数据库服务层处理
+		if ("HBASE".equalsIgnoreCase(commandValue)) { //需要转到数据库服务层处理
 			String body = LoginBuf.getBody();
 			if (uStringUtil.empty(body)==false) {
 				try {
@@ -123,20 +108,8 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 				}
 			}
 		}
-		else if (commandValue.equalsIgnoreCase("LOCAL")) { //直接处理本地业务逻辑
-	  		try {
-				Dispatcher.<HTTPREQUEST<String>>execute(this.getRequest(), commandId);
-				return -1;
-			} catch (InstantiationException | IllegalAccessException e) {
-				status = -23;
-				uLogger.printInfo(e.getMessage());
-			} catch (Exception e) {
-				status = -23;
-				uLogger.printInfo(e.getMessage());
-			}
-	  	}
-		else if (commandValue.equalsIgnoreCase("DECODE")) { //需要进行解码处理
-			buffer = super.decodeMessage(commandId, LoginBuf.getBody());
+		else if ("DECODE".equalsIgnoreCase(commandValue)) { //需要进行解码处理
+			buffer = super.decodeMessage(LoginBuf.getCommandId(), LoginBuf.getBody());
 		}	
 		
 		//返回结果
@@ -169,42 +142,60 @@ public class WebMessageExecutor extends HttpBusinessExecutorBase {
 	  	}
 		return status;
 	}
+	
+	/**
+	 * 跳转到数据层
+	 * @param commandValue
+	 * @return
+	 */
+	private int route(String commandValue) {
+		ByteBuf ibuffer = this.getRequest().getContext().alloc().buffer();
+		int status = doDecode(commandValue, ibuffer); // 进行解码，转换成内部业务消息包
+		if (status == 0) {
+			// 发送到数据层
+			sendTo(ibuffer);
+			this.cachemanager.getHttpCache().replaceDone(this.getRequest());
+		}
+		return status;
+	}
 
 	/**
 	 * 执行业务
 	 */
 	@Override
-	public void run() {
+	public Integer call() {
 		//判断缓存是否有效并连接是否合法
 		if (null == this.getCacheManager() || null == this.getRequest()) {
 			uLogger.printInfo("找不到相应的缓存");
-			return;
+			return -10;
 		}
 
 		cachemanager = this.getCacheManager();
-		if (doFilter() == true) {
-			ByteBuf ibuffer = this.getRequest().getContext().alloc().buffer();
-			int status = doDecode(ibuffer); // 进行解码，转换成内部业务消息包
-			if (status == 0) {
-				// 获取可用的hbase服务端连接
-				IpTableBean iptable = this.getIpTable();
-				if (null != iptable && iptable.getStatus() == StatusEnum.EFFECTIVE.getValue()) {
-					// 提交到hbase服务端
-					TcpClient client = new TcpClient(iptable.getAddress(), iptable.getPort());
-					client.send(ibuffer, uGlobalVar.RETRY);
-					// 设置状态为等待应答
-					this.getRequest().setDoning();
-				} else {
-					// 设置状态为等待处理
-					this.getRequest().setWait();
+		int status = doFilter();
+		if (status == 0) {
+			int commandId = LoginBuf.getCommandId();
+			String key = uLogger.sprintf("CMD.%d", commandId);
+			String commandValue = uLoadVar.GetValue("", key);
+			if (uStringUtil.empty(commandValue)) { //业务头为空
+				status = -20;
+		  	}
+			else if ("LOCAL".equalsIgnoreCase(commandValue)) { //直接处理本地业务逻辑
+		  		try {
+		  			status = Dispatcher.<HTTPREQUEST<String>>submit(this.getRequest(), commandId);
+				} catch (InstantiationException | IllegalAccessException e) {
+					status = -23;
+					uLogger.printInfo(e.getMessage());
+				} catch (Exception e) {
+					status = -23;
+					uLogger.printInfo(e.getMessage());
 				}
-				this.cachemanager.getHttpCache().replaceDone(this.getRequest());
-				return;
-			} else if (status == -1) { //处理本地逻辑
-				return;
+		  	}
+			else {
+				return route(commandValue);
 			}
 		}
 		this.cachemanager.getHttpCache().removeDone(this.getRequest().getID());
+		return status;
 	}
 	
 	/**

@@ -1,25 +1,25 @@
 /*
- * 名称: WeixinMessageLocalResponse
- * 描述: 微信消息本地业务直接反馈
+ * 名称: AbstractWebMessageLocalResponse
+ * 描述: WEB消息本地业务直接反馈
  * 版本：  1.0.0
  * 作者： 翁富家
  * 修改:
- * 日期：2015年05月28日
+ * 日期：2017年04月03日
  */
 
-package io.box.weixin.executor;
+package io.box.web.executor;
 
 import org.anyway.exceptions.NoCacheException;
 import org.anyway.server.web.cache.CacheManager;
 import org.anyway.server.web.factory.HttpBusinessExecutorBase;
 
-public abstract class AbstractWeixinMessageLocalResponse extends HttpBusinessExecutorBase {
+public abstract class AbstractWebMessageLocalResponse extends HttpBusinessExecutorBase {
 	
 	protected CacheManager manager = null;
 
 	/**
 	 * 执行业务
-	 * 重写msgEncode，获取需要返回微信的内容
+	 * 重写msgEncode，获取需要返回WEB的内容
 	 */
 	@Override
 	public Integer call() {
@@ -29,16 +29,15 @@ public abstract class AbstractWeixinMessageLocalResponse extends HttpBusinessExe
 			return -23;
 		}
 
+		int status = -23;
 		if (null != this.getRequest()) { //找到http连接
-			return sendResponse(msgEncode());
+			status = sendResponse(msgEncode());
 		}
-		else {
-			return -23;
-		}
+		return status;
 	}
 
 	/**
-	 * 消息转换成微信
+	 * 消息转换成WEB返回包
 	 * 需要被继承
 	 * @return
 	 */

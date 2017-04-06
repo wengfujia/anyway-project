@@ -1,6 +1,6 @@
 /*
- * 名称: ConfigCacheEvent
- * 描述: config连接线程池事件
+ * 名称: HttpCacheEvent
+ * 描述: http连接线程池事件
  * 版本：  1.0.0
  * 作者： 翁富家
  * 修改:
@@ -8,17 +8,16 @@
  * 修改日期:
  */
 
-package org.anyway.server.web.cache.ehcache.event;
+package org.anyway.server.web.cache.event;
 
-import org.anyway.exceptions.NoCacheException;
-import org.anyway.server.web.cache.CacheManager;
+import org.anyway.server.data.packages.HTTPREQUEST;
 
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.event.CacheEventListener;
 
-public class ConfigCacheEvent implements CacheEventListener {
+public class HttpCacheEvent implements CacheEventListener {
 	
 	@Override
 	public void dispose() {
@@ -26,6 +25,9 @@ public class ConfigCacheEvent implements CacheEventListener {
 	
 	@Override
     public void notifyElementEvicted(Ehcache cache, Element element) {
+    	@SuppressWarnings("unchecked")
+		HTTPREQUEST<String> request = (HTTPREQUEST<String>)element.getObjectValue();
+    	close(request);
 	}
     
     /**
@@ -34,17 +36,10 @@ public class ConfigCacheEvent implements CacheEventListener {
      */
     @Override
     public void notifyElementExpired(Ehcache cache, Element element) {
-    	//如果是微信则进行重获
-    	if (cache.getName().equals("WeixinConfigCache")) {
-    		try {
-    			Element ele = new Element(element.getObjectKey(), element.getObjectValue());
-				cache.put(ele);
-				//获取accesstoken
-				CacheManager.getInstance().getConfigCache().getTokenFormWeixin(ele.getObjectKey());
-			} catch (NoCacheException e) {
-				
-			}
-    	}
+    	//获取连接，关闭
+    	@SuppressWarnings("unchecked")
+		HTTPREQUEST<String> request = (HTTPREQUEST<String>)element.getObjectValue();
+    	close(request);
     }
     
     /**
@@ -53,6 +48,12 @@ public class ConfigCacheEvent implements CacheEventListener {
      */
     @Override
     public void notifyRemoveAll(Ehcache cache) {
+    	//关闭连接池中的所有连接
+    	for (Object key : cache.getKeys()) {
+    		@SuppressWarnings("unchecked")
+			HTTPREQUEST<String> request = (HTTPREQUEST<String>)cache.get(key).getObjectValue();
+    		close(request);
+    	}
     }
 
     /**
@@ -62,6 +63,9 @@ public class ConfigCacheEvent implements CacheEventListener {
     @Override
     public void notifyElementRemoved(Ehcache cache, Element element)
              throws CacheException {
+    	@SuppressWarnings("unchecked")
+		HTTPREQUEST<String> request = (HTTPREQUEST<String>) element.getObjectValue();
+    	close(request);
     }
     
     /**
@@ -71,6 +75,7 @@ public class ConfigCacheEvent implements CacheEventListener {
     @Override
     public void notifyElementPut(Ehcache cache, Element element)
             throws CacheException {
+    	
     }
     
     @Override
@@ -81,5 +86,18 @@ public class ConfigCacheEvent implements CacheEventListener {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+    
+    /**
+     * 关闭连接
+     * @param request
+     */
+    private void close(HTTPREQUEST<String> request) {
+    	if (null != request) {
+    		if (null != request.getIpTable()) {
+    			request.getIpTable().decCurthreads();
+    		}
+        	request.Close();
+    	}
     }
 }
