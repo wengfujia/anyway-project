@@ -1,7 +1,0 @@
-[default]
-PATTERN=\b((?!\d\d\d)\d+|1\d\d|2[0-4]\d|25[0-5])\.((?!\d\d\d)\d+|1\d\d|2[0-4]\d|25[0-5])\.((?!\d\d\d)\d+|1\d\d|2[0-4]\d|25[0-5])\.((?!\d\d\d)\d+|1\d\d|2[0-4]\d|25[0-5])\b
-DRIVER=com.mysql.jdbc.Driver
-URLPRE=jdbc:mysql://
-URLSUFFIX=?useUnicode=true&characterEncoding=utf-8
-DEFAULTNAME=rycc.sql
-DEFAULTDATABASE=/test

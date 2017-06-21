@@ -58,21 +58,18 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.anyway</groupId>
-			<artifactId>anyway-cache-base</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.anyway</groupId>
-			<artifactId>anyway-server-api</artifactId>
+			<groupId>org.anyway.cache</groupId>
+			<artifactId>anyway-cache-factory</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 	<packaging>pom</packaging>
 	<modules>
-		<module>server-web</module>
-		<module>server-dbase</module>
-		<module>server-sms</module>
+		<module>adapter</module>
+		<module>assister</module>
+		<module>processor</module>
 	</modules>
-	<description>数据库服务层、短信服务层、web与微信对接服务层</description>
+	<description>adapter适配服务层：对接各类终端并对消息进行处理或分发
+processor处理服务层：处理adapter的消息
+assister附助服务：其它附助功能的衍生</description>
 </project>

@@ -1,0 +1,1 @@
+java -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9092 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=60.12.230.82 -cp .:./lib/* org.anyway.server.adapter.StartUp
