@@ -29,9 +29,9 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.anyway.common.MessageAnnotation;
+import org.anyway.common.annotation.MessageAnnotation;
 
-public class uClassUtil {
+public class ClassUtil {
 	
 	// msgType->请求、响应类的class对象
 	private static Map<Integer, Class<?>> typeToMsgClassMap;

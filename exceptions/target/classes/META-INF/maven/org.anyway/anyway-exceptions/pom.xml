@@ -12,6 +12,7 @@
 	<name>${project.artifactId}</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<skip_maven_deploy>true</skip_maven_deploy>
 	</properties>
 	<description>自定义异常处理</description>
 </project>

@@ -11,6 +11,9 @@
 
 package org.anyway.netty;
 
+import org.anyway.common.utils.LoggerUtil;
+import org.anyway.common.utils.NettyUtil;
+
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;
@@ -20,10 +23,41 @@ import io.netty.handler.timeout.WriteTimeoutException;
 
 public class IdleTimeOutHandler extends ChannelDuplexHandler {
 	
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+    	final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
+    	LoggerUtil.println("NETTY SERVER PIPELINE: channelRegistered，%s", remoteAddress);
+        super.channelRegistered(ctx);
+    }
+
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+    	final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
+    	LoggerUtil.println("NETTY SERVER PIPELINE: channelUnregistered，%s", remoteAddress);
+        super.channelUnregistered(ctx);
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    	final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
+    	LoggerUtil.println("NETTY SERVER PIPELINE: channelActive，%s", remoteAddress);
+        super.channelActive(ctx);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    	final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
+    	LoggerUtil.println("NETTY SERVER PIPELINE: channelInactive，%s", remoteAddress);
+        super.channelInactive(ctx);
+    }
+    
 	// 设置读写超时进入的单元
 	@Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        if (cause instanceof ReadTimeoutException) {
+		final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
+		LoggerUtil.getLogger().warn("NETTY SERVER PIPELINE: exceptionCaught {}", remoteAddress);
+		LoggerUtil.getLogger().warn("NETTY SERVER PIPELINE: exceptionCaught exception {}.", cause);
+		if (cause instanceof ReadTimeoutException) {
         	ctx.close();
         } else if (cause instanceof WriteTimeoutException) {
         	ctx.close();
@@ -45,7 +79,10 @@ public class IdleTimeOutHandler extends ChannelDuplexHandler {
             } else if (e.state() == IdleState.ALL_IDLE) {
             	ctx.close();
             }
-            
+            final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
+            LoggerUtil.println("NETTY SERVER PIPELINE: IDLE exception，%s", remoteAddress);
         }
+        
+        ctx.fireUserEventTriggered(evt);
     }
 }

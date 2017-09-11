@@ -8,7 +8,7 @@
  * 修改日期:
  */
 
-package org.anyway.server.data.http;
+package org.anyway.common.protocol.buffer.impl.http;
 
 import java.util.ArrayList;
 import java.util.List;

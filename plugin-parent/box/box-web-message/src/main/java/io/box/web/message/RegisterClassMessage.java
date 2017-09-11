@@ -11,11 +11,12 @@
 package io.box.web.message;
 
 
-import org.anyway.common.MessageAnnotation;
-import org.anyway.common.uGlobalVar;
-import org.anyway.server.data.packages.COMMANDID;
+import org.anyway.common.SystemConfig;
+import org.anyway.common.annotation.MessageAnnotation;
 
-@MessageAnnotation(msgType = COMMANDID.CLASS_REGISTER)
+import io.box.common.CommandID;
+
+@MessageAnnotation(msgType = CommandID.CLASS_REGISTER)
 public class RegisterClassMessage {
 
 	/*
@@ -24,8 +25,8 @@ public class RegisterClassMessage {
 	public byte[] decode(String body) {	
 		String newbody = body;
 		char last = newbody.charAt(newbody.length()-1);
-		if (last != uGlobalVar.MSG_SEPATATE) {
-			newbody += String.valueOf(uGlobalVar.MSG_SEPATATE);
+		if (last != SystemConfig.MSG_SEPATATE) {
+			newbody += String.valueOf(SystemConfig.MSG_SEPATATE);
 		}
 //		String[] bodys = StringUtils.splitPreserveAllTokens(newbody, uGlobalVar.MSG_SEPATATE);
 //		String code = bodys[0] + bodys[1] + bodys[2];

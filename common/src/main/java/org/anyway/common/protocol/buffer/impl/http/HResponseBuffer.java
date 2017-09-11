@@ -1,4 +1,4 @@
-package org.anyway.server.data.http;
+package org.anyway.common.protocol.buffer.impl.http;
 
 public class HResponseBuffer {
 	private byte[] result;

@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.anyway.logic.box</groupId>
-    <artifactId>box</artifactId>
+    <groupId>org.anyway.plugin.box</groupId>
+    <artifactId>anyway-plugin-box</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>box-web-message</artifactId>
@@ -13,4 +13,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <description>盒子WEB层消息处理实现</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.anyway.plugin.box</groupId>
+  		<artifactId>box-common</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

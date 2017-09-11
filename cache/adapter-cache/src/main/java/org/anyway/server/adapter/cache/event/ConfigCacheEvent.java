@@ -8,10 +8,10 @@
  * 修改日期:
  */
 
-package org.anyway.server.web.cache.event;
+package org.anyway.server.adapter.cache.event;
 
 import org.anyway.exceptions.NoCacheException;
-import org.anyway.server.web.cache.CacheManager;
+import org.anyway.server.adapter.cache.CacheManager;
 
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.Ehcache;

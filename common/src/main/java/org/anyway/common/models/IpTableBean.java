@@ -1,4 +1,6 @@
-package org.anyway.server.data.models;
+package org.anyway.common.models;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
  * 名称: KeywordBean
@@ -12,17 +14,33 @@ package org.anyway.server.data.models;
 
 @SuppressWarnings("serial")
 public class IpTableBean implements java.io.Serializable {
+	private String name;
 	private String address;
 	private int port;
 	private int maxthreads;
-	private volatile int curthreads; //设置为线程安全
+	private AtomicInteger curthreads; //设置为线程安全
 	private int status;
 
 	/**
 	 * 构造函数
 	 */
 	public IpTableBean() {
-		this.curthreads = 0;
+		this.curthreads = new AtomicInteger(0);
+	}
+	
+	/**
+	 * 获取配置名称
+	 * @return
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * 设置配置名称
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 	
     /**
@@ -75,36 +93,27 @@ public class IpTableBean implements java.io.Serializable {
      * @return
      */
     public int getCurthreads() {
-    	return this.curthreads;
-    }
-    /**
-     * 设置当前线程数
-     * @param cur
-     */
-    public void setCurthreads(int cur) {
-    	this.curthreads = cur;
+    	return this.curthreads.get();
     }
     
     /**
      * 增加线程数
      */
-    public void addCurthreads() {
-    	this.curthreads++;
+    public int incCurthreads() {
+    	return this.curthreads.incrementAndGet();
     }
     /**
      * 减少线程数
      */
-    public void decCurthreads() {
-    	if (this.curthreads>0) {
-    		this.curthreads--;	
-    	}
+    public int decCurthreads() {
+    	return this.curthreads.decrementAndGet();
     }
     
     /**
      * 获取有效的线程数
      */
     public int getValidthreads() {
-    	return this.maxthreads - this.curthreads;
+    	return this.maxthreads - this.curthreads.get();
     }
     
     /**
@@ -129,4 +138,5 @@ public class IpTableBean implements java.io.Serializable {
     public Boolean isSucess() {
     	return this.status==1 ? true : false; //this.curthreads<this.maxthreads && 加个这个条件出现找不到可能IP资源，可能因为线程报错造成IP资源没有释放
     }
+    
 }

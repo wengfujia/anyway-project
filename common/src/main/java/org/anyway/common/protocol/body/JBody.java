@@ -1,4 +1,4 @@
-package org.anyway.server.data.packages.json;
+package org.anyway.common.protocol.body;
 
 import java.util.List;
 

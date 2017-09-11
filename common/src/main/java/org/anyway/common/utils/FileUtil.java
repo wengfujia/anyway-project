@@ -16,7 +16,25 @@ import java.util.Scanner;
  * 修改日期:
  */
 
-public class uFileUtil {
+public class FileUtil {
+	
+	/**
+	 * 转换成全文件路径名（user.dir属性值）
+	 * @param fileName
+	 * @return
+	 */
+	public static String toFileName(String fileName) {
+		String dir = System.getProperty("user.dir");
+		if (!StringUtil.empty(dir)) {
+			if (!dir.endsWith("\\") && !dir.endsWith("/")) {
+				if (!fileName.startsWith("\\") && !fileName.startsWith("/")) {
+					dir = dir + System.getProperty("file.separator");
+				}
+			}
+			return dir + fileName;
+		}
+		return fileName;
+	}
 	
 	/**
 	 * 创建文件

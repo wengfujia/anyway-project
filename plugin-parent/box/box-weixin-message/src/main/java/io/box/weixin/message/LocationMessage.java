@@ -12,10 +12,11 @@ package io.box.weixin.message;
 
 import java.util.Map;
 
-import org.anyway.common.MessageAnnotation;
-import org.anyway.server.data.packages.COMMANDID;
+import org.anyway.common.annotation.MessageAnnotation;
 
-@MessageAnnotation(msgType = COMMANDID.WEIXIN_LOCATION)
+import io.box.common.CommandID;
+
+@MessageAnnotation(msgType = CommandID.WEIXIN_LOCATION)
 public class LocationMessage {
 
 	/*

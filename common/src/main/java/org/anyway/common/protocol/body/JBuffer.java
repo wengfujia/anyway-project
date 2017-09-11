@@ -1,4 +1,4 @@
-package org.anyway.server.data.packages.json;
+package org.anyway.common.protocol.body;
 /*
  * 名称: JBuffer
  * 描述: Json解析包

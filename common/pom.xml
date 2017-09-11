@@ -7,7 +7,7 @@
 	<name>${project.artifactId}</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<skip_maven_deploy>false</skip_maven_deploy>
+		<skip_maven_deploy>true</skip_maven_deploy>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -19,9 +19,16 @@
 			<artifactId>commons-codec</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.nikhaldimann</groupId>
+			<artifactId>inieditor</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.anyway</groupId>
 			<artifactId>anyway-exceptions</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 	<description>公用函数集</description>	

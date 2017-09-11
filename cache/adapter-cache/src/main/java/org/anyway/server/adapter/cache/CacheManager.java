@@ -7,13 +7,15 @@
  * 日期：2015年05月28日
  */
 
-package org.anyway.server.web.cache;
+package org.anyway.server.adapter.cache;
 
+import org.anyway.common.SystemConfig;
+import org.anyway.common.models.ErrorDescBean;
+import org.anyway.common.models.IpTableBean;
 import org.anyway.common.types.pstring;
+import org.anyway.common.utils.LoggerUtil;
+import org.anyway.common.utils.StringUtil;
 import org.anyway.exceptions.NoCacheException;
-import org.anyway.server.data.models.ErrorDescBean;
-import org.anyway.server.data.models.IpTableBean;
-import org.anyway.server.web.providers.DbService;
 import org.anyway.cache.ehcache.EhCacheFactory;
 
 public class CacheManager {
@@ -22,9 +24,8 @@ public class CacheManager {
 	
 	private EhCacheFactory ehcachemanager = null;
 	
-	private DbCache dbcache = null;
-	private HttpCache httpcache = null;
-	private ConfigCache configcache = null;
+	private RequestCache requestCache = null;
+	private ConfigCache configCache = null;
 
 	/**
 	 * 获取Instance
@@ -33,12 +34,12 @@ public class CacheManager {
 	 * @throws Exception 
 	 */
 	public  static CacheManager getInstance() throws NoCacheException {
-		synchronized(CacheManager.class) {
-			if (INSTANCE == null) {
+		if (INSTANCE == null) {
+			synchronized(CacheManager.class) {
 				INSTANCE = new CacheManager();
 			}
-			return INSTANCE;
 		}
+		return INSTANCE;
 	}
 
 	/**
@@ -65,11 +66,8 @@ public class CacheManager {
 		//创建线程池
 		if (ehcachemanager == null) 
 			ehcachemanager = new EhCacheFactory();
-		this.httpcache = new HttpCache(ehcachemanager);
-		this.configcache = new ConfigCache(ehcachemanager);
-		
-		//创建数据为缓存
-		this.dbcache = new DbCache();
+		this.requestCache = new RequestCache(ehcachemanager);
+		this.configCache = new ConfigCache(ehcachemanager);
 	}
 	
 	/**
@@ -80,27 +78,16 @@ public class CacheManager {
 	private CacheManager(EhCacheFactory ehcachemanager) throws Exception {
 		//创建线程池
 		this.ehcachemanager = ehcachemanager;
-		this.httpcache = new HttpCache(ehcachemanager);
-		this.configcache = new ConfigCache(ehcachemanager);
-		
-		//创建数据为缓存
-		this.dbcache = new DbCache();
+		this.requestCache = new RequestCache(ehcachemanager);
+		this.configCache = new ConfigCache(ehcachemanager);
 	}
 	
 	/**
-	 * 获取xml数据文件缓存
+	 * 获取连接池缓存
 	 * @return
 	 */
-	public DbCache getDbCache() {
-		return this.dbcache;
-	}
-	
-	/**
-	 * 获取http连接池缓存
-	 * @return
-	 */
-	public HttpCache getHttpCache() {
-		return this.httpcache;
+	public RequestCache getRequestCache() {
+		return this.requestCache;
 	}
 	
 	/**
@@ -108,7 +95,7 @@ public class CacheManager {
 	 * @return
 	 */
 	public ConfigCache getConfigCache() {
-		return this.configcache;
+		return this.configCache;
 	}
 	
 	/**
@@ -120,52 +107,38 @@ public class CacheManager {
 			ehcachemanager = new EhCacheFactory();
 		return ehcachemanager;
 	}	
-	
-	/**
-	 * 创建缓存
-	 * @throws NoCacheException 
-	 */
-	public void DO() throws NoCacheException {
-		DbService.FillCategories();	//各类消息分类
-		DbService.FillErrors();		//加载错误定义列表
-		DbService.FillIpTables(); 	//加载hbase服务列表
-		DbService.FillStopWords(); 	//加载关键字列表
-	}
-	
+
 	/**
 	 * 获取地址表
 	 * 获取当前线程数最小值
+	 * @param sessionId
+	 * @param commandId
 	 * @return
 	 */
-	public IpTableBean getIpTable() {
+	public IpTableBean getRoute(String sessionId, String commandId) {
 		IpTableBean iptable = null;
-		for (IpTableBean ip:this.dbcache.IpTablesCache().values()) {
-			if (ip.isSucess()) {
-				if (null == iptable || ip.getValidthreads()>iptable.getValidthreads()) {
-					iptable = ip;
+		//1.根据业务标识获取路处理层路由信息
+		String iptableName = this.configCache.getCommandIdRouteCache()
+				.get(commandId + SystemConfig.KEY_SEPATATE + sessionId);
+		if (!StringUtil.empty(iptableName)) {
+			iptable = this.configCache.getRoutesCache().get(iptableName);
+		} else {
+			// 2.获取当前线程最小的处理层
+			for (IpTableBean ip : this.configCache.getRoutesCache().values()) {
+				if (ip.isSucess()) {
+					if (null == iptable || ip.getValidthreads() > iptable.getValidthreads()) {
+						iptable = ip;
+					}
 				}
 			}
 		}
+		
 		//增加线程
 		if (null != iptable) {
-			iptable.addCurthreads();
-			//已经对变量做了线程同步
-//			synchronized(iptable) {
-//				iptable.addCurthreads();
-//			}	
+			int threads = iptable.incCurthreads();
+			LoggerUtil.println("Curthreads ip:%s,port:%s,threads:%d,maxThreads:%d", iptable.getAddress(),
+					iptable.getPort(), threads, iptable.getMaxthreads());
 		}
-		
-//		//排序
-//		List<Map.Entry<String, IpTableBean>> sortList =
-//			    new ArrayList<Map.Entry<String, IpTableBean>>(this.dbcache.IpTablesCache().entrySet());
-//		Collections.sort(sortList, new Comparator<Map.Entry<String, IpTableBean>>() {   
-//		    public int compare(Map.Entry<String, IpTableBean> o1, Map.Entry<String, IpTableBean> o2) { 
-//		    	return (o1.getValue().getValidthreads() - o2.getValue().getValidthreads()); 
-//		        //return (o1.getKey()).toString().compareTo(o2.getKey());
-//		    }
-//		}); 
-//		iptable = sortList.get(0).getValue();	
-//		iptable.addCurthreads();
 		
 		return iptable;
 	}
@@ -180,7 +153,7 @@ public class CacheManager {
 	public int GetErrorInfo(int err, pstring description, pstring response) {
 		int Result = 0;
 		try {
-			ErrorDescBean error = this.dbcache.ErrorDescsCache().get(err);
+			ErrorDescBean error = this.configCache.getErrorDescsCache().get(err);
 			if (error!=null)
 			{
 				description.setString(error.getDescription());

@@ -22,7 +22,6 @@
     <dependency>
     	<groupId>org.anyway</groupId>
     	<artifactId>anyway-common</artifactId>
-    	<version>${project.parent.version}</version>
     </dependency>
   </dependencies>
   <description>netty封装</description>

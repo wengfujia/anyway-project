@@ -5,7 +5,7 @@
  *
  */
 
-package org.anyway.server.web.common.enums;
+package org.anyway.common.enums;
 
 public enum SessionEnum {
 	

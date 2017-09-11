@@ -1,6 +1,0 @@
-[main]2016-07-02 19:54:31,514 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
-The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created3877589460765285263diskstore.
-To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
-[main]2016-07-02 21:44:48,844 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
-The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created6686526221365664952diskstore.
-To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.

@@ -10,8 +10,6 @@
 
 package io.box.weixin.executor.impl;
 
-import io.box.weixin.executor.AbstractWeixinMessageResponse;
-
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +21,18 @@ import org.anyway.wechat.entity.message.resp.NewsMessage;
 import org.anyway.wechat.entity.message.resp.TextMessage;
 import org.anyway.wechat.service.MessageService;
 import org.anyway.wechat.util.MessageUtil;
-import org.anyway.common.MessageAnnotation;
-import org.anyway.server.api.CSHTMsgStream;
-import org.anyway.server.data.packages.COMMANDID;
+import org.anyway.common.annotation.MessageAnnotation;
+import org.anyway.common.protocol.TcpMessageCoder;
+import org.anyway.server.plugin.adapter.executor.AbstractWeixinMessageResponse;
 
-@MessageAnnotation(msgType = COMMANDID.CLASS_JOIN_VALIDATECODE)
+import io.box.common.CommandID;
+
+@MessageAnnotation(msgType = CommandID.CLASS_JOIN_VALIDATECODE)
 public class FastJoinResponse extends AbstractWeixinMessageResponse {
 	
 	@Override
-	public Integer call() {
-		return super.call();
+	public void run() {
+		super.run();
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class FastJoinResponse extends AbstractWeixinMessageResponse {
 		byte[] buffer = this.httprequest.getJBody().getBody().getBytes();
 		Map<String, String> requestMap = MessageUtil.parseXml(new ByteArrayInputStream(buffer));
 		
-		CSHTMsgStream cstream = this.getRequest().getCStream();	
+		TcpMessageCoder cstream = this.getRequest().getCStream();	
 		if (cstream.getHeader().getStatus() == 0) {
 			String[] results = cstream.GetRow(0);
 			if (null != results && results.length == 2) {

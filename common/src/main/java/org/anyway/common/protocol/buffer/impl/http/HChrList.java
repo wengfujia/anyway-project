@@ -8,14 +8,14 @@
  * 修改日期:
  */
 
-package org.anyway.server.data.http;
+package org.anyway.common.protocol.buffer.impl.http;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.anyway.common.uConfigVar;
-import org.anyway.common.utils.uNetUtil;
-import org.anyway.server.data.contracts.IChrList;
+import org.anyway.common.SystemConfig;
+import org.anyway.common.protocol.buffer.IChrList;
+import org.anyway.common.utils.NetUtil;
 
 public class HChrList implements IChrList{
 	
@@ -42,7 +42,7 @@ public class HChrList implements IChrList{
 	public void Append(byte[] nr)
 	{
 		String str = "";
-		str = uNetUtil.getString(nr, uConfigVar.CharsetName);
+		str = NetUtil.getString(nr, SystemConfig.CharsetName);
 		HMessageBuffer.CBody body = new HMessageBuffer.CBody(str);
 		list.add(body);
 	}

@@ -15,10 +15,10 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
 import org.anyway.exceptions.NotEnoughDataInByteBufferException;
 
-public class uNetUtil {
+public class NetUtil {
 	private static final byte SZ_BYTE = 1;
 	private static final byte SZ_SHORT = 2;
 	private static final byte SZ_INT = 4;
@@ -42,7 +42,7 @@ public class uNetUtil {
 	 * @return byte[]
 	 */
 	public static byte[] getBytes (char[] chars) {
-	   Charset cs = Charset.forName (uConfigVar.CharsetName);
+	   Charset cs = Charset.forName (SystemConfig.CharsetName);
 	   CharBuffer cb = CharBuffer.allocate (chars.length);
 	   cb.put (chars);
 	   cb.flip ();
@@ -57,7 +57,7 @@ public class uNetUtil {
 	 * @return char[]
 	 */
 	public static char[] getChars (byte[] bytes) {
-		Charset cs = Charset.forName (uConfigVar.CharsetName);
+		Charset cs = Charset.forName (SystemConfig.CharsetName);
 		ByteBuffer bb = ByteBuffer.allocate (bytes.length);
 		bb.put (bytes);
         bb.flip ();
@@ -71,7 +71,7 @@ public class uNetUtil {
      * @see 如果系统不支持所传入的<code>charset</code>字符集,则按照系统默认字符集进行转换 
      */  
     public static String getString(byte[] buffer, int frmIndx, int ilen, String charset) {  
-        if(uStringUtil.empty(buffer)){  
+        if(StringUtil.empty(buffer)){  
             return "";  
         }  
         
@@ -83,7 +83,7 @@ public class uNetUtil {
         byte[] data = new byte[icount];
         System.arraycopy(buffer, frmIndx, data, 0, icount);
         
-        if(uStringUtil.empty(charset)){  
+        if(StringUtil.empty(charset)){  
             return new String(data);  
         } 
         
@@ -99,10 +99,10 @@ public class uNetUtil {
      * @see 如果系统不支持所传入的<code>charset</code>字符集,则按照系统默认字符集进行转换 
      */  
     public static String getString(byte[] data, String charset) {  
-        if(uStringUtil.empty(data)){  
+        if(StringUtil.empty(data)){  
             return "";  
         }  
-        if(uStringUtil.empty(charset)){  
+        if(StringUtil.empty(charset)){  
             return new String(data);  
         } 
         
@@ -119,7 +119,7 @@ public class uNetUtil {
      */  
     public static byte[] getBytes(String data, String charset) throws UnsupportedEncodingException {  
         data = (data==null ? "" : data);  
-        if (uStringUtil.empty(charset)) {  
+        if (StringUtil.empty(charset)) {  
             return data.getBytes();  
         }  
         
@@ -172,7 +172,7 @@ public class uNetUtil {
     public static int chars2int(byte[] buffer, String charset) {
 		int targets = 0;
 		String s = getString(buffer, charset).trim();
-		if (s.isEmpty()==false && uStringUtil.isInt(s)) {
+		if (s.isEmpty()==false && StringUtil.isInt(s)) {
 			targets = Integer.parseInt(s);
 		}
 		
@@ -265,7 +265,7 @@ public class uNetUtil {
 		int result = 0;
 		byte[] tmp = new byte[ilen];
 		System.arraycopy(buffer, fromIdx, tmp, 0, ilen);
-		result = chars2int(tmp, uConfigVar.CharsetName);
+		result = chars2int(tmp, SystemConfig.CharsetName);
 		return result;
 	}
 	
@@ -425,7 +425,7 @@ public class uNetUtil {
 				try {
 					result = new String(buffer, 0, size, encoding);
 				} catch (UnsupportedEncodingException e) {
-					uLogger.println("Unsupported encoding exception " + e);
+					LoggerUtil.println("Unsupported encoding exception " + e);
 					encodingException = e;
 				}
 			} else {

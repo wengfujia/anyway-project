@@ -1,0 +1,130 @@
+[pool-2-thread-2]2017-08-30 00:00:32,560 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xfd064272]'
+[Thread-0]2017-08-30 00:07:11,773 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xc38a53ad]'
+[Thread-0]2017-08-30 00:07:11,776 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xc38a53ad]'
+[pool-2-thread-1]2017-08-30 00:07:37,505 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x4363f642]'
+[pool-2-thread-1]2017-08-30 00:07:41,896 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:99):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:89)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:111)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-1]2017-08-30 00:07:41,910 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:99):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:89)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:111)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-1]2017-08-30 00:07:41,913 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:99):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:89)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:111)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[Thread-0]2017-08-30 00:19:28,385 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x97b5e662]'
+[Thread-0]2017-08-30 00:19:28,388 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x97b5e662]'
+[pool-2-thread-1]2017-08-30 00:21:52,707 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x0459a33c]'
+[pool-2-thread-1]2017-08-30 00:22:08,450 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x7487acd4]'
+[pool-2-thread-1]2017-08-30 00:22:25,849 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x1400a140]'
+[pool-2-thread-1]2017-08-30 00:22:30,361 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x8ce8a7c1]'
+[Thread-0]2017-08-30 00:25:16,699 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x5bbb36e6]'
+[Thread-0]2017-08-30 00:25:16,702 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x5bbb36e6]'
+[pool-2-thread-1]2017-08-30 00:25:28,793 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xa0593515]'
+[pool-2-thread-1]2017-08-30 00:25:31,630 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x1c3eeb75]'
+[pool-2-thread-1]2017-08-30 00:25:48,919 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x3fe0c7f7]'
+[pool-2-thread-1]2017-08-30 00:25:59,173 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xafb2a7a4]'
+[pool-2-thread-2]2017-08-30 00:26:42,161 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x471f9763]'
+[pool-2-thread-2]2017-08-30 00:26:44,805 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x9cc15047]'
+[pool-2-thread-2]2017-08-30 00:26:51,222 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xbc877cea]'
+[Thread-0]2017-08-30 00:38:00,106 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xfc50660e]'
+[Thread-0]2017-08-30 00:38:00,109 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xfc50660e]'
+[pool-2-thread-1]2017-08-30 00:38:24,127 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xeed3c534]'
+[pool-2-thread-1]2017-08-30 00:38:28,160 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x0e72cb6c]'
+[pool-2-thread-1]2017-08-30 00:38:36,522 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:97):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:92)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:109)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-2]2017-08-30 00:39:51,514 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x8d0748f0]'
+[pool-2-thread-2]2017-08-30 00:40:06,764 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:97):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:92)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:109)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-3]2017-08-30 00:40:26,716 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x811fe22e]'
+[pool-2-thread-3]2017-08-30 00:40:53,716 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:97):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:92)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:109)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[Thread-0]2017-08-30 00:46:34,399 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xd49d6003]'
+[Thread-0]2017-08-30 00:46:34,402 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xd49d6003]'
+[pool-2-thread-1]2017-08-30 00:50:36,748 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x1a50d6a3]'
+[pool-2-thread-1]2017-08-30 00:50:43,733 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x439978c7]'
+[pool-2-thread-1]2017-08-30 00:50:45,839 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:97):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:92)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:109)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-2]2017-08-30 00:51:06,821 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xbd0dd71f]'
+[pool-2-thread-2]2017-08-30 00:51:17,548 [ERROR] - org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:97):TcpCLient error:
+java.lang.NullPointerException
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:92)
+	at org.anyway.server.plugin.adapter.client.Client2Processor.send(Client2Processor.java:109)
+	at org.anyway.server.plugin.adapter.BusinessBaseExecutor.sendTo(BusinessBaseExecutor.java:158)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.route(HttpMessageExecutor.java:163)
+	at org.anyway.server.plugin.adapter.executor.impl.HttpMessageExecutor.run(HttpMessageExecutor.java:205)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-3]2017-08-30 00:51:29,582 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xf9bf2d4f]'
+[pool-2-thread-3]2017-08-30 00:52:17,733 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xf88bed96]'
+[pool-2-thread-3]2017-08-30 00:52:24,980 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xe5d34221]'
+[pool-2-thread-3]2017-08-30 00:52:26,580 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xfaa43dec]'

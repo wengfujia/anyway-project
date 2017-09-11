@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class uDateUtil {
+public class DateUtil {
 
 	public static String[] chars = { "A", "B", "C", "D", "E", "F", "G", "H",
 			"I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
@@ -103,7 +103,7 @@ public class uDateUtil {
 				ex.printStackTrace();
 				return val.toString();
 			}
-		} else if (uStringUtil.isInt(val.toString()))
+		} else if (StringUtil.isInt(val.toString()))
 			tmp = new Date(Long.parseLong(val.toString()));
 		else {
 			tmp = (Date) val;

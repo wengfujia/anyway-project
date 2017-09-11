@@ -8,7 +8,7 @@
  * 修改日期:
  */
 
-package org.anyway.server.factory;
+package org.anyway.common.factory;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

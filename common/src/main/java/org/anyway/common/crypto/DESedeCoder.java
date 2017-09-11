@@ -16,7 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
 
 public class DESedeCoder {
 	
@@ -95,7 +95,7 @@ public class DESedeCoder {
 	 * @throws Exception
 	 */
 	public static byte[] encrypt(byte[] data) throws Exception{
-		byte[] key = PASSWORD_CRYPT_KEY.getBytes(uConfigVar.CharsetName);
+		byte[] key = PASSWORD_CRYPT_KEY.getBytes(SystemConfig.CharsetName);
 		Key k = toKey(key); 
 		return encrypt(data, k, DEFAULT_CIPHER_ALGORITHM);
 	}	
@@ -141,7 +141,7 @@ public class DESedeCoder {
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(byte[] data) throws Exception{
-		byte[] key = PASSWORD_CRYPT_KEY.getBytes(uConfigVar.CharsetName);
+		byte[] key = PASSWORD_CRYPT_KEY.getBytes(SystemConfig.CharsetName);
 		Key k = toKey(key); 
 		return decrypt(data, k,DEFAULT_CIPHER_ALGORITHM);
 	}	

@@ -12,18 +12,23 @@ package org.anyway.common;
  * 		用户名长度由17位修改为35位，HEADER_LENGTH增加18位由156位调整为174位
  */
 
-public class uGlobalVar {
-
-	public final static String AppPath = System.getProperty("user.dir");
+public class SystemConfig {
+	
+	public static boolean DEBUG = true;	//是否启用调试
+	public static String CharsetName = "utf-8";
 	
 	//包长度定义
-	public final static int HEADER_LENGTH = 174;
+	public final static int HEADER_LENGTH = 198;
 	public final static int MSG_SEPATATE_LEN = 1;
 	public final static char MSG_SEPATATE = '\t';
 	public final static int MSG_SEPATATE_LINE_LEN = 1;
 	public final static char MSG_SEPATATE_LINE = '\n';	
-	public final static char CHAT_KEY_SEPATATE = '|';
 
+	/**
+	 * map key的分隔符
+	 */
+	public final static String KEY_SEPATATE = "@";
+	
 	//线程相关标识定义
 	public final static int RETURN_SUCCESS = 0;
 	public final static int TRACE_ERROR  = -1;

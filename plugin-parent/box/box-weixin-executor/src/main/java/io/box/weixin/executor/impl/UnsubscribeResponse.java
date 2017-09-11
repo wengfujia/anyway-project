@@ -10,24 +10,24 @@
 
 package io.box.weixin.executor.impl;
 
-import io.box.weixin.executor.AbstractWeixinMessageLocalResponse;
-
 import java.io.ByteArrayInputStream;
 import java.util.Map;
 
-import org.anyway.common.MessageAnnotation;
-import org.anyway.server.data.packages.COMMANDID;
+import org.anyway.common.annotation.MessageAnnotation;
+import org.anyway.server.plugin.adapter.executor.AbstractWeixinMessageLocalResponse;
 import org.anyway.wechat.constant.ConstantWeChat;
 import org.anyway.wechat.entity.message.resp.TextMessage;
 import org.anyway.wechat.service.MessageService;
 import org.anyway.wechat.util.MessageUtil;
 
-@MessageAnnotation(msgType = COMMANDID.WEIXIN_UNSUBSCRIBE)
+import io.box.common.CommandID;
+
+@MessageAnnotation(msgType = CommandID.WEIXIN_UNSUBSCRIBE)
 public class UnsubscribeResponse extends AbstractWeixinMessageLocalResponse {
 	
 	@Override
-	public Integer call() {
-		return super.call();
+	public void run() {
+		super.run();
 	}
 	
 	/**

@@ -8,7 +8,7 @@
  * 修改日期:
  */
 
-package org.anyway.server.data.models;
+package org.anyway.common.models;
 
 import java.util.Date;
 

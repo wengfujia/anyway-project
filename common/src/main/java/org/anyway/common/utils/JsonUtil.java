@@ -6,16 +6,16 @@
  * 修改:
  * 日期：2016年07月06日
  * */
-package org.anyway.server.utils;
+package org.anyway.common.utils;
 
 import java.util.Map;
 
-import org.anyway.server.data.packages.json.JBuffer;
+import org.anyway.common.protocol.body.JBuffer;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class uJsonUtil {
+public class JsonUtil {
 	
 	/**
 	 * parseData解析json数据

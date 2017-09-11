@@ -16,7 +16,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
 
 public class AESCoder {
 	
@@ -70,9 +70,10 @@ public class AESCoder {
 	 * @throws Exception
 	 */
 	public static byte[] encrypt(byte[] data) throws Exception{
-		byte[] key = PASSWORD_CRYPT_KEY.getBytes(uConfigVar.CharsetName);
+		byte[] key = PASSWORD_CRYPT_KEY.getBytes(SystemConfig.CharsetName);
 		return encrypt(data, key,DEFAULT_CIPHER_ALGORITHM);
 	}
+	
 	/**
 	 * 加密
 	 * 
@@ -140,7 +141,7 @@ public class AESCoder {
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(byte[] data) throws Exception{
-		byte[] key = PASSWORD_CRYPT_KEY.getBytes(uConfigVar.CharsetName);
+		byte[] key = PASSWORD_CRYPT_KEY.getBytes(SystemConfig.CharsetName);
 		return decrypt(data, key,DEFAULT_CIPHER_ALGORITHM);
 	}	
 	/**

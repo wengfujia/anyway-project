@@ -14,10 +14,10 @@ import com.google.gson.Gson;
 import java.io.UnsupportedEncodingException;
 
 import org.anyway.common.crypto.DESedeCoder;
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
 import org.anyway.common.enums.CryptEnum;
 
-public class uSecretUtil {
+public class SecretUtil {
 	/**
      * 加密方法，加码出错返回原数组
      * @param src 源数据的字节数组,mode加密模式
@@ -72,8 +72,8 @@ public class uSecretUtil {
 	 * @throws UnsupportedEncodingException
 	 */
 	public static String Encrypt3Des(String source) throws UnsupportedEncodingException{		
-		byte[] encrypt3Des = Encrypt(source.getBytes(uConfigVar.CharsetName), CryptEnum.DES);
-    	String result = uStringUtil.base64Encode(encrypt3Des);
+		byte[] encrypt3Des = Encrypt(source.getBytes(SystemConfig.CharsetName), CryptEnum.DES);
+    	String result = StringUtil.base64Encode(encrypt3Des);
     	return result;
 	}
 	 
@@ -84,7 +84,7 @@ public class uSecretUtil {
 	 * @throws UnsupportedEncodingException
 	 */
 	public static String Encrypt3DesToJson(String source) throws UnsupportedEncodingException{		
-		byte[] encrypt3Des = Encrypt(source.getBytes(uConfigVar.CharsetName), CryptEnum.DES);
+		byte[] encrypt3Des = Encrypt(source.getBytes(SystemConfig.CharsetName), CryptEnum.DES);
 		Gson gson = new Gson();
 		String str = gson.toJson(encrypt3Des);
 		return str;
@@ -99,13 +99,13 @@ public class uSecretUtil {
 	public static String Decrypt3Des(String des) throws UnsupportedEncodingException{
     	//Gson gson = new Gson();
     	//byte[] bt = gson.fromJson(des, byte[].class);
-		byte[] bt = uStringUtil.base64Decode02(des);
-    	String result = new String(Decrypt(bt, CryptEnum.DES), uConfigVar.CharsetName);
+		byte[] bt = StringUtil.base64Decode02(des);
+    	String result = new String(Decrypt(bt, CryptEnum.DES), SystemConfig.CharsetName);
     	return result;
     }
 	
 	public static String Decrypt3Des(byte[] des) throws UnsupportedEncodingException{
-	    String result = new String(Decrypt(des, CryptEnum.DES), uConfigVar.CharsetName);
+	    String result = new String(Decrypt(des, CryptEnum.DES), SystemConfig.CharsetName);
 	    return result;
 	}
 	
@@ -118,7 +118,7 @@ public class uSecretUtil {
 	public static String Decrypt3DesToJson(String des) throws UnsupportedEncodingException{
     	Gson gson = new Gson();
     	byte[] bt = gson.fromJson(des, byte[].class);
-    	String str = new String(Decrypt(bt, CryptEnum.DES), uConfigVar.CharsetName);
+    	String str = new String(Decrypt(bt, CryptEnum.DES), SystemConfig.CharsetName);
     	return str;
     }
 

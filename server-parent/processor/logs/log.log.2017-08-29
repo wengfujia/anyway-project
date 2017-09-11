@@ -1,0 +1,20 @@
+[Thread-2]2017-08-29 23:14:47,853 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x5c73c499]'
+[Thread-2]2017-08-29 23:14:47,863 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x5c73c499]'
+[Thread-2]2017-08-29 23:14:47,864 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x5c73c499]'
+[Thread-2]2017-08-29 23:14:47,864 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x5c73c499]'
+[Thread-2]2017-08-29 23:16:49,782 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xd525c69b]'
+[Thread-2]2017-08-29 23:16:49,787 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xd525c69b]'
+[Thread-2]2017-08-29 23:16:49,788 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xd525c69b]'
+[Thread-2]2017-08-29 23:16:49,788 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xd525c69b]'
+[Thread-4]2017-08-29 23:30:03,562 [WARN] - org.eclipse.jetty.deploy.providers.ScanningAppProvider.doStart(ScanningAppProvider.java:140):Does not exist: file:///C:/%E6%BA%90%E7%A0%81/%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0/anyway-project/server-parent/processor/webRoot
+[Thread-2]2017-08-29 23:30:03,994 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xacfa8c86]'
+[Thread-2]2017-08-29 23:30:03,995 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xacfa8c86]'
+[Thread-2]2017-08-29 23:30:03,995 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xacfa8c86]'
+[Thread-2]2017-08-29 23:30:03,995 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xacfa8c86]'
+[Thread-3]2017-08-29 23:35:48,961 [ERROR] - org.anyway.server.processor.HttpServer$1.run(HttpServer.java:87):Fail to open the http service!Address already in use: bind
+[Thread-4]2017-08-29 23:35:49,045 [WARN] - org.eclipse.jetty.deploy.providers.ScanningAppProvider.doStart(ScanningAppProvider.java:140):Does not exist: file:///C:/%E6%BA%90%E7%A0%81/%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0/anyway-project/server-parent/processor/webRoot
+[Thread-2]2017-08-29 23:35:49,762 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x2bc3916a]'
+[Thread-2]2017-08-29 23:35:49,762 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x2bc3916a]'
+[Thread-2]2017-08-29 23:35:49,763 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x2bc3916a]'
+[Thread-2]2017-08-29 23:35:49,763 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x2bc3916a]'
+[Thread-2]2017-08-29 23:35:49,792 [ERROR] - org.anyway.server.processor.SocketServer$1.run(SocketServer.java:66):Fail to open the socket service !Address already in use: bind

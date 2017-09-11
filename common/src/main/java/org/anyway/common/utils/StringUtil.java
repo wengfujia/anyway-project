@@ -21,7 +21,7 @@ import java.util.Random;
 import java.util.UUID;
 import org.apache.commons.codec.binary.Base64;
 
-public class uStringUtil {
+public class StringUtil {
 	
 	static String charsetName = "utf-8";
 	
@@ -87,7 +87,7 @@ public class uStringUtil {
 	 * @return
 	 */
 	public static String getUUID() {
-		return UUID.randomUUID().toString();
+		return UUID.randomUUID().toString().replace("-", "");
 	}
 
 	/**
@@ -296,7 +296,7 @@ public class uStringUtil {
 			md = MessageDigest.getInstance("SHA-1");
 			md.update(value.getBytes(charsetName));
 			byte[] digest = md.digest();
-			return uHexUtil.bytesToHexString(digest);
+			return HexUtil.bytesToHexString(digest);
 		} catch (Exception ex) {
 			return null;
 		}

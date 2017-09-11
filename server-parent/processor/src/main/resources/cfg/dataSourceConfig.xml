@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<config>
+
+	<!-- 数据源配置 -->
+	<!-- name为数据源标识名称，default为是否默认数据源-->	
+	<datasources>	
+		<datasource name="data1" properties="./cfg/datasource/data1.properties" status="1" default="1" />		
+		<datasource name="data2" properties="./cfg/datasource/data2.properties" status="1" default="0" />		
+	</datasources>
+
+	<!-- 配置业务标识号与终端需要连接到哪个数据源 -->
+	<commandids>
+		<commandid value="1" sessionid="1" datasource="data1" />
+		<commandid value="10" sessionid="1" datasource="data1" />
+	</commandids>
+
+</config>

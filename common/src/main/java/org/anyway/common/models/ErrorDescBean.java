@@ -1,4 +1,4 @@
-package org.anyway.server.data.models;
+package org.anyway.common.models;
 /*
  * 名称: TbErrorBean
  * 描述: 错误信息类

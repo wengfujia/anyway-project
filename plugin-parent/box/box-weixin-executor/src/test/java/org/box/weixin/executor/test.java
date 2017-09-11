@@ -3,14 +3,14 @@ package org.box.weixin.executor;
 import static org.junit.Assert.*;
 
 import org.anyway.common.types.pint;
-import org.anyway.common.utils.uLogger;
+import org.anyway.common.utils.LoggerUtil;
 import org.junit.Test;
 
 public class test {
 
 	@Test
 	public void test() {
-		String ddd = uLogger.sprintf("CMD.%s", "33");
+		String ddd = LoggerUtil.sprintf("CMD.%s", "33");
 		
 		pint i= new pint();
 		i.setInt(2);

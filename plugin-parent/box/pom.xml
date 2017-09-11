@@ -2,12 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.anyway.logic</groupId>
-    <artifactId>anyway-plugin-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>box</artifactId>
+  <artifactId>anyway-plugin-box</artifactId>
   <name>${project.artifactId}</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,25 +13,14 @@
   	<module>box-web-message</module>
   	<module>box-weixin-executor</module>
   	<module>box-weixin-message</module>
-
   	<module>box-db-executor</module>
+  	<module>box-common</module>
   </modules>
-  <groupId>org.anyway.logic.box</groupId>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>org.anyway.server</groupId>
-  			<artifactId>anyway-webserver</artifactId>
-  			<version>${project.version}</version>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.anyway.server</groupId>
-  		<artifactId>anyway-webserver</artifactId>
-  		<version>${project.version}</version>
-  	</dependency>
-  </dependencies>
   <description>盒子业务逻辑实现</description>
+  <parent>
+  	<groupId>org.anyway.plugin.parent</groupId>
+  	<artifactId>anyway-plugin-parent</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>org.anyway.plugin.box</groupId>
 </project>

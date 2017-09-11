@@ -10,42 +10,18 @@
 
 package org.anyway.netty.socket.handler;
 
-import java.io.IOException;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-import org.anyway.common.utils.uLogger;
+import org.anyway.common.AdapterConfig;
+import org.anyway.common.enums.CryptEnum;
+import org.anyway.common.protocol.TcpMessageCoder;
+import org.anyway.common.protocol.header.Header;
+import org.anyway.common.utils.LoggerUtil;
 
 public abstract class SimpleDefaultHandler extends SimpleChannelInboundHandler<byte[]> {
-
-	// 当一个客端端连结到服务器后
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-    	uLogger.println("[socket]Channel Connected");
-    }
-    
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-    	uLogger.println("[socket]Channel Closed");
-    }
-    
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {  
-    	if (cause instanceof IOException) {
-            uLogger.getLogger().error("[socket]Exception: ", cause);
-        } else {
-        	uLogger.getLogger().info("[socket]I/O error: " + cause.getMessage());
-        }
-    	ctx.close();
-    }
-    
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-    	ctx.flush();
-    }
     
 	/**
 	 * SendPacket
@@ -69,9 +45,39 @@ public abstract class SimpleDefaultHandler extends SimpleChannelInboundHandler<b
 		}
 		catch (Exception E)
 		{
-			uLogger.printInfo(E.getMessage());
+			LoggerUtil.printInfo(E.getMessage());
 		}
 		return ret;
 	}
-	
+
+    /**
+     * 发送反馈包
+     * @param ctx
+     * @param header
+     */
+    protected void SendResp(final ChannelHandlerContext ctx, Header header) {  	
+		TcpMessageCoder streamResp = new TcpMessageCoder(AdapterConfig.getInstance().getUSMaxSendBufferSize());
+    	Header headerResp = new Header(header);
+    	try
+    	{
+    		headerResp.setCommandID(-header.getCommandID());
+    		headerResp.setStatus(0);
+	    	ByteBuf ibuffer = ctx.alloc().buffer(); 
+	    	int len = streamResp.LoadFromStream(ibuffer, CryptEnum.DES);
+	    	
+	    	ChannelFuture retsend = SendPacket(ctx, ibuffer, len);
+	    	if (retsend==null) {
+				LoggerUtil.sprintf("[socket]Fail To SendPacket,IP:%s",header.getIP());
+				ctx.close();
+	    	}	
+    	}
+    	finally { 
+    		//清空
+    		streamResp.ClearStream();
+	    	streamResp = null;
+	    	headerResp.Clear();
+	    	headerResp = null;
+    	}
+    }
+    
 }

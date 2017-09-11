@@ -7,41 +7,48 @@
  * 日期：2015年05月28日
  */
 
-package org.anyway.server.web.cache;
+package org.anyway.server.adapter.cache;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.anyway.common.uGlobalVar;
-import org.anyway.common.utils.uStringUtil;
+import org.anyway.common.SystemConfig;
+import org.anyway.common.models.ErrorDescBean;
+import org.anyway.common.models.IpTableBean;
+import org.anyway.common.utils.FileUtil;
+import org.anyway.common.utils.StringUtil;
 import org.anyway.exceptions.NoCacheException;
-import org.anyway.server.web.common.uLoadVar;
-import org.anyway.server.web.common.models.SeqSectionBean;
-import org.anyway.server.web.common.packages.WEIXINCONFIG;
+import org.anyway.server.adapter.cache.common.config.WeixinConfig;
 import org.anyway.cache.ehcache.EhCacheFactory;
 import org.anyway.cache.ehcache.EhCacheWrapper;
 import org.anyway.wechat.entity.AccessToken;
 import org.anyway.wechat.util.WeixinUtil;
 
 public class ConfigCache {
-	private EhCacheFactory ehcachemanager = null;
-	private volatile EhCacheWrapper<String, WEIXINCONFIG> weixincache; 	//微信配置信息缓存
-	private volatile EhCacheWrapper<String, List<Map<String, String>>> weixincache_cmdid;	//微信转换成业务头的配置缓存
 	
-	private EhCacheWrapper<String, Integer> seqidcache;	//各递增序号缓存  <setctioname+code, seqid>
-	private Map<String, SeqSectionBean> seqsection;	//序号允许的号段 <sectioname, SeqSectionBean>
+	private String path = "./cfg/";
+	
+	private EhCacheFactory ehcachemanager = null;
+	private EhCacheWrapper<String, WeixinConfig> weixincache; 	//微信配置信息缓存
+	private EhCacheWrapper<String, List<Map<String, String>>> weixincache_cmdid;	//微信转换成业务头的配置缓存
+	
+	private Map<String, IpTableBean> routesCache = null;	//processor群IP列表缓存
+	/**
+	 * key为commandid + "@" + sessionid;
+	 * value为iptable的name
+	 */
+	private Map<String, String> commandIdRouteCache = null;
+	private Map<Integer, ErrorDescBean> errorsCache = null;	//错误定义缓存
 	
 	/**
 	 * 构造函数
@@ -51,16 +58,41 @@ public class ConfigCache {
 		ehcachemanager = null;
 		if (null != manager) {
 			this.ehcachemanager = manager;
-			if (uLoadVar.IsWeixinServer()) { //如果是微信服务端，则开启相关缓存
-				weixincache = new EhCacheWrapper<String, WEIXINCONFIG>("WeixinConfigCache", ehcachemanager.getManager());
+			
+			weixincache = new EhCacheWrapper<String, WeixinConfig>("WeixinConfigCache", ehcachemanager.getManager());
+			weixincache_cmdid = new EhCacheWrapper<String, List<Map<String, String>>>("WeixinCommandIDCache", ehcachemanager.getManager());
+			loadWeixinConfig();
+			
+			this.routesCache = new ConcurrentHashMap<String, IpTableBean>();
+			this.commandIdRouteCache = new HashMap<String, String>();
+			this.errorsCache = new HashMap<Integer, ErrorDescBean>();
+			this.loadRoutes();
+			this.loadCommandIdRouteCache();
+			this.loadErrors();
+		}
+		else throw new NoCacheException("manager不能为空，configcache线程缓存池创建失败！");
+	}
+	
+	/**
+	 * 构造函数
+	 * @throws Exception 
+	 */
+	public ConfigCache(EhCacheFactory manager, boolean IsWeixinServer) throws NoCacheException {
+		ehcachemanager = null;
+		if (null != manager) {
+			this.ehcachemanager = manager;
+			if (IsWeixinServer) { //如果是微信服务端，则开启相关缓存
+				weixincache = new EhCacheWrapper<String, WeixinConfig>("WeixinConfigCache", ehcachemanager.getManager());
 				weixincache_cmdid = new EhCacheWrapper<String, List<Map<String, String>>>("WeixinCommandIDCache", ehcachemanager.getManager());
-				LoadWeixinConfig();
+				loadWeixinConfig();
 			}
-			else {
-				seqidcache = new EhCacheWrapper<String, Integer>("SequenceIdCache", ehcachemanager.getManager());			
-				loadSeqSection();
-				loadSeqidCache();
-			}
+			
+			this.routesCache = new HashMap<String, IpTableBean>();
+			this.commandIdRouteCache = new HashMap<String, String>();
+			this.errorsCache = new HashMap<Integer, ErrorDescBean>();
+			this.loadRoutes();
+			this.loadCommandIdRouteCache();
+			this.loadErrors();
 		}
 		else throw new NoCacheException("manager不能为空，configcache线程缓存池创建失败！");
 	}
@@ -73,18 +105,17 @@ public class ConfigCache {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("unchecked")
-	private void LoadWeixinConfig() {
-		
+	private void loadWeixinConfig() {
 		SAXReader reader = new SAXReader();
 		try {
-			Document doc = reader.read(new File("./cfg/weixin.xml"));
+			Document doc = reader.read(new File(FileUtil.toFileName(path + "weixin.xml")));
 			Element root =doc.getRootElement();
 
 			//获取微信token配置信息
 			Iterator<Element> nodes = root.elementIterator("tokens");
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				WEIXINCONFIG config = new WEIXINCONFIG();
+				WeixinConfig config = new WeixinConfig();
 				config.setKey(node.attributeValue("key"));
 				config.setAppID(node.attributeValue("appid"));
 				config.setAppSecret(node.attributeValue("appsecret"));
@@ -120,28 +151,27 @@ public class ConfigCache {
 	}
 	
 	/**
-	 * 读取各递增序号的号段
+	 * 读取habase服务端IP列表
 	 */
 	@SuppressWarnings("unchecked")
-	public void loadSeqSection() {
-		seqsection = new HashMap<String, SeqSectionBean>();
+	private void loadRoutes() {
 		SAXReader reader = new SAXReader();
 		try {
-			Document doc = reader.read(new File("./cfg/config.xml"));
-			Element root = doc.getRootElement();
-			Iterator<Element> nodes = root.elementIterator("sections");
-			if (nodes.hasNext()) {
+			Document doc = reader.read(new File(FileUtil.toFileName(path + "routes.xml")));
+			Element root =(Element) doc.getRootElement().elementIterator("iptables").next();
+			if (null == root) {
+				return;
+			}
+			Iterator<Element> nodes = root.elementIterator();
+			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				Iterator<Element> childnodes = node.elementIterator("section");	
-				while(childnodes.hasNext()) {
-					Element childnode = childnodes.next();
-					SeqSectionBean section = new SeqSectionBean();
-					section.setSectionName(childnode.attributeValue("name"));
-					section.setMinID(Integer.valueOf(childnode.attributeValue("minid")));
-					section.setMaxID(Integer.valueOf(childnode.attributeValue("maxid")));
-					section.setLength(Integer.valueOf(childnode.attributeValue("length")));
-					seqsection.put(section.getSectionName(), section);	
-				}
+				IpTableBean iptable = new IpTableBean();
+				iptable.setName(node.attributeValue("name"));
+				iptable.setAddress(node.attributeValue("addr"));
+	        	iptable.setPort(StringUtil.getInteger(node.attributeValue("port")));
+	        	iptable.setMaxthread(StringUtil.getInteger(node.attributeValue("maxthread")));
+	        	iptable.setStatus(StringUtil.getInteger(node.attributeValue("status")));
+	        	this.routesCache.put(iptable.getName(), iptable);
 			}
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -151,49 +181,68 @@ public class ConfigCache {
 	}
 	
 	/**
-	 * 加载自增序号缓存
+	 * 配置业务标识号与终端需要连接到哪个数据源
+	 * @param dir
+	 * @param configFile
 	 */
-	public void loadSeqidCache() {
+	@SuppressWarnings("unchecked")
+	private void loadCommandIdRouteCache() {
+		SAXReader reader = new SAXReader();
 		try {
-			if (null != this.seqidcache) {
-				// 开启指定的文件
-				File file = new File(uGlobalVar.AppPath + "/data/seqid.txt");
-				if (file.exists()) {
-					BufferedReader read = new BufferedReader(new FileReader(file));
-					String line = "";
-					while ((line=read.readLine()) != null) {
-						String[] values = line.split("\t");
-						if (null != values && values.length == 2) {
-							this.seqidcache.put(values[0], Integer.valueOf(values[1]));
-						}
-					}
-					read.close();
-				}
+			Document doc = reader.read(new File(FileUtil.toFileName(path + "routes.xml")));
+			Element root =(Element) doc.getRootElement().elementIterator("commandids").next();
+			if (null == root) {
+				return;
 			}
-			
-		} catch (IOException e) {
+			Iterator<Element> nodes = root.elementIterator();
+			while(nodes.hasNext()) {
+				Element node = nodes.next();
+				String key = node.attributeValue("value") + SystemConfig.KEY_SEPATATE + node.attributeValue("sessionid");
+				this.commandIdRouteCache.put(key, node.attributeValue("iptable"));
+			}
+		} catch (DocumentException e) {
 			e.printStackTrace();
+		} finally {
+			reader = null;
 		}
 	}
 	
 	/**
-	 * 获取自增序号缓存
-	 * @return
+	 * 读取错误定义表
 	 */
-	public EhCacheWrapper<String, Integer> getSeqIdCache() {
-		return this.seqidcache;
+	@SuppressWarnings("unchecked")
+	private void loadErrors() {
+		SAXReader reader = new SAXReader();
+		try {
+			Document doc = reader.read(new File(FileUtil.toFileName(path + "errorDescriptions.xml")));
+			Element root =doc.getRootElement();
+			//ErrorCode="10" Description="系统错误" Response
+			Iterator<Element> nodes = root.elementIterator("error");
+			while(nodes.hasNext()) {
+				Element node = nodes.next();
+				ErrorDescBean tberror = new ErrorDescBean();
+	        	tberror.setErrorCode(StringUtil.getInteger(node.attributeValue("ErrorCode")));
+	        	tberror.setDescription(node.attributeValue("Description"));
+	        	tberror.setResponse(node.attributeValue("Response"));
+	        	this.errorsCache.put(tberror.getErrorCode(), tberror);
+			}
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} finally {
+			reader = null;
+		}
 	}
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-//微信缓存相关函数
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	//微信缓存相关函数
 	
 	/**
 	 * 获取微信配置缓存
 	 * @return
 	 */
-	public EhCacheWrapper<String, WEIXINCONFIG> WeixinCache() {
+	public EhCacheWrapper<String, WeixinConfig> WeixinCache() {
 		if (null == weixincache) {
-			weixincache = new EhCacheWrapper<String, WEIXINCONFIG>("WeixinConfigCache", ehcachemanager.getManager());
+			weixincache = new EhCacheWrapper<String, WeixinConfig>("WeixinConfigCache", ehcachemanager.getManager());
 		}
 		return weixincache;
 	}
@@ -219,7 +268,7 @@ public class ConfigCache {
 			return "";
 		}
 		else {
-			WEIXINCONFIG config = this.weixincache.get(key);
+			WeixinConfig config = this.weixincache.get(key);
 			return config.getToken();	
 		}
 	}
@@ -234,7 +283,7 @@ public class ConfigCache {
 			return "";
 		}
 		else {
-			WEIXINCONFIG config = this.weixincache.get(key);
+			WeixinConfig config = this.weixincache.get(key);
 			return config.getAccessToken().getToken();	
 		}
 	}
@@ -243,8 +292,8 @@ public class ConfigCache {
 	 * 获取微信配置信息
 	 * @return WEIXINCONFIG
 	 */
-	public WEIXINCONFIG getWeixinConfig(String key) {
-		WEIXINCONFIG config = this.weixincache.get(key);
+	public WeixinConfig getWeixinConfig(String key) {
+		WeixinConfig config = this.weixincache.get(key);
 		return config;
 	}
 	
@@ -264,12 +313,12 @@ public class ConfigCache {
 			//记录匹配
 			if (map.get("msgtype").equalsIgnoreCase(weixinMap.get("MsgType"))) { //消息类型匹配
 				String msgkey = map.get("msgkey");
-				if (uStringUtil.empty(msgkey)) { //如果没有msgkey进行匹配，说明是根据消息类型匹配
+				if (StringUtil.empty(msgkey)) { //如果没有msgkey进行匹配，说明是根据消息类型匹配
 					result = map.get("commandid");
 				}
 				String lvalue = map.get(msgkey).toLowerCase(); 		//需要匹配的值
 				String wvalue = weixinMap.get(msgkey).toLowerCase();//微信转入的值
-				if (!uStringUtil.empty(lvalue) && !uStringUtil.empty(wvalue)) {//判断是否为精确匹配
+				if (!StringUtil.empty(lvalue) && !StringUtil.empty(wvalue)) {//判断是否为精确匹配
 					String _value = lvalue.replace("?", ""); //替换掉模湖匹配关键字
 					if (wvalue.length() == lvalue.length() && wvalue.indexOf(_value) >= 0) { //微信转入的值是否包含设定的匹配值
 						result = map.get("commandid");
@@ -287,7 +336,7 @@ public class ConfigCache {
 	 */
 	public void fetchTokenFormWeixin() {
 		for (Object key : this.weixincache.getCache().getKeys()) {
-			WEIXINCONFIG config = this.weixincache.get((String)key);
+			WeixinConfig config = this.weixincache.get((String)key);
 			AccessToken accesstoken = WeixinUtil.getAccessToken(config.getAppID(), config.getAppSecret());
 			config.setAccessToken(accesstoken);
 		}
@@ -297,41 +346,35 @@ public class ConfigCache {
 	 * 从微信获取令牌
 	 */
 	public void getTokenFormWeixin(Object key) {
-		WEIXINCONFIG config = this.weixincache.get((String)key);
+		WeixinConfig config = this.weixincache.get((String)key);
 		AccessToken accesstoken = WeixinUtil.getAccessToken(config.getAppID(), config.getAppSecret());
 		config.setAccessToken(accesstoken);
 	}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////	
-//其它缓存相关函数
+	
+	///其它缓存
 	
 	/**
-	 * 获取序号
-	 * @param sectioname 名称如：学校为shcool
-	 * @param code 名称对应的编号如：学校的前7位编号
+	 * 错误定义缓存
 	 * @return
 	 */
-	public String getNextSequenceId(String sectioname, String code) {
-		int SequenceId;
-		String key = sectioname+code;
-		SeqSectionBean section = this.seqsection.get(sectioname);
-		if (this.seqidcache.isKeyInCache(key)) { //存在的序号进行递增
-			SequenceId = this.seqidcache.get(key) + 1;
-			//判断是否超出最大允许值
-			if (SequenceId>section.getMaxID()*section.getLength()) {
-				SequenceId = -1; //设置返回-1，表示值超出预设限定
-			}
-			else {
-				//保存当前值
-				this.seqidcache.replace(key, SequenceId);
-			}
-		}
-		else { //如果不存在表示是新的序号	
-			SequenceId = section.getMinID() * section.getLength();
-			//保存到缓存
-			this.seqidcache.put(key, SequenceId);
-		}
-		return String.valueOf(SequenceId);
+	public Map<Integer, ErrorDescBean> getErrorDescsCache() {
+		return this.errorsCache;
 	}
 
+	/**
+	 * habase群IP列表缓存
+	 * @return
+	 */
+	public Map<String, IpTableBean> getRoutesCache() {
+		return this.routesCache;
+	}
+	
+	/**
+	 * 获取业务标识号路由信息
+	 * @return
+	 */
+	public Map<String, String> getCommandIdRouteCache() {
+		return this.commandIdRouteCache;
+	}
+	
 }

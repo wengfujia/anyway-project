@@ -1,4 +1,4 @@
-package org.anyway.server.web.cache.event;
+package org.anyway.server.adapter.cache.event;
 
 /*
  * 名称: CacheEventListener

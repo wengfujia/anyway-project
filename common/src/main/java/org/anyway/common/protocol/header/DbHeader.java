@@ -7,10 +7,10 @@
  * 日期：2013年08月16日
  * 修改日期:
  */
-package org.anyway.server.data.packages;
+package org.anyway.common.protocol.header;
 
 @SuppressWarnings("serial")
-public class DBHEADER implements java.io.Serializable {
+public class DbHeader implements java.io.Serializable {
 	private String seq_id = "";
 	
 	//唯 一序号  20位

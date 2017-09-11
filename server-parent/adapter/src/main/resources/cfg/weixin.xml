@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- 微信配置信息 -->
+<config>
+
+	<!-- key:平台接入密钥，用于区分不同接入的公众号 appid:微信appid appsecret:微信appsecret token:微信地址签权口令 -->
+	<tokens key="057151778" appid="wxa50dc6bbeea9cf72" appsecret="68720599bb00f9026354b6499115d204"
+		token="beinfolux15424" />
+
+	<!-- 微信消息跟业务commandid匹配表 根据微信的MsgType(消息类型)与内容关键字，获取commandid key:平台接入密钥，用于区分不同接入的公众号 
+		msgtype:微信消息类型 msgkey:需要匹配的微信包中的键 msgvalue:需要匹配的微信包中的键的值，其中？表示需要模糊匹配的值 -->
+	<commandids key="057151778" msgtype="text" msgkey="Content"
+		Content="#?????" commandid="26" />
+	<commandids key="057151778" msgtype="event" msgkey="EventKey"
+		EventKey="register" commandid="80000" />
+	<commandids key="057151778" msgtype="event" msgkey="EventKey"
+		EventKey="message" commandid="80001" />
+	<commandids key="057151778" msgtype="location" commandid="80002" />
+	<commandids key="057151778" msgtype="event" msgkey="Event"
+		Event="LOCATION" commandid="80002" />
+	<commandids key="057151778" msgtype="event" msgkey="Event"
+		Event="subscribe" commandid="88888" />
+	<commandids key="057151778" msgtype="event" msgkey="Event"
+		Event="unsubscribe" commandid="88889" />
+
+</config>

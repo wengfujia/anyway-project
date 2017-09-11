@@ -1,0 +1,25 @@
+[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xddedc96e]'
+[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xddedc96e]'
+[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xddedc96e]'
+[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xddedc96e]'
+[main]2017-05-11 23:02:23,417 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created6841560683029711876diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x50efa201]'
+[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x50efa201]'
+[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x50efa201]'
+[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x50efa201]'
+[main]2017-05-11 23:04:16,943 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created6381259073338741435diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xb881c831]'
+[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xb881c831]'
+[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xb881c831]'
+[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xb881c831]'
+[main]2017-05-11 23:05:06,735 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
+The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created1180406717957961019diskstore.
+To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
+[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x4bbfaab3]'
+[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x4bbfaab3]'
+[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x4bbfaab3]'
+[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x4bbfaab3]'

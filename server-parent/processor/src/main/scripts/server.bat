@@ -1,0 +1,1 @@
+java -cp .;./lib/* org.anyway.server.processor.StartUp start

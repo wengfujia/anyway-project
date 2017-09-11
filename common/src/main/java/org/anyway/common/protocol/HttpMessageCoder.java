@@ -8,24 +8,24 @@
  * 修改日期:
  */
 
-package org.anyway.server.api;
+package org.anyway.common.protocol;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
 import org.anyway.common.enums.CryptEnum;
-import org.anyway.common.utils.uNetUtil;
-import org.anyway.common.utils.uSecretUtil;
-import org.anyway.server.data.http.HChrList;
-import org.anyway.server.data.http.HMessageBuffer;
-import org.anyway.server.data.packages.HEADER;
+import org.anyway.common.utils.NetUtil;
+import org.anyway.common.utils.SecretUtil;
+import org.anyway.common.protocol.buffer.impl.http.HChrList;
+import org.anyway.common.protocol.buffer.impl.http.HMessageBuffer;
+import org.anyway.common.protocol.header.Header;
 
-public class HSHTMsgStream {
+public class HttpMessageCoder {
 
-	private HEADER header = new HEADER();
+	private Header header = new Header();
 	private HChrList msgs = new HChrList();
 	
 	/**
@@ -40,7 +40,7 @@ public class HSHTMsgStream {
 	/**
 	 * 构造函数
 	 */
-	public HSHTMsgStream() {
+	public HttpMessageCoder() {
 		ClearStream();
 	}
     
@@ -48,7 +48,7 @@ public class HSHTMsgStream {
      * EncodeHeader
      * @param h
      */
-    public void EncodeHeader(HEADER h) {
+    public void EncodeHeader(Header h) {
     	header.Clear();
     	header = h;
     }
@@ -57,7 +57,7 @@ public class HSHTMsgStream {
      * 获取包头
      * @return
      */
-    public HEADER getHeader(){
+    public Header getHeader(){
     	return header;
     }
     
@@ -122,10 +122,10 @@ public class HSHTMsgStream {
 			//转换成json
 			String sjson = toJson(hbuffer);
 
-			result = uNetUtil.getBytes(sjson, uConfigVar.CharsetName);
+			result = NetUtil.getBytes(sjson, SystemConfig.CharsetName);
 			if (result != null) 
 			{
-				result = uSecretUtil.Encrypt(result, encrypt);			
+				result = SecretUtil.Encrypt(result, encrypt);			
 			}
 		}
 		catch (Exception e)
@@ -157,11 +157,11 @@ public class HSHTMsgStream {
 				result = sjson;
 			}
 			else {
-				byte[] tmp = uNetUtil.getBytes(sjson, uConfigVar.CharsetName);
+				byte[] tmp = NetUtil.getBytes(sjson, SystemConfig.CharsetName);
 				if (tmp != null) 
 				{
-					tmp = uSecretUtil.Encrypt(tmp, encrypt);
-					result = uNetUtil.getString(tmp, uConfigVar.CharsetName);			
+					tmp = SecretUtil.Encrypt(tmp, encrypt);
+					result = NetUtil.getString(tmp, SystemConfig.CharsetName);			
 				}
 				else {
 					result = sjson;
@@ -221,7 +221,7 @@ public class HSHTMsgStream {
 	 * 参数:HEADER header, String body
 	 * 返回:HMessageBuffer
 	 */
-	private static HMessageBuffer SetVarToHMessageBuffer(HEADER header, String body)
+	private static HMessageBuffer SetVarToHMessageBuffer(Header header, String body)
 	{
 		HMessageBuffer hbuffer = new HMessageBuffer();
 		List<HMessageBuffer.CBody> list = new ArrayList<HMessageBuffer.CBody>();
@@ -244,7 +244,7 @@ public class HSHTMsgStream {
 	{
 		HMessageBuffer hbuffer = new HMessageBuffer();
 		ArrayList<HMessageBuffer.CBody> list = new ArrayList<HMessageBuffer.CBody>();
-		String content = uNetUtil.getString(body, uConfigVar.CharsetName);
+		String content = NetUtil.getString(body, SystemConfig.CharsetName);
     	list.add(new HMessageBuffer.CBody(content));
     	hbuffer.setResult(result);
     	hbuffer.setData(list);
@@ -260,14 +260,14 @@ public class HSHTMsgStream {
 	 * @return
 	 * @throws Exception 
 	 */
-	public static byte[] toJson(HEADER header, String body)
+	public static byte[] toJson(Header header, String body)
 	{
 		byte[] jsons = null;
 		HMessageBuffer hbuffer = null;
 		try
 		{
 			hbuffer = SetVarToHMessageBuffer(header, body);
-			jsons = uNetUtil.getBytes(toJson(hbuffer), uConfigVar.CharsetName);	
+			jsons = NetUtil.getBytes(toJson(hbuffer), SystemConfig.CharsetName);	
 		}
 		catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -294,7 +294,7 @@ public class HSHTMsgStream {
 		try
 		{
 			hbuffer = SetVarToHMessageBuffer(result, body);
-			jsons = uNetUtil.getBytes(toJson(hbuffer), uConfigVar.CharsetName);	
+			jsons = NetUtil.getBytes(toJson(hbuffer), SystemConfig.CharsetName);	
 		}
 		catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

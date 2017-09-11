@@ -1,4 +1,4 @@
-package org.anyway.server.data.contracts;
+package org.anyway.common.protocol.buffer;
 
 /*
  * 名称: ChrList

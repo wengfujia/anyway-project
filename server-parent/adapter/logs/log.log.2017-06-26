@@ -1,0 +1,5 @@
+[Thread-0]2017-06-26 00:39:48,843 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x3d491138]'
+[Thread-0]2017-06-26 00:39:48,843 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x3d491138]'
+[Thread-0]2017-06-26 00:50:44,860 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xdfd0f352]'
+[Thread-0]2017-06-26 00:50:44,864 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xdfd0f352]'
+[pool-2-thread-21]2017-06-26 00:51:02,953 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x5b163f9e]'

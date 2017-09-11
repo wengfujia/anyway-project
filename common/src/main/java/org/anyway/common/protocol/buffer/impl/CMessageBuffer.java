@@ -1,4 +1,4 @@
-package org.anyway.server.data;
+package org.anyway.common.protocol.buffer.impl;
 /*
  * 名称: CMessageBuffer
  * 描述: socket的消息类

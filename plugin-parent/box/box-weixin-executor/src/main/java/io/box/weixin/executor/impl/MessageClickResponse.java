@@ -10,16 +10,14 @@
 
 package io.box.weixin.executor.impl;
 
-import io.box.weixin.executor.AbstractWeixinMessageResponse;
-
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.anyway.common.MessageAnnotation;
-import org.anyway.server.api.CSHTMsgStream;
-import org.anyway.server.data.packages.COMMANDID;
+import org.anyway.common.annotation.MessageAnnotation;
+import org.anyway.common.protocol.TcpMessageCoder;
+import org.anyway.server.plugin.adapter.executor.AbstractWeixinMessageResponse;
 import org.anyway.wechat.constant.ConstantWeChat;
 import org.anyway.wechat.entity.message.resp.Article;
 import org.anyway.wechat.entity.message.resp.NewsMessage;
@@ -27,12 +25,14 @@ import org.anyway.wechat.entity.message.resp.TextMessage;
 import org.anyway.wechat.service.MessageService;
 import org.anyway.wechat.util.MessageUtil;
 
-@MessageAnnotation(msgType = COMMANDID.WEIXIN_MSG_CLICK)
+import io.box.common.CommandID;
+
+@MessageAnnotation(msgType = CommandID.WEIXIN_MSG_CLICK)
 public class MessageClickResponse extends AbstractWeixinMessageResponse {
 	
 	@Override
-	public Integer call() {
-		return super.call();
+	public void run() {
+		super.run();
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class MessageClickResponse extends AbstractWeixinMessageResponse {
 		byte[] buffer = this.httprequest.getJBody().getBody().getBytes();
 		Map<String, String> requestMap = MessageUtil.parseXml(new ByteArrayInputStream(buffer));
 		
-		CSHTMsgStream cstream = this.getRequest().getCStream();
+		TcpMessageCoder cstream = this.getRequest().getCStream();
 		if (cstream.GetStatus() == 0) {
 			NewsMessage newsMessage = (NewsMessage) MessageService.bulidBaseMessage(requestMap, ConstantWeChat.RESP_MESSAGE_TYPE_NEWS);
 			List<Article> articleList = new ArrayList<Article>();

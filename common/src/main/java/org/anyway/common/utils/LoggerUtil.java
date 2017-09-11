@@ -16,28 +16,31 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.anyway.common.SystemConfig;
 
-import org.anyway.common.uConfigVar;
-
-public class uLogger {
+public class LoggerUtil {
 
 	static boolean debug = false;
 	static final public String RT = "\n";
-	static protected Logger logger = LoggerFactory.getLogger(uLogger.class.getName());
+	static protected Logger logger = LoggerFactory.getLogger(LoggerUtil.class.getName());
 	
 	/**
 	 * 
 	 * @return
 	 */
-	static public Logger getLogger() {
+	public static Logger getLogger() {
 		return logger;
+	}
+	
+	public static <T> Logger getLogger(Class<T> cls) {
+		return LoggerFactory.getLogger(cls.getName());
 	}
 
 	/**
 	 * 
 	 * @param myLogger
 	 */
-	static public void setLogger(Logger myLogger) {
+	public static void setLogger(Logger myLogger) {
 		logger = myLogger;
 	}
 	
@@ -55,7 +58,7 @@ public class uLogger {
 	 */
 	public static void printInfo(String info) {
 		if (debug) {
-			logger.debug(info);
+			logger.info(info);
 		}
 	}
 	
@@ -67,12 +70,12 @@ public class uLogger {
 	 */
 	public static void printInfo(byte[] info) throws UnsupportedEncodingException {
 		if (debug) {
-			String sinfo = uNetUtil.getString(info, uConfigVar.CharsetName);
+			String sinfo = NetUtil.getString(info, SystemConfig.CharsetName);
 			logger.info(sinfo);
 		}
 	}
 	
-	public static void printInfo(String format,Object...replace) {
+	public static void printInfo(String format, Object...replace) {
 		if (debug) {
 			Date now = new Date();  
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   HH:mm:ss");//可以方便地修改日期格式  
@@ -87,7 +90,7 @@ public class uLogger {
 	 */
 	public static void println(String log)
 	{
-		if (debug && uStringUtil.empty(log)==false) {
+		if (debug && StringUtil.empty(log)==false) {
 			Date now = new Date();  
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd   HH:mm:ss");//可以方便地修改日期格式  
 			String strDate = dateFormat.format(now);

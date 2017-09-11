@@ -7,12 +7,12 @@
  * 日期：2015年05月28日
  */
 
-package org.anyway.server.web.common.packages;
+package org.anyway.server.adapter.cache.common.config;
 
 import org.anyway.wechat.entity.AccessToken;
 
 @SuppressWarnings("serial")
-public class WEIXINCONFIG implements java.io.Serializable {
+public class WeixinConfig implements java.io.Serializable {
 	
 	private String key;
 	private String appid;
@@ -24,7 +24,7 @@ public class WEIXINCONFIG implements java.io.Serializable {
 	/**
 	 * 构造函数
 	 */
-	public WEIXINCONFIG() {
+	public WeixinConfig() {
 		this.time = System.currentTimeMillis();
 	}
 	

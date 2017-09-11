@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<errors>
+
+	<error ErrorCode="-12" Description="版本不对" Response="版本号过低，请升级" />
+	<error ErrorCode="-17" Description="非法关键字" Response="含有非法关键字" />
+	<error ErrorCode="-18" Description="非法用户" Response="非法用户名" />
+	<error ErrorCode="-20" Description="非法业务头" Response="您所操作的业务不存在" />
+	<error ErrorCode="-23" Description="系统错误" Response="系统错误，请稍后重试" />
+	<error ErrorCode="-60" Description="重复推荐" Response="对不起，你重复推荐或非萧山公安新粉丝（取消关注后重新关注的，不计入新粉丝）" />
+	<error ErrorCode="-61" Description="推广码不存在" Response="你所获取的推广码不存在，或你还没有注册" />
+	<error ErrorCode="-62" Description="已注册" Response="该微信号或手机号已经被注册" />
+	
+</errors>

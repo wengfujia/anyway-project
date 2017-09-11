@@ -1,0 +1,2 @@
+[Thread-0]2017-07-30 23:53:10,319 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x0d813537]'
+[Thread-0]2017-07-30 23:53:10,331 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x0d813537]'

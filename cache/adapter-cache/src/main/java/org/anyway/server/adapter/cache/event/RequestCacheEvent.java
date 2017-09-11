@@ -8,16 +8,18 @@
  * 修改日期:
  */
 
-package org.anyway.server.web.cache.event;
+package org.anyway.server.adapter.cache.event;
 
-import org.anyway.server.data.packages.HTTPREQUEST;
+import org.anyway.common.models.IpTableBean;
+import org.anyway.common.protocol.request.HttpRequest;
+import org.anyway.common.utils.LoggerUtil;
 
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.event.CacheEventListener;
 
-public class HttpCacheEvent implements CacheEventListener {
+public class RequestCacheEvent implements CacheEventListener {
 	
 	@Override
 	public void dispose() {
@@ -26,7 +28,7 @@ public class HttpCacheEvent implements CacheEventListener {
 	@Override
     public void notifyElementEvicted(Ehcache cache, Element element) {
     	@SuppressWarnings("unchecked")
-		HTTPREQUEST<String> request = (HTTPREQUEST<String>)element.getObjectValue();
+		HttpRequest<String> request = (HttpRequest<String>)element.getObjectValue();
     	close(request);
 	}
     
@@ -38,7 +40,7 @@ public class HttpCacheEvent implements CacheEventListener {
     public void notifyElementExpired(Ehcache cache, Element element) {
     	//获取连接，关闭
     	@SuppressWarnings("unchecked")
-		HTTPREQUEST<String> request = (HTTPREQUEST<String>)element.getObjectValue();
+		HttpRequest<String> request = (HttpRequest<String>)element.getObjectValue();
     	close(request);
     }
     
@@ -51,7 +53,7 @@ public class HttpCacheEvent implements CacheEventListener {
     	//关闭连接池中的所有连接
     	for (Object key : cache.getKeys()) {
     		@SuppressWarnings("unchecked")
-			HTTPREQUEST<String> request = (HTTPREQUEST<String>)cache.get(key).getObjectValue();
+			HttpRequest<String> request = (HttpRequest<String>)cache.get(key).getObjectValue();
     		close(request);
     	}
     }
@@ -64,7 +66,7 @@ public class HttpCacheEvent implements CacheEventListener {
     public void notifyElementRemoved(Ehcache cache, Element element)
              throws CacheException {
     	@SuppressWarnings("unchecked")
-		HTTPREQUEST<String> request = (HTTPREQUEST<String>) element.getObjectValue();
+		HttpRequest<String> request = (HttpRequest<String>) element.getObjectValue();
     	close(request);
     }
     
@@ -92,12 +94,15 @@ public class HttpCacheEvent implements CacheEventListener {
      * 关闭连接
      * @param request
      */
-    private void close(HTTPREQUEST<String> request) {
+    private void close(HttpRequest<String> request) {
     	if (null != request) {
-    		if (null != request.getIpTable()) {
-    			request.getIpTable().decCurthreads();
+    		IpTableBean iptable = request.getIpTable();
+    		if (null != iptable) {
+    			int threads = iptable.decCurthreads();
+    			LoggerUtil.println("Curthreads ip:%s,port:%s,threads:%d,maxThreads:%d", iptable.getAddress(),
+    					iptable.getPort(), threads, iptable.getMaxthreads());
     		}
-        	request.Close();
+        	request.close();
     	}
     }
 }

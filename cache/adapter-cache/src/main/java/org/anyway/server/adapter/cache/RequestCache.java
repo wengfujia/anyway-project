@@ -11,7 +11,7 @@
  * 		取消待处理缓存，统一由已处理缓存存放
  */
 
-package org.anyway.server.web.cache;
+package org.anyway.server.adapter.cache;
 
 import java.util.List;
 
@@ -21,84 +21,43 @@ import net.sf.ehcache.search.Query;
 import net.sf.ehcache.search.Results;
 
 import org.anyway.exceptions.NoCacheException;
-import org.anyway.server.data.packages.HTTPREQUEST;
 import org.anyway.cache.ehcache.EhCacheFactory;
 import org.anyway.cache.ehcache.EhCacheWrapper;
+import org.anyway.common.protocol.request.BaseRequest;
 
-public class HttpCache {
+public class RequestCache {
 	
 	private EhCacheFactory ehcachemanager = null;
-//	private EhCacheWrapper<String, HTTPREQUEST<String>> waitcache; //待处理缓存
-	private EhCacheWrapper<String, HTTPREQUEST<String>> donecache; //已处理缓存
+	private EhCacheWrapper<String, BaseRequest> donecache; //已处理缓存
 	
 	/**
 	 * 构造函数
 	 * @throws Exception 
 	 */
-	public HttpCache(EhCacheFactory manager) throws NoCacheException {
+	public RequestCache(EhCacheFactory manager) throws NoCacheException {
 		ehcachemanager = null;
 		if (null != manager) {
 			this.ehcachemanager = manager;
-//				waitcache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpWaitCache", ehcachemanager.getManager());
-				donecache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpDoneCache", ehcachemanager.getManager());
+				donecache = new EhCacheWrapper<String, BaseRequest>("requestDoneCache", ehcachemanager.getManager());
 		}
 		else throw new NoCacheException("manager不能为空，ThreadCache线程缓存池创建失败！");
 	}
-	
-//	/**
-//	 * 获取待处理缓存
-//	 * @return
-//	 */
-//	public EhCacheWrapper<String, HTTPREQUEST<String>> WaitCache() {
-//		if (null == waitcache) {
-//			waitcache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpWaitCache", ehcachemanager.getManager());
-//		}
-//		return waitcache;
-//	}
 	
 	/**
 	 * 获取已处理缓存
 	 * @return
 	 */
-	public synchronized EhCacheWrapper<String, HTTPREQUEST<String>> DoneCache() {
+	public EhCacheWrapper<String, BaseRequest> doneCache() {
 		if (null == donecache) {
-			donecache = new EhCacheWrapper<String, HTTPREQUEST<String>>("httpDoneCache", ehcachemanager.getManager());
+			synchronized(EhCacheWrapper.class) {
+				if (null == donecache) {
+					donecache = new EhCacheWrapper<String, BaseRequest>("requestDoneCache", ehcachemanager.getManager());
+				}
+			}
 		}
 
 		return donecache;
 	}
-	
-//	/**
-//	 * 获取等待keys
-//	 * @return
-//	 */
-//	public List<?> getWaitKeys() {
-//		return waitcache.getCache().getKeys();
-//	}
-//	
-//	/**
-//	 * 添加连接到连接池
-//	 * @param reqest
-//	 */
-//	public void addWait(HTTPREQUEST<String> request) {
-//		waitcache.put(request.getID(), request);
-//	}
-//	
-//	/**
-//	 * 删除元素，并触发remove事件
-//	 * @param key
-//	 */
-//	public void removeWait(String key) {
-//		waitcache.remove(key);
-//	}
-//	
-//	/**
-//	 * 删除元素，不触发remove事件
-//	 * @param key
-//	 */
-//	public void removeQuiteWait(String key) {
-//		waitcache.removeQuiet(key);
-//	}
 	
 	/**
 	 * 获取已处理keys
@@ -112,7 +71,7 @@ public class HttpCache {
 	 * 添加连接到连接池
 	 * @param reqest
 	 */
-	public void addDone(HTTPREQUEST<String> request) {
+	public void addDone(BaseRequest request) {
 		donecache.put(request.getID(), request);
 	}
 	
@@ -120,7 +79,7 @@ public class HttpCache {
 	 * 更新连接池
 	 * @param reqest
 	 */
-	public void replaceDone(HTTPREQUEST<String> request) {
+	public void replaceDone(BaseRequest request) {
 		donecache.replace(request.getID(), request);
 	}
 	
@@ -160,4 +119,5 @@ public class HttpCache {
 		Results results = query.execute();
 		return results;
 	}
+	
 }

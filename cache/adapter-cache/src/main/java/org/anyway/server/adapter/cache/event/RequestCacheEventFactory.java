@@ -1,4 +1,4 @@
-package org.anyway.server.web.cache.event;
+package org.anyway.server.adapter.cache.event;
 
 /*
  * 名称: HttpCacheEventFactory
@@ -14,10 +14,10 @@ import java.util.Properties;
 import net.sf.ehcache.event.CacheEventListener;
 import net.sf.ehcache.event.CacheEventListenerFactory;
 
-public class HttpCacheEventFactory extends CacheEventListenerFactory {
+public class RequestCacheEventFactory extends CacheEventListenerFactory {
 
 	@Override
     public CacheEventListener createCacheEventListener(Properties properties) {
-        return new HttpCacheEvent();
+        return new RequestCacheEvent();
     }
 }

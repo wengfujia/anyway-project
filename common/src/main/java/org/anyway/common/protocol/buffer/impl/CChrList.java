@@ -8,13 +8,13 @@
  * 修改日期:
  */
 
-package org.anyway.server.data;
+package org.anyway.common.protocol.buffer.impl;
 
 import org.anyway.common.types.pint;
-import org.anyway.common.utils.uNetUtil;
+import org.anyway.common.utils.NetUtil;
 import org.anyway.exceptions.NotEnoughDataInByteBufferException;
-import org.anyway.server.data.contracts.IChrList;
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
+import org.anyway.common.protocol.buffer.IChrList;
 
 public class CChrList implements IChrList{
 	
@@ -155,7 +155,7 @@ public class CChrList implements IChrList{
 	 */
 	public void Append(String str) {
 		try {
-			byte[] b = uNetUtil.getBytes(str, uConfigVar.CharsetName);
+			byte[] b = NetUtil.getBytes(str, SystemConfig.CharsetName);
 			int  len = b.length;
 			Append(b, len);	
 		} catch (Exception e) {

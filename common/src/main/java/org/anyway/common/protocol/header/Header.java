@@ -8,16 +8,16 @@
  * 修改日期:
  */
 
-package org.anyway.server.data.packages;
+package org.anyway.common.protocol.header;
 
 @SuppressWarnings("serial")
-public class HEADER implements java.io.Serializable {
+public class Header implements java.io.Serializable {
 
-	//包头内部字段定义
+	//包头内部字段定义 
 	private int len = 0; 
 	private int commandid = 0;
 	private int status = 0;
-	private String sequence = "";     	//序列号 17位长
+	private String sequence = "";     	//序列号 36位长
 	private String acknowledge = "";  	//确认
 	private String sessionid = "";		//session标识  0:pc,1:android,2:iphone,3:mac,4:web,5:weixin;
 	private int resptype = 0;      		//反馈类型: 0 表示还有后续包，1表示是最后一个包了
@@ -30,7 +30,7 @@ public class HEADER implements java.io.Serializable {
 	/**
 	 * 空的构造函数
 	 */
-	public HEADER() {
+	public Header() {
 		
 	}
 	
@@ -38,7 +38,7 @@ public class HEADER implements java.io.Serializable {
 	 * 构造函数
 	 * @param header
 	 */
-	public HEADER(HEADER header) {
+	public Header(Header header) {
 		this.len = header.getLen();
 		this.commandid = header.getCommandID();
 		this.status = header.getStatus();
@@ -78,7 +78,7 @@ public class HEADER implements java.io.Serializable {
         this.status = iStatus;
     }
     //设置状态并返回头部
-    public HEADER Status(int iStatus) {
+    public Header Status(int iStatus) {
     	this.status = iStatus;
     	return this;
     }
@@ -115,7 +115,7 @@ public class HEADER implements java.io.Serializable {
         this.resptype = iResptype;
     }
     
-    //登录帐号  17位
+    //登录帐号  35位
     public String getUser() {
         return user;
     }
