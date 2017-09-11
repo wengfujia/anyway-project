@@ -21,27 +21,21 @@ import io.netty.handler.codec.http.HttpObject;
 import io.netty.util.CharsetUtil;
 
 import org.anyway.common.AdapterConfig;
-import org.anyway.common.uConfigVar;
+import org.anyway.common.future.InvokeCallback;
+import org.anyway.common.future.ResponseFuture;
+import org.anyway.common.protocol.HttpMessageCoder;
 import org.anyway.common.protocol.body.JBuffer;
 import org.anyway.common.protocol.header.CommandID;
 import org.anyway.common.protocol.request.HttpRequest;
+import org.anyway.common.utils.JsonUtil;
 import org.anyway.common.utils.LoggerUtil;
+import org.anyway.common.utils.NettyUtil;
 import org.anyway.common.utils.SecretUtil;
 import org.anyway.server.adapter.cache.CacheManager;
 import org.anyway.server.plugin.adapter.dispatcher.Dispatcher;
+import org.anyway.server.plugin.adapter.utils.ResponseHelper;
 
 public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
-
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-    	ctx.close();
-    }
-  
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-    	LoggerUtil.println(cause.getMessage());
-        ctx.close();
-    }
   
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception { 
@@ -62,7 +56,7 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
     public void messageReceived(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
     	// 获取request
     	FullHttpRequest fullRequest = (FullHttpRequest) msg;
-    	if (fullRequest.method().equals(HttpMethod.POST)) {
+    	if (fullRequest.getMethod().equals(HttpMethod.POST)) {
 	    	if (ctx.channel().isActive() == false) {
 	    		ctx.close();
 	    		fullRequest = null;
@@ -73,39 +67,55 @@ public class HttpHandler extends SimpleChannelInboundHandler<HttpObject> {
 	        	fullRequest = null;
 	        	return;
 	        }
-	    	LoggerUtil.println("[http]connect is closed!");
     	}
     	
     	//分解消息
     	String content = fullRequest.content().toString(CharsetUtil.UTF_8);
-    	
-		JBuffer<String> LoginBuf = new JBuffer<String>();
+    	int commandId = CommandID.HTTP_REQUEST;
 		if (AdapterConfig.getInstance().IsWeixinServer()) { //微信接入			
-			LoginBuf.setCommandId(CommandID.WEIXIN_REQUEST);
-			LoggerUtil.println("[http]Receive message from weixin!");
+			commandId = CommandID.WEIXIN_REQUEST;
+			LoggerUtil.println("[http]Receive message from weixin!message is:" + content);
 		}
 		else { 
-			LoginBuf.setCommandId(CommandID.WEB_REQUEST);
-			if (uConfigVar.HT_Crypt == 1) { //启用加密，需要解密
+			if (AdapterConfig.getInstance().getHTCrypt() == 1) { //启用加密，需要解密
 				content = SecretUtil.Decrypt3Des(content);
 	    	}
-			LoggerUtil.println("[http]Receive message from web!");
+			LoggerUtil.println("[http]Receive message from web!message is:" + content);
 		}
-		LoginBuf.setBody(content);
 		
+		JBuffer<String> LoginBuf = JsonUtil.parseBuffer(content);
 		//保存到已处理缓存
 		HttpRequest<String> request = new HttpRequest<String>();
+		request.setMsgType(commandId);
 		request.setJBody(LoginBuf);
-		request.setDecoderResult(fullRequest.decoderResult());
+		request.setDecoderResult(fullRequest.getDecoderResult());
 		request.setRequest(fullRequest);
 		request.setContext(ctx);
-		request.setUri(fullRequest.uri());
-		request.setHttpMethod(fullRequest.method());
+		request.setUri(fullRequest.getUri());
+		request.setHttpMethod(fullRequest.getMethod());
 		request.setWait(); 
-		CacheManager.getInstance().getHttpCache().addDone(request);
+		CacheManager.getInstance().getRequestCache().addDone(request);
 		//业务处理
-		int status = Dispatcher.<HttpRequest<String>>submit(request, request.getJBody().getCommandId());
-		LoggerUtil.println("[http]final status=%s", status);
+		int status = 0;
+		
+		try{
+			status = Dispatcher.<HttpRequest<String>>submit(request, request.getMsgType(),
+					new InvokeCallback() {
+						@Override
+						public void operationComplete(ResponseFuture responseFuture) {
+							LoggerUtil.println("[http]final status=%d commandid=%d", responseFuture.getStatus(), responseFuture.getCommandID());
+						}
+					});
+		} catch (InstantiationException | IllegalAccessException e) {
+			LoggerUtil.getLogger().error("[http]Dispatcher Init Fail!,IP:{},error:{}", NettyUtil.parseChannelRemoteAddr(ctx.channel()), e);
+			status = -10;
+		}
+		
+		if (status != 0) {
+			ResponseHelper.writeResponse(HttpMessageCoder.toJsonString(status, ""), ctx, fullRequest);
+			CacheManager.getInstance().getRequestCache().removeDone(request.getID());
+		}
+		LoggerUtil.println("[http]executing...... status=%d", status);
     }
    
 }

@@ -25,42 +25,36 @@
 			<artifactId>ehcache</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jdbc</artifactId>
-		</dependency>
+	        <groupId>com.zaxxer</groupId>
+	        <artifactId>HikariCP-java7</artifactId>
+	    </dependency>
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
+		</dependency>  
+	    <dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.nikhaldimann</groupId>
 			<artifactId>inieditor</artifactId>
-			<version>r5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.anyway</groupId>
 			<artifactId>anyway-common</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.anyway</groupId>
 			<artifactId>anyway-exceptions</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.anyway</groupId>
 			<artifactId>anyway-netty-base</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.anyway.cache</groupId>
 			<artifactId>anyway-cache-factory</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 	<packaging>pom</packaging>

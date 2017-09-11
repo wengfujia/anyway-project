@@ -13,15 +13,16 @@
 package org.anyway.server.adapter.socket.handler;
 
 import java.io.UnsupportedEncodingException;
-import java.net.InetSocketAddress;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 
 import org.anyway.common.AdapterConfig;
-import org.anyway.common.uConfigVar;
+import org.anyway.common.SystemConfig;
 import org.anyway.common.enums.CryptEnum;
+import org.anyway.common.future.InvokeCallback;
+import org.anyway.common.future.ResponseFuture;
 import org.anyway.common.protocol.TcpMessageCoder;
 import org.anyway.common.protocol.header.CommandID;
 import org.anyway.common.protocol.header.Header;
@@ -29,6 +30,7 @@ import org.anyway.common.protocol.request.TcpRequest;
 import org.anyway.common.types.pint;
 import org.anyway.common.types.pstring;
 import org.anyway.common.utils.NetUtil;
+import org.anyway.common.utils.NettyUtil;
 import org.anyway.common.utils.LoggerUtil;
 import org.anyway.common.utils.StringUtil;
 import org.anyway.exceptions.NoCacheException;
@@ -38,8 +40,6 @@ import org.anyway.server.plugin.adapter.dispatcher.Dispatcher;
 
 public class SocketHandler extends SimpleDefaultHandler {
 
-	private String clientIP;
-	
     // 当服务器端发送的消息到达时:
     /**
      * 收到需要处理的消息后二步骤操作，
@@ -49,11 +49,10 @@ public class SocketHandler extends SimpleDefaultHandler {
      */
     @Override
     public void channelRead0(ChannelHandlerContext ctx, byte[] msg) throws NoCacheException {
-
     	//获取IP地址
-    	clientIP = ((InetSocketAddress)ctx.channel().remoteAddress()).getAddress().getHostAddress();
+    	final String remoteAddress = NettyUtil.parseChannelRemoteAddr(ctx.channel());
     	
-    	TcpMessageCoder shtStream = new TcpMessageCoder();
+    	TcpMessageCoder shtStream = new TcpMessageCoder(AdapterConfig.getInstance().getUSMaxSendBufferSize());
     	//获取包头中的长度
     	int ilen = shtStream.GetLength(msg);
     	//判断包中的包长是否跟接收到的包长相符
@@ -61,23 +60,22 @@ public class SocketHandler extends SimpleDefaultHandler {
 			//分解包
 			int ret = shtStream.SaveToStream(msg, msg.length, CryptEnum.DES);
 	    	if (ret > 0) {
+	    		shtStream.getHeader().setIP(remoteAddress);
 	    		//消息处理
-	    		HandleMsgStream(ctx, shtStream);
+	    		handleMsgStream(ctx, shtStream);
 	    		return;
 	    	} 
 	    	else {
-	    		LoggerUtil.sprintf("[socket]Receive The Wrong Message,IP:%s",clientIP);
+	    		LoggerUtil.sprintf("[socket]Receive The Wrong Message,IP:%s", remoteAddress);
 	    		ctx.close();
 	    	}
 		} 
 		else {
-			LoggerUtil.sprintf("[socket]Receive The Wrong Message,IP:%s",clientIP);
+			LoggerUtil.sprintf("[socket]Receive The Wrong Message,IP:%s", remoteAddress);
 			ctx.close();
     	}
 		
 		if (shtStream!=null) {shtStream.ClearStream();shtStream = null;} 
-		
-		//ReferenceCountUtil.release(msg);
     } 
     
 	/**
@@ -87,17 +85,15 @@ public class SocketHandler extends SimpleDefaultHandler {
 	 * @param stream
 	 * @throws NoCacheException
 	 */
-	protected void HandleMsgStream(final ChannelHandlerContext ctx, TcpMessageCoder stream) throws NoCacheException {
-
+	protected void handleMsgStream(final ChannelHandlerContext ctx, TcpMessageCoder stream) throws NoCacheException {
 		// 1.处理
 		Header header = stream.getHeader();
-		header.setIP(clientIP);// 设置IP
 
 		int status = 0;
 		int commandid = stream.GetCommand();
 
 		if (commandid == CommandID.TEST) {
-			LoggerUtil.printInfo("[socket]Test,User:%s,IP:%s,Mac:%s", header.getUser(), clientIP, header.getReserve());
+			LoggerUtil.printInfo("[socket]Test,User:%s,IP:%s,Mac:%s", header.getUser(), header.getIP(), header.getReserve());
 		} else if (commandid == CommandID.INIT_FINAL) {
 			LoggerUtil.println("[socket]Login Init Final!");
 		} else {
@@ -109,12 +105,18 @@ public class SocketHandler extends SimpleDefaultHandler {
 			} else {
 				// 2.业务分发
 				TcpRequest request = new TcpRequest();
+				request.setMsgType(CommandID.TCP_REQUEST);
 				request.setContext(ctx);
 				request.setCStream(stream);
 				try {
-					status = Dispatcher.submit(request, stream.GetCommand());
+					status = Dispatcher.<TcpRequest>submit(request, request.getMsgType(), new InvokeCallback() {
+						@Override
+						public void operationComplete(ResponseFuture responseFuture) {
+							LoggerUtil.println("[socket]final status=%d commandid=%d", responseFuture.getStatus(), responseFuture.getCommandID());
+						}
+					});
 				} catch (InstantiationException | IllegalAccessException e) {
-					LoggerUtil.printInfo("[socket]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s", clientIP);
+					LoggerUtil.printInfo("[socket]Dispatcher Init Fail!" + e.getMessage() + ",IP:%s", header.getIP());
 					status = -10;
 				}
 			}
@@ -129,67 +131,36 @@ public class SocketHandler extends SimpleDefaultHandler {
 				result2.setString("非知错误");
 			}
 
-			pint pstrlen = new pint(0);
-			byte[] pstr;
+			byte[] pstr = null;
 			try {
-				pstr = NetUtil.getBytes(result2.getString(), uConfigVar.CharsetName);
-				TcpMessageCoder streamResp = new TcpMessageCoder();
-				header.setCommandID(commandid);
-				header.setStatus(status);
-				header.setResptype(1);
-				streamResp.SetNr(pstr, pstrlen.getInt());
-				streamResp.EncodeHeader(header);
-				ByteBuf ibuffer = ctx.alloc().buffer();
-				int len = streamResp.LoadFromStream(ibuffer, CryptEnum.DES);
-				streamResp.ClearStream();
-				streamResp = null;
-				ChannelFuture retsend = SendPacket(ctx, ibuffer, len);
-				if (retsend == null) {
-					LoggerUtil.printInfo("[socket]Fail To SendPacket,IP:%s", clientIP);
-					ctx.close();
-				}
-				LoggerUtil.printInfo("[socket]Fail! ErrorCode:%s， CommandID:%s,User:%s,IP:%s", status, header.getCommandID(),
-						header.getUser(), clientIP);
+				pstr = NetUtil.getBytes(result2.getString(), SystemConfig.CharsetName);
 			} catch (UnsupportedEncodingException e) {
 				LoggerUtil.printInfo(e.getMessage());
+				return;
 			}
+			
+			pint pstrlen = new pint(pstr.length);
+			TcpMessageCoder streamResp = new TcpMessageCoder(AdapterConfig.getInstance().getUSMaxSendBufferSize());
+			header.setCommandID(commandid);
+			header.setStatus(status);
+			header.setResptype(1);
+			streamResp.SetNr(pstr, pstrlen.getInt());
+			streamResp.EncodeHeader(header);
+			ByteBuf ibuffer = ctx.alloc().buffer();
+			int len = streamResp.LoadFromStream(ibuffer, CryptEnum.DES);
+			streamResp.ClearStream();
+			streamResp = null;
+			ChannelFuture retsend = SendPacket(ctx, ibuffer, len);
+			if (retsend == null) {
+				LoggerUtil.printInfo("[socket]Fail To SendPacket,IP:%s", header.getIP());
+				ctx.close();
+			}
+			LoggerUtil.printInfo("[socket]Fail! ErrorCode:%s， CommandID:%s,User:%s,IP:%s", status, header.getCommandID(),
+					header.getUser(), header.getIP());
 		} else if (AdapterConfig.getInstance().IsArk(commandid)) { // 发送反馈包，表示接收成功
 			header.setCommandID(-commandid);
 			SendResp(ctx, header);
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////
-	//消息发送函数
-	///////////////////////////////////////////////////////////////////
-    /**
-     * 发送反馈包
-     * @param ctx
-     * @param header
-     */
-    protected void SendResp(final ChannelHandlerContext ctx, Header header) {  	
-    	TcpMessageCoder streamResp = new TcpMessageCoder();
-    	Header headerResp = new Header(header);
-    	try
-    	{
-    		headerResp.setCommandID(-header.getCommandID());
-    		headerResp.setStatus(0);
-	    	ByteBuf ibuffer = ctx.alloc().buffer(); 
-	    	int len = streamResp.LoadFromStream(ibuffer, CryptEnum.DES);
-	    	
-	    	ChannelFuture retsend = SendPacket(ctx, ibuffer, len);
-	    	if (retsend==null) {
-				LoggerUtil.sprintf("[socket]Fail To SendPacket,IP:%s",clientIP);
-				ctx.close();
-	    	}	
-    	}
-    	finally { 
-    		//清空
-    		streamResp.ClearStream();
-	    	streamResp = null;
-	    	headerResp.Clear();
-	    	headerResp = null;
-    	}
-    }
-    
 }

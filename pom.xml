@@ -34,19 +34,24 @@
 	<modules>
 		<module>common</module>
 		<module>exceptions</module>
-		<module>logic-plugin-parent</module>
 		<module>manage</module>
 		<module>netty-base</module>	
 		<module>server-parent</module>
     	<module>wechat</module>
     	<module>cache</module>
+    	<module>plugin-parent</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.apache.tomcat</groupId>
-				<artifactId>tomcat-jdbc</artifactId>
-				<version>8.5.13</version>
+		        <groupId>com.zaxxer</groupId>
+		        <artifactId>HikariCP-java7</artifactId>
+		        <version>2.4.12</version>
+		    </dependency>
+		    <dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>5.1.42</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
@@ -61,27 +66,27 @@
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-servlet</artifactId>
-				<version>9.3.10.v20160621</version>
+				<version>9.4.6.v20170531</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-server</artifactId>
-				<version>9.3.10.v20160621</version>
+				<version>9.4.6.v20170531</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-deploy</artifactId>
-				<version>9.3.10.v20160621</version>
+				<version>9.4.6.v20170531</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-jmx</artifactId>
-				<version>9.3.10.v20160621</version>
+				<version>9.4.6.v20170531</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-http</artifactId>
-				<version>9.3.10.v20160621</version>
+				<version>9.4.6.v20170531</version>
 			</dependency>
 			<dependency>
 				<groupId>dom4j</groupId>
@@ -118,6 +123,66 @@
 				<artifactId>inieditor</artifactId>
 				<version>r5</version>
 			</dependency>
+			<dependency>
+				<groupId>org.anyway.plugin</groupId>
+				<artifactId>anyway-plugin-processor</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway.cache</groupId>
+				<artifactId>anyway-cache</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-exceptions</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-netty-base</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway.cache</groupId>
+				<artifactId>anyway-cache-factory</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-wechat</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-exceptions</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway</groupId>
+				<artifactId>anyway-wechat</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway.cache</groupId>
+				<artifactId>anyway-adapter-cache</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.anyway.plugin</groupId>
+				<artifactId>anyway-plugin-adapter</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<description>anyway项目管理</description>
@@ -145,7 +210,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.1.9.Final</version>
+			<version>4.1.15.Final</version>
 		</dependency>
 	</dependencies>
 </project>

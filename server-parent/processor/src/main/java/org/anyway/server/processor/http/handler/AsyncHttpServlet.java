@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.anyway.common.ProcesserConfig;
-import org.anyway.common.uConfigVar;
 import org.anyway.common.enums.CryptEnum;
 import org.anyway.common.protocol.HttpMessageCoder;
 import org.anyway.common.protocol.body.JBuffer;
@@ -50,7 +49,7 @@ import org.anyway.server.processor.cache.DBCache;
 @SuppressWarnings("serial")
 public class AsyncHttpServlet extends HttpServlet {
 
-	private ExecutorService executor = Executors.newFixedThreadPool(uConfigVar.US_WorkThreadCount);
+	private ExecutorService executor = Executors.newFixedThreadPool(ProcesserConfig.getInstance().getHTWorkThreadCount());
 	
 	@Override	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -99,7 +98,7 @@ public class AsyncHttpServlet extends HttpServlet {
 			out.flush();
 		} else { //异步调用
 			AsyncContext ctx = request.startAsync();
-			ctx.setTimeout(uConfigVar.HT_WaitTimeOut);
+			ctx.setTimeout(ProcesserConfig.getInstance().getHTWaitTimeOut());
 			executor.submit(new DecodeMessage(ctx, sId));
 		}
 	}
@@ -127,9 +126,6 @@ public class AsyncHttpServlet extends HttpServlet {
 		 * @throws UnsupportedEncodingException
 		 */
 		private String HandleMsgStream() throws UnsupportedEncodingException {//synchronized 取消了同步标识
-			//String sId = request.getParameter("sId");
-			//if (uFunctions.isEmpty(sId)) return null;
-			
 			String sId = SecretUtil.Decrypt3Des(aId);	
 			JBuffer<String> LoginBuf = JsonUtil.parseBuffer(sId);
 
@@ -210,11 +206,10 @@ public class AsyncHttpServlet extends HttpServlet {
 			    	if (status ==0) {
 			    		LoggerUtil.sprintf(log, "[http]Sucess! CommandID:%d,User:%s,Content:%.10s,IP:%s", commandid, suser, sbody, ip);
 			    	}else {
-			    		
 			    		//查出错误含义		    			
 			    		pstring result1 = new pstring();
 			    		pstring result2 = new pstring();
-			    		DBCache.GetErrorInfo(status, result1, result2);
+						DBCache.GetErrorInfo(header.getSessionid(), header.getCommandID(), status, result1, result2);
 		    			if (!StringUtil.empty(result2.getString())) //获取到错误代码解释
 		    			{
 		    				list.Clear();

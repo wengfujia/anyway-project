@@ -15,14 +15,15 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
 
-import org.anyway.common.uConfigVar;
+import org.anyway.common.AdapterConfig;
 import org.anyway.common.crypto.SSLContextFactory;
 import org.anyway.common.factory.PriorityThreadFactory;
 import org.anyway.netty.IdleTimeOutHandler;
 import org.anyway.server.adapter.http.handler.HttpHandler;
 
 public class HttpCodecFactory extends ChannelInitializer<SocketChannel> {
-	final EventExecutorGroup e1 = new DefaultEventExecutorGroup(uConfigVar.HT_WorkThreadCount, new PriorityThreadFactory("executionLogicHandlerThread+#", Thread.NORM_PRIORITY ));
+	final EventExecutorGroup e1 = new DefaultEventExecutorGroup(AdapterConfig.getInstance().getHTWorkThreadCount(),
+			new PriorityThreadFactory("executionLogicHandlerThread+#", Thread.NORM_PRIORITY));
 	
 	@Override
 	public void initChannel(SocketChannel ch) throws Exception {
@@ -34,14 +35,15 @@ public class HttpCodecFactory extends ChannelInitializer<SocketChannel> {
         //ipFilterRuleHandler.addAll(new IpFilterRuleList("+i:192.168.*"+ ", -i:*"));
         //p.addLast("ipFilter", ipFilterRuleHandler);
         
-        if (uConfigVar.HT_IsHttps) {
+        if (AdapterConfig.getInstance().getHTIsHttps()) {
             SSLEngine engine = SSLContextFactory.getServerContext().createSSLEngine();
             engine.setUseClientMode(false);
             pipeline.addLast("ssl", new SslHandler(engine));
         }
         
         // 超时设置
-	    pipeline.addLast("idleAware", new IdleStateHandler(uConfigVar.HT_RWTimeOut, uConfigVar.HT_RWTimeOut, uConfigVar.HT_IdleTimeOut));
+		pipeline.addLast("idleAware", new IdleStateHandler(AdapterConfig.getInstance().getHTRWTimeOut(),
+				AdapterConfig.getInstance().getHTRWTimeOut(), AdapterConfig.getInstance().getHTIdleTimeOut()));
         pipeline.addLast("IdleTimeOutHandler", new IdleTimeOutHandler());
 	    /**
 	     * http-response解码器

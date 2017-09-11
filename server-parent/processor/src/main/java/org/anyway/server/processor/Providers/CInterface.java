@@ -15,13 +15,11 @@ import java.lang.reflect.Method;
 import java.sql.SQLException;
 
 import org.anyway.common.ProcesserConfig;
-import org.anyway.common.enums.StatusEnum;
 import org.anyway.common.protocol.buffer.IChrList;
 import org.anyway.common.protocol.header.DbHeader;
 import org.anyway.common.protocol.header.Header;
 import org.anyway.common.utils.ClassUtil;
 import org.anyway.common.utils.LoggerUtil;
-import org.anyway.server.processor.cache.DBCache;
 
 public abstract class CInterface<T> {
 	Header m_header;
@@ -133,8 +131,6 @@ public abstract class CInterface<T> {
 			m_header = header;
 			m_nr = nr;
 			m_reserve = reserve;
-//			if (reserve!=null)
-//				System.arraycopy(reserve, 0, m_reserve, 0, reserve.length);
 			m_type = type;
 
 			result = Handle_DB(m_nr, nrlen, list, o_reserve);
@@ -158,6 +154,7 @@ public abstract class CInterface<T> {
 		
 		Class<?> classType = ClassUtil.getExecutorClassByType(header.getCommandID());
   		if (classType==null) { //找不到，退出
+  			LoggerUtil.getLogger().error("未找到相应的执行类,commandId:{}", header.getCommandID());
   			return -23;
   		}
   		
@@ -166,6 +163,7 @@ public abstract class CInterface<T> {
 		try {
 			invokerMessage = classType.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
+			LoggerUtil.getLogger().error("实例化执行类出错:", e);
 			return -23;
 		}
 		try {
@@ -180,23 +178,14 @@ public abstract class CInterface<T> {
 						 header, (String)nr, list });
 	  		}
 		} catch (NoSuchMethodException | SecurityException e) {
+			LoggerUtil.getLogger().error("执行出错:", e);
 			result = GetExceptCode(e.getClass().getName(), e.getMessage());
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			LoggerUtil.getLogger().error("执行出错:", e);
 			result = GetExceptCode(e.getClass().getName(), e.getMessage());
 		}
   		
 		return result;
 	}
 	
-	/**
-	 * 检查用户是否合格
-	 * 
-	 * @return UserStatus
-	 */
-	protected StatusEnum CheckUser() {
-		String name = m_header.getUser();
-		String pwd = m_header.getPwd();
-		return DBCache.CheckUser(name, pwd);
-	}
-
 }

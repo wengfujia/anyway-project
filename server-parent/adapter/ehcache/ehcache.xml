@@ -621,12 +621,12 @@
 		<persistence strategy="localTempSwap" />
 	</defaultCache>
 
-	<!-- http链接池，表示已经处理 -->
-	<cache name="httpDoneCache" maxEntriesLocalHeap="100" eternal="false"
+	<!-- 链接池，表示已经处理 -->
+	<cache name="requestDoneCache" maxEntriesLocalHeap="100" eternal="false"
 		timeToIdleSeconds="12" timeToLiveSeconds="12"
 		diskExpiryThreadIntervalSeconds="12" memoryStoreEvictionPolicy="FIFO">
 		<cacheEventListenerFactory
-			class="org.anyway.server.web.cache.event.HttpCacheEventFactory" />
+			class="org.anyway.server.adapter.cache.event.RequestCacheEventFactory" />
 		<searchable>
 			<searchAttribute name="times" expression="value.getTimes()" />
 			<searchAttribute name="status" expression="value.getStatus()" />
@@ -639,7 +639,7 @@
 		timeToIdleSeconds="7000" timeToLiveSeconds="7000"
 		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU">
 		<cacheEventListenerFactory
-			class="org.anyway.server.web.cache.event.ConfigCacheEventFactory" />
+			class="org.anyway.server.adapter.cache.event.ConfigCacheEventFactory" />
 	</cache>
 
 	<cache name="WeixinCommandIDCache" maxEntriesLocalHeap="200"

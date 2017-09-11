@@ -6,9 +6,9 @@
 		<artifactId>anyway-server-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>anyway-webserver</artifactId>
+	<artifactId>anyway-adapter</artifactId>
 	<name>${project.artifactId}</name>
-	<description>web与微信对接服务层</description>
+	<description>web等与微信对接服务层</description>
 
 	<build>
 		<resources>
@@ -85,17 +85,14 @@
 		<dependency>
 			<groupId>org.anyway</groupId>
 			<artifactId>anyway-wechat</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.anyway.cache</groupId>
 			<artifactId>anyway-adapter-cache</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.anyway.plugin</groupId>
 			<artifactId>anyway-plugin-adapter</artifactId>
-			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 </project>

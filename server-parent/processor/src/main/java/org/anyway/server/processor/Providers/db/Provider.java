@@ -11,8 +11,6 @@ package org.anyway.server.processor.Providers.db;
 
 import java.sql.SQLException;
 
-import org.anyway.common.models.UserBean;
-
 public interface Provider {
 	
 	/**
@@ -23,37 +21,5 @@ public interface Provider {
 	 * @throws SQLException 
 	 */
 	public void FillErrors() throws SQLException, Exception;
-	
-	/**
-	 * ry_users表的操作
-	 */
-	/**
-	 * 根据rowid查找User
-	 * @param id
-	 * @return User
-	 * @throws Exception 
-	 * @throws SQLException 
-	 */
-	public UserBean SelectUser(int id) throws SQLException, Exception;
-	/**
-	 * 根据user删除一行记录
-	 * @param user
-	 * @throws Exception 
-	 * @throws SQLException 
-	 */
-	public void DeleteUser(UserBean user) throws SQLException, Exception;
-	/**
-	 * 根据user更新记录
-	 * @param user
-	 * @throws Exception 
-	 * @throws SQLException 
-	 */
-	public void UpdateUser(UserBean user) throws SQLException, Exception;
-	/**
-	 * 取出所有的User记录
-	 * @throws Exception 
-	 * @throws SQLException 
-	 */
-	public void FillUsers() throws SQLException, Exception;
 	
 }

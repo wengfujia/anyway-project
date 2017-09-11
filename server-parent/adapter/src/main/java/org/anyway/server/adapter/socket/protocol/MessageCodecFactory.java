@@ -21,7 +21,8 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
 
-import org.anyway.common.uConfigVar;
+import org.anyway.common.AdapterConfig;
+import org.anyway.common.SystemConfig;
 import org.anyway.common.factory.PriorityThreadFactory;
 import org.anyway.netty.IdleTimeOutHandler;
 import org.anyway.netty.socket.codec.MessageDecoder;
@@ -30,15 +31,17 @@ import org.anyway.server.adapter.socket.handler.SocketHandler;
 
 public class MessageCodecFactory  extends ChannelInitializer<SocketChannel> {
 	
-	final EventExecutorGroup e1 = new DefaultEventExecutorGroup(uConfigVar.US_WorkThreadCount, new PriorityThreadFactory("executionLogicHandlerThread+#", Thread.NORM_PRIORITY ));
+	final EventExecutorGroup e1 = new DefaultEventExecutorGroup(AdapterConfig.getInstance().getUSWorkThreadCount(),
+			new PriorityThreadFactory("executionLogicHandlerThread+#", Thread.NORM_PRIORITY));
     
     @Override
     public void initChannel(SocketChannel ch) throws Exception {  	
         ChannelPipeline pipe = ch.pipeline();       
-        pipe.addLast("idleAware", new IdleStateHandler(uConfigVar.US_RWTimeOut, uConfigVar.US_RWTimeOut, uConfigVar.US_IdleTimeOut));
+		pipe.addLast("idleAware", new IdleStateHandler(AdapterConfig.getInstance().getUSRWTimeOut(),
+				AdapterConfig.getInstance().getUSRWTimeOut(), AdapterConfig.getInstance().getUSIdleTimeOut()));
         pipe.addLast("IdleTimeOutHandler", new IdleTimeOutHandler());
         // Add the number codec first, 
-        pipe.addLast("decoder", new MessageDecoder(uConfigVar.CharsetName));
+        pipe.addLast("decoder", new MessageDecoder(SystemConfig.CharsetName));
         pipe.addLast("encoder", new MessageEncoder());
         pipe.addLast(e1, "handler", new SocketHandler()); // 处理业务类 采用线程池 new NioEventLoopGroup(),
     }

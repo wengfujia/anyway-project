@@ -34,14 +34,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
 
-import org.anyway.common.uConfigVar;
 import org.anyway.common.SystemConfig;
 import org.anyway.common.protocol.buffer.IChrList;
 import org.anyway.common.protocol.buffer.impl.CChrList;
 import org.anyway.common.utils.LoggerUtil;
 import org.anyway.common.utils.NetUtil;
 import org.anyway.common.utils.StringUtil;
-import org.anyway.server.processor.Providers.db.CJdbcPool;
+import org.anyway.plugin.processor.pool.DataSourcePool;
 
 public class CHandleInterfaceCursor<T> extends CInterface<T> {
 
@@ -60,7 +59,7 @@ public class CHandleInterfaceCursor<T> extends CInterface<T> {
 		CallableStatement cs = null;
 		try {
 			// Connection connection = (pdb != null)?pdb.getDBSession() : null;
-			connection = CJdbcPool.datasource.getConnection();
+			connection = DataSourcePool.getInstance().getConnection(m_header.getSessionid(), m_header.getCommandID());
 			if (connection != null && !connection.isClosed()) {
 
 				String name = m_header.getUser().trim();
@@ -70,8 +69,8 @@ public class CHandleInterfaceCursor<T> extends CInterface<T> {
 						+ SystemConfig.MSG_SEPATATE + m_header.getVersion();
 				String body = "";
 				if (nr != null) {
-					if (nr instanceof byte[]) // nr.getClass().getSimpleName().equals("byte[]")
-						body = NetUtil.getString((byte[]) nr, uConfigVar.CharsetName);
+					if (nr instanceof byte[]) 
+						body = NetUtil.getString((byte[]) nr, SystemConfig.CharsetName);
 					else
 						body = (String) nr;
 				}
@@ -160,7 +159,7 @@ public class CHandleInterfaceCursor<T> extends CInterface<T> {
 			Result = cs.getInt(1);
 			String s1 = cs.getString(8) == null ? "" : cs.getString(8);
 			String s2 = cs.getString(9) == null ? "" : cs.getString(9);
-			o_reserve = NetUtil.getBytes(s2, uConfigVar.CharsetName);
+			o_reserve = NetUtil.getBytes(s2, SystemConfig.CharsetName);
 			if (list == null)
 				return Result;
 

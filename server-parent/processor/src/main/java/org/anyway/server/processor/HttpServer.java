@@ -23,7 +23,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.anyway.common.uConfigVar;
+import org.anyway.common.ProcesserConfig;
 import org.anyway.common.utils.LoggerUtil;
 import org.anyway.server.processor.http.handler.AsyncHttpServlet;
 import org.anyway.server.processor.http.handler.HttpSSL;
@@ -40,7 +40,7 @@ public class HttpServer {
     Runnable OpenHttp = new Runnable(){
 		public void run(){
 			
-			if (uConfigVar.Web_IsHttps == 1) { 
+			if (ProcesserConfig.getInstance().getWebIsHttps()) { 
 				server = new Server();
 			} else {
 				server = new Server(port);
@@ -69,7 +69,7 @@ public class HttpServer {
 	        /* 启用https方式
 	         * 如果web启用https,则http server接口必须为https
 	         * */
-	        if (uConfigVar.Web_IsHttps == 1) { 
+	        if (ProcesserConfig.getInstance().getWebIsHttps()) { 
 	        	HttpConfiguration http_config = HttpSSL.configHttp(port);
 		        SslContextFactory sslContextFactory = HttpSSL.configSSLFactory();
 		        
@@ -92,6 +92,6 @@ public class HttpServer {
     public void start() throws Exception {  
     	thread = new Thread(OpenHttp);
 		thread.start();
-		LoggerUtil.println("The http service is runing! Port:" + uConfigVar.HT_Port);
+		LoggerUtil.println("The http service is runing! Port:" + ProcesserConfig.getInstance().getHTPort());
     }  
 }

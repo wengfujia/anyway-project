@@ -1,25 +1,440 @@
-[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xddedc96e]'
-[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xddedc96e]'
-[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xddedc96e]'
-[Thread-5]2017-05-11 22:16:51,978 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xddedc96e]'
-[main]2017-05-11 23:02:23,417 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
-The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created6841560683029711876diskstore.
-To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
-[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x50efa201]'
-[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x50efa201]'
-[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x50efa201]'
-[Thread-5]2017-05-11 23:02:24,288 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x50efa201]'
-[main]2017-05-11 23:04:16,943 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
-The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created6381259073338741435diskstore.
-To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
-[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0xb881c831]'
-[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xb881c831]'
-[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0xb881c831]'
-[Thread-5]2017-05-11 23:04:17,944 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0xb881c831]'
-[main]2017-05-11 23:05:06,735 [WARN] - net.sf.ehcache.DiskStorePathManager.resolveAndLockIfNeeded(DiskStorePathManager.java:162):diskStorePath 'C:\Users\wengfj\AppData\Local\Temp' is already used by an existing CacheManager either in the same VM or in a different process.
-The diskStore path for this CacheManager will be set to C:\Users\wengfj\AppData\Local\Temp\ehcache_auto_created1180406717957961019diskstore.
-To avoid this warning consider using the CacheManager factory methods to create a singleton CacheManager or specifying a separate ehcache configuration (ehcache.xml) for each CacheManager instance.
-[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_SNDBUF' for channel '[id: 0x4bbfaab3]'
-[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x4bbfaab3]'
-[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x4bbfaab3]'
-[Thread-5]2017-05-11 23:05:07,857 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x4bbfaab3]'
+[Thread-0]2017-09-07 10:30:00,518 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x75554118]'
+[Thread-0]2017-09-07 10:30:00,522 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x75554118]'
+[Thread-0]2017-09-07 10:30:00,559 [ERROR] - org.anyway.server.adapter.HttpServer$1.run(HttpServer.java:64):Fail to open the socket service !
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:444)
+	at sun.nio.ch.Net.bind(Net.java:436)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:128)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:558)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1283)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:501)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:486)
+	at io.netty.handler.logging.LoggingHandler.bind(LoggingHandler.java:191)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:501)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:486)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:989)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:254)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:365)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:403)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:463)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-1-thread-2]2017-09-07 10:30:09,631 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xd850320c]'
+[pool-1-thread-2]2017-09-07 10:30:09,693 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x7d15c43a]'
+[Thread-0]2017-09-07 10:32:38,034 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x3ca9692c]'
+[Thread-0]2017-09-07 10:32:38,039 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x3ca9692c]'
+[pool-1-thread-2]2017-09-07 10:32:47,103 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x327d4c6d]'
+[pool-1-thread-2]2017-09-07 10:32:47,157 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x542d6074]'
+[nioEventLoopGroup-3-1]2017-09-07 10:34:01,669 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-4-1]2017-09-07 10:34:01,669 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-3-1]2017-09-07 10:34:01,671 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-1]2017-09-07 10:34:01,671 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-1]2017-09-07 10:34:01,747 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-1]2017-09-07 10:34:01,747 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-1-thread-2]2017-09-07 10:34:07,186 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xf74beadb]'
+[pool-1-thread-2]2017-09-07 10:34:07,692 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xde6439fe]'
+[nioEventLoopGroup-4-2]2017-09-07 10:34:39,763 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-4-2]2017-09-07 10:34:39,764 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-2]2017-09-07 10:34:39,763 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-4-2]2017-09-07 10:34:39,765 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-2]2017-09-07 10:34:39,765 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-2]2017-09-07 10:34:39,770 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-1-thread-2]2017-09-07 10:34:47,710 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xf35ac663]'
+[pool-1-thread-2]2017-09-07 10:34:48,714 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x00036f77]'
+[pool-1-thread-2]2017-09-07 10:34:49,720 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x1b39024f]'
+[pool-1-thread-2]2017-09-07 10:34:50,726 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x5ad58851]'
+[pool-1-thread-2]2017-09-07 10:34:51,729 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x1c59e975]'
+[pool-1-thread-2]2017-09-07 10:34:52,731 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x06738a9b]'
+[pool-1-thread-2]2017-09-07 10:35:03,737 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x364a856c]'
+[pool-1-thread-2]2017-09-07 10:35:04,742 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x38940474]'
+[pool-1-thread-2]2017-09-07 10:35:05,759 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x685239db]'
+[pool-1-thread-2]2017-09-07 10:35:06,763 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xb094d2f0]'
+[pool-1-thread-2]2017-09-07 10:35:07,767 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xb4a7b9c9]'
+[pool-1-thread-2]2017-09-07 10:35:08,774 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x858e9605]'
+[pool-1-thread-2]2017-09-07 10:35:19,779 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x8ded8808]'
+[pool-1-thread-2]2017-09-07 10:35:20,784 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x144aaf91]'
+[pool-1-thread-2]2017-09-07 10:35:21,787 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xdd9c531a]'
+[pool-1-thread-2]2017-09-07 10:35:22,792 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x678f0495]'
+[pool-1-thread-2]2017-09-07 10:35:23,795 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x49bb722c]'
+[pool-1-thread-2]2017-09-07 10:35:24,799 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x5ae5018a]'
+[pool-1-thread-2]2017-09-07 10:35:35,810 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x7e7f602e]'
+[pool-1-thread-2]2017-09-07 10:35:36,827 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x256050eb]'
+[pool-1-thread-2]2017-09-07 10:35:37,831 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x9a131eb8]'
+[nioEventLoopGroup-3-5]2017-09-07 10:36:37,398 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-4-4]2017-09-07 10:36:37,399 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-3-5]2017-09-07 10:36:37,399 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-4]2017-09-07 10:36:37,399 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-5]2017-09-07 10:36:37,401 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-4]2017-09-07 10:36:37,402 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-1-thread-2]2017-09-07 10:36:37,867 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xd4de94ee]'
+[pool-1-thread-2]2017-09-07 10:36:38,871 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xabae18fe]'
+[pool-1-thread-2]2017-09-07 10:36:39,877 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x86b93755]'
+[pool-2-thread-11]2017-09-07 10:36:40,897 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x00e58b5e]'
+[pool-1-thread-2]2017-09-07 10:36:40,897 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x2c7247dc]'
+[nioEventLoopGroup-3-1]2017-09-07 10:37:14,345 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-4-5]2017-09-07 10:37:14,345 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-3-1]2017-09-07 10:37:14,345 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-5]2017-09-07 10:37:14,346 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-5]2017-09-07 10:37:14,348 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-1]2017-09-07 10:37:14,349 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-2-thread-13]2017-09-07 10:37:17,569 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xdfe32b31]'
+[pool-2-thread-13]2017-09-07 10:37:18,576 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xd76d6ba3]'
+[pool-2-thread-13]2017-09-07 10:37:19,580 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x5c00bb91]'
+[pool-1-thread-2]2017-09-07 10:37:21,920 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x87fbe18a]'
+[pool-1-thread-2]2017-09-07 10:37:22,424 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x7667464d]'
+[Thread-0]2017-09-07 10:38:58,766 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'TCP_NODELAY' for channel '[id: 0x3552a937]'
+[Thread-0]2017-09-07 10:38:58,769 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x3552a937]'
+[pool-1-thread-2]2017-09-07 10:39:08,148 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x8493cd7f]'
+[pool-1-thread-2]2017-09-07 10:39:08,215 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x2923feda]'
+[nioEventLoopGroup-4-1]2017-09-07 10:40:52,697 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-4-1]2017-09-07 10:40:52,699 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-1]2017-09-07 10:40:52,700 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:58):NETTY SERVER PIPELINE: exceptionCaught 127.0.0.1:8083
+[nioEventLoopGroup-3-1]2017-09-07 10:40:52,705 [WARN] - org.anyway.netty.IdleTimeOutHandler.exceptionCaught(IdleTimeOutHandler.java:59):NETTY SERVER PIPELINE: exceptionCaught exception {}.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-3-1]2017-09-07 10:40:52,718 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[nioEventLoopGroup-4-1]2017-09-07 10:40:52,721 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:151):An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1106)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:373)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:645)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:580)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:497)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:459)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:138)
+	at java.lang.Thread.run(Thread.java:745)
+[pool-1-thread-2]2017-09-07 10:40:58,250 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x075ccdbd]'
+[pool-1-thread-2]2017-09-07 10:40:59,255 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x3faa26a2]'
+[pool-1-thread-2]2017-09-07 10:41:00,261 [WARN] - io.netty.util.internal.logging.Slf4JLogger.warn(Slf4JLogger.java:146):Unknown channel option 'SO_TIMEOUT' for channel '[id: 0x82d4dc06]'

@@ -35,7 +35,7 @@ import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.ScheduledExecutorScheduler;
-import org.anyway.common.uConfigVar;
+import org.anyway.common.ProcesserConfig;
 import org.anyway.common.utils.LoggerUtil;
 import org.anyway.server.processor.http.handler.HttpSSL;
 
@@ -85,7 +85,7 @@ public class WebServer {
 	        MBeanContainer mbContainer = new MBeanContainer(ManagementFactory.getPlatformMBeanServer());
 	        server.addBean(mbContainer);
 	        
-	        if (uConfigVar.Web_IsHttps == 1) { //https方式
+	        if (ProcesserConfig.getInstance().getWebIsHttps()) { //https方式
 	        	HttpConfiguration http_config = HttpSSL.configHttp(port);
 		        SslContextFactory sslContextFactory = HttpSSL.configSSLFactory();
 		        
@@ -131,6 +131,6 @@ public class WebServer {
     public void start() throws Exception {  
     	Thread thread = new Thread(OpenWeb);
 		thread.start();
-		LoggerUtil.println("The web servlet is runing! Port:" + uConfigVar.Web_Port);
+		LoggerUtil.println("The web servlet is runing! Port:" + ProcesserConfig.getInstance().getWebPort());
     }  
 }
