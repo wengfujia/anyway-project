@@ -6,7 +6,7 @@ Class-Path: lib/anyway-wechat-0.0.1-SNAPSHOT.jar lib/javax.servlet-api
  site-1.1.jar lib/json-lib-2.4-jdk15.jar lib/commons-beanutils-1.8.0.j
  ar lib/commons-collections-3.2.1.jar lib/ezmorph-1.0.6.jar lib/anyway
  -adapter-cache-0.0.1-SNAPSHOT.jar lib/anyway-plugin-adapter-0.0.1-SNA
- PSHOT.jar lib/ehcache-2.10.3.jar lib/HikariCP-java7-2.4.12.jar lib/do
+ PSHOT.jar lib/ehcache-2.10.4.jar lib/HikariCP-java7-2.4.12.jar lib/do
  m4j-1.6.1.jar lib/xml-apis-1.0.b2.jar lib/mysql-connector-java-5.1.42
  .jar lib/inieditor-r5.jar lib/anyway-common-0.0.1-SNAPSHOT.jar lib/co
  mmons-codec-1.10.jar lib/anyway-exceptions-0.0.1-SNAPSHOT.jar lib/any

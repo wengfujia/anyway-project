@@ -9,7 +9,7 @@
 		<iptable name="iptable2" addr="127.0.0.1" port="8083" maxthread="50" status="1" />
 	</iptables>
 	
-	<!-- 配置业务标识号与终端需要连接到哪个处理层 -->
+	<!-- 配置业务标识号与终端需要连接到哪个处理层，多个iptable间用|分隔 -->
 	<commandids>
 		<commandid value="1" sessionid="1" iptable="iptable1" />
 		<commandid value="10" sessionid="1" iptable="iptable1" />

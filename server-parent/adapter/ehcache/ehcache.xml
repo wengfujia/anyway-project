@@ -622,7 +622,7 @@
 	</defaultCache>
 
 	<!-- 链接池，表示已经处理 -->
-	<cache name="requestDoneCache" maxEntriesLocalHeap="100" eternal="false"
+	<cache name="requestDoneCache" maxEntriesLocalHeap="1000" eternal="false"
 		timeToIdleSeconds="12" timeToLiveSeconds="12"
 		diskExpiryThreadIntervalSeconds="12" memoryStoreEvictionPolicy="FIFO">
 		<cacheEventListenerFactory
