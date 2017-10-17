@@ -31,7 +31,7 @@ public class SystemConfig {
 	/**
 	 * 路由iptable的分隔符
 	 */
-	public final static String ROUTE_SEPATATE = "|";
+	public final static String ROUTE_SEPATATE = ",";
 	
 	//线程相关标识定义
 	public final static int RETURN_SUCCESS = 0;
