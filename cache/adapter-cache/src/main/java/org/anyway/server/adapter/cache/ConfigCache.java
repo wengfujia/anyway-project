@@ -23,6 +23,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.anyway.common.SystemConfig;
+import org.anyway.common.enums.StatusEnum;
 import org.anyway.common.models.ErrorDescBean;
 import org.anyway.common.models.IpTableBean;
 import org.anyway.common.utils.FileUtil;
@@ -165,13 +166,16 @@ public class ConfigCache {
 			Iterator<Element> nodes = root.elementIterator();
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				IpTableBean iptable = new IpTableBean();
-				iptable.setName(node.attributeValue("name"));
-				iptable.setAddress(node.attributeValue("addr"));
-	        	iptable.setPort(StringUtil.getInteger(node.attributeValue("port")));
-	        	iptable.setMaxthread(StringUtil.getInteger(node.attributeValue("maxthread")));
-	        	iptable.setStatus(StringUtil.getInteger(node.attributeValue("status")));
-	        	this.routesCache.put(iptable.getName(), iptable);
+				int status = StringUtil.getInteger(node.attributeValue("status"));
+				if (status == StatusEnum.EFFECTIVE.getValue()) {
+					IpTableBean iptable = new IpTableBean();
+					iptable.setName(node.attributeValue("name"));
+					iptable.setAddress(node.attributeValue("addr"));
+					iptable.setPort(StringUtil.getInteger(node.attributeValue("port")));
+					iptable.setMaxthread(StringUtil.getInteger(node.attributeValue("maxthread")));
+					iptable.setStatus(status);
+					this.routesCache.put(iptable.getName(), iptable);
+				}
 			}
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -197,8 +201,17 @@ public class ConfigCache {
 			Iterator<Element> nodes = root.elementIterator();
 			while(nodes.hasNext()) {
 				Element node = nodes.next();
-				String key = node.attributeValue("value") + SystemConfig.KEY_SEPATATE + node.attributeValue("sessionid");
-				this.commandIdRouteCache.put(key, node.attributeValue("iptable"));
+				
+				String iptableNames = "";
+				for (String iptableName : node.attributeValue("iptable").split(SystemConfig.ROUTE_SEPATATE)) {
+					if (this.routesCache.containsKey(iptableName)) { //判断iptable是否存在
+						iptableNames += SystemConfig.ROUTE_SEPATATE + iptableName;
+					}
+				}
+				if (!StringUtil.empty(iptableNames)) {
+					String key = node.attributeValue("value") + SystemConfig.KEY_SEPATATE + node.attributeValue("sessionid");
+					this.commandIdRouteCache.put(key, iptableNames.substring(1)); //去掉最前的分隔符
+				}
 			}
 		} catch (DocumentException e) {
 			e.printStackTrace();

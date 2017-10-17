@@ -28,6 +28,10 @@ public class SystemConfig {
 	 * map key的分隔符
 	 */
 	public final static String KEY_SEPATATE = "@";
+	/**
+	 * 路由iptable的分隔符
+	 */
+	public final static String ROUTE_SEPATATE = "|";
 	
 	//线程相关标识定义
 	public final static int RETURN_SUCCESS = 0;

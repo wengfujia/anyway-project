@@ -118,10 +118,17 @@ public class CacheManager {
 	public IpTableBean getRoute(String sessionId, String commandId) {
 		IpTableBean iptable = null;
 		//1.根据业务标识获取路处理层路由信息
-		String iptableName = this.configCache.getCommandIdRouteCache()
+		String iptableNames = this.configCache.getCommandIdRouteCache()
 				.get(commandId + SystemConfig.KEY_SEPATATE + sessionId);
-		if (!StringUtil.empty(iptableName)) {
-			iptable = this.configCache.getRoutesCache().get(iptableName);
+		if (!StringUtil.empty(iptableNames)) { //多个tableName间用|分隔
+			for (String iptableName : iptableNames.split(SystemConfig.ROUTE_SEPATATE)) {
+				IpTableBean ip = this.configCache.getRoutesCache().get(iptableName);
+				if (ip.isSucess()) {
+					if (null == iptable || ip.getValidthreads() > iptable.getValidthreads()) {
+						iptable = ip;
+					}
+				}
+			}
 		} else {
 			// 2.获取当前线程最小的处理层
 			for (IpTableBean ip : this.configCache.getRoutesCache().values()) {
